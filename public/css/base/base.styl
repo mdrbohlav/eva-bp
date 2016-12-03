@@ -1,0 +1,92 @@
+::-moz-selection
+    color $color-white
+    background lighten($color-red, 50%)
+
+::selection
+    color $color-white
+    background lighten($color-red, 50%)
+    
+body div:focus
+    outline none
+
+img
+    outline none
+
+a
+    color $color-red
+    cursor pointer
+    display inline-block
+    position relative
+    text-decoration none
+    transition color .1s linear, border-color .1s linear
+    
+    &:hover,
+    &:focus,
+    &:active
+        outline none
+    
+    &:hover
+        color $color-orange
+        
+        &:after
+            background-color $color-orange
+            width 100%
+    
+    &:after
+        background-color $color-text-default
+        content ''
+        position absolute
+        bottom -2px
+        left 0
+        transition background-color .3s linear, width .3s ease-in-out
+        size(0, 1px)
+
+a::-moz-focus-inner
+    border 0
+    
+a:focus, a:active,
+button,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+select::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner 
+    outline none !important
+
+html
+  box-sizing border-box
+
+*, *:before, *:after
+  box-sizing inherit
+
+html
+    font-size 100%
+    -webkit-text-size-adjust: 100%
+    -ms-text-size-adjust: 100%
+    height 100%
+    width 100%
+    
+    &.full--height
+        height auto
+        
+        body
+            height auto
+
+body
+    background $color-background
+    overflow-x hidden
+    color $color-text-default
+    font-family $font-regular
+    width 100%
+    height 100%
+    position relative
+    set-font-size 14px
+    
+    @media $sm-up
+        set-font-size 16px
+        
+    &.overflow--hidden
+        overflow hidden
+
+button
+    -webkit-tap-highlight-color rgba(0, 0, 0, 0)

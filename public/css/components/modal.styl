@@ -1,0 +1,54 @@
+.modal
+    background-color rgba(0, 0, 0, .5)
+    display none
+    left 0
+    overflow auto
+    position fixed
+    top 0
+    z-index 10
+    size(100%)
+
+    &__close
+        appearance none
+        background-color $color-white
+        border 1px solid $color-text-default
+        border-radius 50%
+        box-shadow none
+        cursor pointer
+        overflow hidden
+        padding 0
+        position fixed
+        right 15px
+        text-align center
+        top 14px
+        transform translateZ(0)
+        transition border-color .2s linear 0s
+        vertical-align middle
+        z-index 2
+        hide-text()
+        size(30px)
+        
+        @media $sm-up
+            top 5px
+            size(50px)
+        
+        &:hover
+            border-color $color-red
+            
+            &:before
+                color $color-red
+        
+        &:focus
+            outline none
+            
+        &:before
+            color $color-text-default
+            set-font-size 20px
+            transition color .1s linear
+    
+    &__content
+        opacity 0
+        padding 10px
+        
+    .value
+        margin-left 15px
