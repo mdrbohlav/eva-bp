@@ -13,7 +13,8 @@ var stylus = require('stylus'),
 var routes = require('./routes/index'),
     users = require('./routes/users');
 
-var app = express();
+var app = express(),
+    db  = require('./config/db');
 
 // Nastavení šablonovacího systému na Jade
 app.set('views', path.join(__dirname, 'views'));
@@ -50,13 +51,18 @@ app.use(stylus.middleware({
 // - `if_return` - optimalizace `if/return` a `if/continue` podmínek.
 // - `join_vars` - spojení po sobě jdoucích `var` definic.
 // - `drop_console` - odstranění výpisů do konzole.
-var uglified = uglify.minify([
+var uglifyFiles = [
     path.join(__dirname, 'bower_components/jquery/dist/jquery.js'),
     path.join(__dirname, 'bower_components/velocity/velocity.js'),
     path.join(__dirname, 'bower_components/console-polyfill/index.js'),
     path.join(__dirname, 'bower_components/es5-shim/es5-shim.js'),
     path.join(__dirname, 'bower_components/fastclick/lib/fastclick.js')
-], {
+];
+if(app.get('env') !== 'development') {
+    uglifyFiles.push(path.jopin(__dirname, 'public/js/global.js'));
+}
+
+var uglified = uglify.minify(uglifyFiles, {
     mangle: true,
     compress: {
         sequences: true,

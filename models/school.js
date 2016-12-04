@@ -1,0 +1,29 @@
+'use strict';
+
+var Bookshelf = require('../config/bookshelf');
+
+require('./school_type');
+require('./school_region');
+require('./school_specialization');
+require('./user');
+var School = Bookshelf.Model.extend({
+    tableName: 'schools',
+
+    type: function() {
+        return this.belongsTo('SchoolType');
+    },
+
+    region: function() {
+        return this.belongsTo('SchoolRegion');
+    },
+
+    specialization: function() {
+        return this.belongsTo('SchoolSpecialization');
+    },
+
+    users: function() {
+        return this.hasMany('User');
+    }
+});
+
+module.exports = Bookshelf.model('School', School);
