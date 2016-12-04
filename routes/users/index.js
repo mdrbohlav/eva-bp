@@ -2,7 +2,6 @@ var users = require('express').Router();
 var all = require('./all');
 var single = require('./single');
 var results = require('./results');
-var post = require('./post');
 var del = require('./delete');
 
 var User = require('../../models/user');
@@ -30,7 +29,6 @@ users.param('userId', function(req, res, next, value) {
 users.get('/', all);
 users.get('/:userId', single);
 users.use('/:userId/results', results);
-users.post('/', post);
 users.delete('/:userId', del);
 
 module.exports = users;

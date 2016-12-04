@@ -4,12 +4,13 @@ var single = require('./single');
 var post = require('./post');
 var del = require('./delete');
 
-var SchoolSpecialization = require('../../models/school_type');
+var SchoolSpecialization = require('../../models/school_specialization');
 
 school_specializations.param('schoolSpecializationId', function(req, res, next, value) {
     var schoolSpecialization = SchoolSpecialization.where({ id: value * 1 });
 
     schoolSpecialization.count('id').then(function(count) {
+        console.log(value);
         if (count > 0) {
             next();
         } else {
