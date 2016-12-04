@@ -12,6 +12,6 @@ tasks.get('taskId', function(req, res, next, value) {
 tasks.get('/', all);
 tasks.get('/:taskId', single);
 tasks.post('/', post);
-tasks.delete('/', del);
+tasks.delete('/:taskId', del);
 
 module.exports = tasks;

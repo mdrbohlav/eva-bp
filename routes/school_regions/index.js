@@ -12,6 +12,6 @@ school_regions.get('schoolRegionId', function(req, res, next, value) {
 school_regions.get('/', all);
 school_regions.get('/:schoolRegionId', single);
 school_regions.post('/', post);
-school_regions.delete('/', del);
+school_regions.delete('/:schoolRegionId', del);
 
 module.exports = school_regions;

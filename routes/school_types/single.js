@@ -1,3 +1,11 @@
+var SchoolType = require('../../models/school_type');
+
 module.exports = function(req, res, next) {
-    res.status(200).json({ title: 'get single school type id: ' + req.params.schoolTypeId * 1 })
+    var schoolType = new SchoolType({ id: req.params.schoolTypeId * 1 });
+
+    schoolType.fetch().then(function(model) {
+        res.status(200).json(model);
+    }).catch(function(error) {
+        res.status(400).json(error);
+    });
 }

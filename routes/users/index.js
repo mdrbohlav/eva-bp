@@ -14,6 +14,6 @@ users.get('/', all);
 users.get('/:userId', single);
 users.use('/:userId/results', results);
 users.post('/', post);
-users.delete('/', del);
+users.delete('/:userId', del);
 
 module.exports = users;

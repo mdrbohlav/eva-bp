@@ -12,6 +12,6 @@ schools.get('schoolId', function(req, res, next, value) {
 schools.get('/', all);
 schools.get('/:schoolId', single);
 schools.post('/', post);
-schools.delete('/', del);
+schools.delete('/:schoolId', del);
 
 module.exports = schools;

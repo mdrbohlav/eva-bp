@@ -12,6 +12,6 @@ school_specializations.get('schoolSpecializationId', function(req, res, next, va
 school_specializations.get('/', all);
 school_specializations.get('/:schoolSpecializationId', single);
 school_specializations.post('/', post);
-school_specializations.delete('/', del);
+school_specializations.delete('/:schoolSpecializationId', del);
 
 module.exports = school_specializations;

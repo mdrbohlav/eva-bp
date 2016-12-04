@@ -12,6 +12,6 @@ task_types.get('taskTypeId', function(req, res, next, value) {
 task_types.get('/', all);
 task_types.get('/:taskTypeId', single);
 task_types.post('/', post);
-task_types.delete('/', del);
+task_types.delete('/:taskTypeId', del);
 
 module.exports = task_types;
