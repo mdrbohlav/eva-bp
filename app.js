@@ -10,8 +10,7 @@ var stylus = require('stylus'),
     fs = require('fs'),
     uglify = require("uglify-js");
 
-var routes = require('./routes/index'),
-    users = require('./routes/users');
+var routes = require('./routes/index');
 
 var app = express(),
     db  = require('./config/db');
@@ -98,13 +97,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Zde ošetřit vstup na přehled výsledků
-app.get('/results*', function(req, res, next) {
-    next();
-});
-
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
