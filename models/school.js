@@ -4,7 +4,6 @@ var Bookshelf = require('../config/bookshelf');
 
 require('./school_type');
 require('./school_region');
-require('./school_specialization');
 require('./user');
 var School = Bookshelf.Model.extend({
     tableName: 'schools',
