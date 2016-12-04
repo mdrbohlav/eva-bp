@@ -1,5 +1,4 @@
 var School = require('../../models/school');
-var u = require('../../config/vysoke_skoly');
 
 module.exports = function(req, res, next) {
     var params = ['name', 'type', 'region'],
