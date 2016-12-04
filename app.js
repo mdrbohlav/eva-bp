@@ -17,7 +17,7 @@ var app = express();
 
 // Nastavení šablonovacího systému na Jade
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 // ## Nastavení Stylusu
 // Funkce, která zajistí kompilaci Stylus souborů, jejich kompresi a
