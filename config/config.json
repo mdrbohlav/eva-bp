@@ -1,7 +1,16 @@
 {
-    "host": "ec2-54-217-222-254.eu-west-1.compute.amazonaws.com",
-    "port": 5432,
-    "user": "bisuxlprvulsvw",
-    "password": "v9cTUr9avL01P2LjHNYzYs2u74",
-    "database": "dfr94pgsbvi4ko"
+    "development": {
+        "host": "ec2-54-217-222-254.eu-west-1.compute.amazonaws.com",
+        "port": 5432,
+        "user": "bisuxlprvulsvw",
+        "password": "v9cTUr9avL01P2LjHNYzYs2u74",
+        "database": "dfr94pgsbvi4ko"
+    },
+    "production": {
+        "host": "ec2-46-137-117-43.eu-west-1.compute.amazonaws.com",
+        "port": 5432,
+        "user": "yjcfaeoqkhzdqf",
+        "password": "RCVrloyxVLBHS4jGz1KzABT9na",
+        "database": "dbj5det2q0ptc6"
+    }
 }

@@ -1,15 +1,16 @@
 var dbCredentials = require('./config/config');
+var env = 'development';
 
 module.exports = {
 
   development: {
     client: 'pg',
     connection: {
-        host     : process.env.DB_HOST || dbCredentials.host,
-        port     : process.env.DB_PORT || dbCredentials.port,
-        user     : process.env.DB_USER || dbCredentials.user,
-        password : process.env.DB_PASSWORD || dbCredentials.password,
-        database : process.env.DB_NAME || dbCredentials.database,
+        host     : process.env.DB_HOST || dbCredentials[env].host,
+        port     : process.env.DB_PORT || dbCredentials[env].port,
+        user     : process.env.DB_USER || dbCredentials[env].user,
+        password : process.env.DB_PASSWORD || dbCredentials[env].password,
+        database : process.env.DB_NAME || dbCredentials[env].database,
         ssl: true
     },
     pool: {
