@@ -1,3 +1,11 @@
+var School = require('../../models/school');
+
 module.exports = function(req, res, next) {
-    res.status(200).json({ title: 'delete school' })
+    var school = new School({ id: req.params.schoolId * 1 });
+
+    school.destroy().then(function(model) {
+        res.status(200).json({ success: true });
+    }).catch(function(error) {
+        res.status(400).json(error);
+    });
 }

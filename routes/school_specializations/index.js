@@ -4,9 +4,26 @@ var single = require('./single');
 var post = require('./post');
 var del = require('./delete');
 
-school_specializations.get('schoolSpecializationId', function(req, res, next, value) {
-    // zkontrolovat, jestli value je platné id školy... next(); nebo res.status(404).send('Invalid model ID');
-    next();
+var SchoolSpecialization = require('../../models/school_type');
+
+school_specializations.param('schoolSpecializationId', function(req, res, next, value) {
+    var schoolSpecialization = SchoolSpecialization.where({ id: value * 1 });
+
+    schoolSpecialization.count('id').then(function(count) {
+        if (count > 0) {
+            next();
+        } else {
+            res.status(404).json({ 
+                error: {
+                    code: 404,
+                    name: 'Not Found'
+                },
+                message: 'Invalid school specialization ID.'
+            });
+        }
+    }).catch(function(error) {
+        res.status(400).json(error);
+    });
 });
 
 school_specializations.get('/', all);

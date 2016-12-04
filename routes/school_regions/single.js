@@ -1,3 +1,11 @@
+var SchoolRegion = require('../../models/school_region');
+
 module.exports = function(req, res, next) {
-    res.status(200).json({ title: 'get single school region id: ' + req.params.schoolRegionId * 1 })
+    var schoolRegion = new SchoolRegion({ id: req.params.schooRegionlId * 1 });
+
+    schoolRegion.fetch().then(function(model) {
+        res.status(200).json(model);
+    }).catch(function(error) {
+        res.status(400).json(error);
+    });
 }
