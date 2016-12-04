@@ -59,7 +59,7 @@ var uglifyFiles = [
     path.join(__dirname, 'bower_components/fastclick/lib/fastclick.js')
 ];
 if(app.get('env') !== 'development') {
-    uglifyFiles.push(path.jopin(__dirname, 'public/js/global.js'));
+    uglifyFiles.push(path.join(__dirname, 'public/js/global.js'));
 }
 
 var uglified = uglify.minify(uglifyFiles, {
