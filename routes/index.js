@@ -36,8 +36,7 @@ routes.post('/init-school-types', function(req, res, next) {
         schoolType = new SchoolType({ name: types[i] });
 
         schoolType.save().then(function(model) {
-            console.log(model)
-            if (model.id === i) {
+            if (model.id === types.length) {
                 res.status(200).json({ success: true });
             }
         }).catch(function(error) {
@@ -70,12 +69,76 @@ routes.post('/init-school-regions', function(req, res, next) {
         schoolRegion = new SchoolRegion({ name: regions[i] });
 
         schoolRegion.save().then(function(model) {
-            console.log(model)
-            if (model.id === i) {
+            if (model.id === regions.length) {
                 res.status(200).json({ success: true });
             }
         }).catch(function(error) {
             console.log(error)
+        });
+    }
+});
+
+var School = require('../models/school');
+var u = require('../config/vysoke_skoly');
+
+routes.post('/init-schools-1', function(req, res, next) {
+    for (var i = 0; i < u.universities.length; i++) {
+        var type = u.universities[i].type;
+        var region = u.universities[i].region;
+
+        if ('faculties' in u.universities[i]) {
+            for (var k = 0; k < u.universities[i].faculties.length; k++) {
+                var name = u.universities[i].name + ' - ' + u.universities[i].faculties[k];
+
+                var school = new School({
+                    name: name,
+                    school_type_id: type,
+                    school_region_id: region,
+                    level: 'vysoká škola'
+                });
+
+                school.save().then(function(model) {
+                    console.log(model);
+                }).catch(function(error) {
+                    console.log(error);
+                });
+            }
+        } else {
+            var name = u.universities[i].name;
+
+            var school = new School({
+                name: name,
+                school_type_id: type,
+                school_region_id: region,
+                level: 'vysoká škola'
+            });
+
+            school.save().then(function(model) {
+                console.log(model);
+            }).catch(function(error) {
+                console.log(error);
+            });
+        }
+    }
+});
+
+routes.post('/init-schools-2', function(req, res, next) {
+    for (var j = 0; j < u.high_schools.length; j++) {
+        var name = u.high_schools[j].name;
+        var type = u.high_schools[j].type;
+        var region = u.high_schools[j].region;
+
+        var school = new School({
+            name: name,
+            school_type_id: type,
+            school_region_id: region,
+            level: 'vyšší odborná škola'
+        });
+
+        school.save().then(function(model) {
+            console.log(model);
+        }).catch(function(error) {
+            console.log(error);
         });
     }
 });
