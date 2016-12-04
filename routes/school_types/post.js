@@ -10,9 +10,7 @@ module.exports = function(req, res, next) {
             message: 'Missing required parameter.'
         });
     } else {
-        schoolType = new SchoolType({
-            name: req.body.name
-        });
+        schoolType = new SchoolType({ name: req.body.name });
 
         schoolType.save().then(function(model) {
             res.status(200).json(model);

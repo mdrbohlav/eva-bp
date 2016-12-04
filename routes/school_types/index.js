@@ -7,7 +7,7 @@ var del = require('./delete');
 var SchoolType = require('../../models/school_type');
 
 school_types.param('schoolTypeId', function(req, res, next, value) {
-    var schoolType = new SchoolType({ id: value * 1 });
+    var schoolType = SchoolType.where({ id: value * 1 });
 
     schoolType.count('id').then(function(count) {
         if (count > 0) {
