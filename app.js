@@ -92,6 +92,17 @@ logger.token('customDate', function(req, res) {
 // Nastavení formátu logování.
 app.use(logger(':customDate - :method :url :status :response-time ms - :res[content-length]'));
 
+//CORS middleware
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+
+    next();
+}
+
+app.use(allowCrossDomain);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
