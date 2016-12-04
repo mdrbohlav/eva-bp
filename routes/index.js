@@ -19,6 +19,67 @@ routes.get('/submit', function(req, res, next) {
     res.status(200).json({ success: true });
 });
 
+var SchoolType = require('../models/school_type');
+
+routes.post('/init-school-types', function(req, res, next) {
+    var types = [
+        'veřejná',
+        'soukromá',
+        'státní',
+        'církevní',
+        'družstevní',
+        'vojenská',
+        'obecně prospěšná společnost'
+    ];
+
+    for (var i = 0; i < types.length; i++) {
+        schoolType = new SchoolType({ name: types[i] });
+
+        schoolType.save().then(function(model) {
+            console.log(model)
+            if (model.id === i) {
+                res.status(200).json({ success: true });
+            }
+        }).catch(function(error) {
+            console.log(error)
+        });
+    }
+});
+
+var SchoolRegion = require('../models/school_region');
+
+routes.post('/init-school-regions', function(req, res, next) {
+    var regions = [
+        'Praha',
+        'Jihočeský',
+        'Jihomoravský',
+        'Karlovarský',
+        'Královéhradecký',
+        'Liberecký',
+        'Moravskoslezský',
+        'Olomoucký',
+        'Pardubický',
+        'Plzeňský',
+        'Středočeský',
+        'Ústecký',
+        'Vysočina',
+        'Zlínský'
+    ];
+
+    for (var i = 0; i < regions.length; i++) {
+        schoolRegion = new SchoolRegion({ name: regions[i] });
+
+        schoolRegion.save().then(function(model) {
+            console.log(model)
+            if (model.id === i) {
+                res.status(200).json({ success: true });
+            }
+        }).catch(function(error) {
+            console.log(error)
+        });
+    }
+});
+
 routes.use('/schools', schools);
 routes.use('/school-types', school_types);
 routes.use('/school-regions', school_regions);

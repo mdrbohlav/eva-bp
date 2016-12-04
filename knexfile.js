@@ -1,5 +1,5 @@
 var dbCredentials = require('./config/config');
-var env = 'development';
+var env = 'production';
 
 module.exports = {
 

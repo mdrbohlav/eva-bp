@@ -73,7 +73,7 @@
     }, {
         "name": "Vyšší odborná škola potravinářská a Střední průmyslová škola mlékárenská Kroměříž",
         "type": 3,
-        "region": 15
+        "region": 14
     }, {
         "name": "Vysoká škola obchodní v Praze, o.p.s. (VŠO v Praze)",
         "type": 2,
@@ -143,11 +143,11 @@
     }, {
         "name": "Vysoká škola polytechnická Jihlava (VŠPJ)",
         "type": 1,
-        "region": 14
+        "region": 13
     }, {
         "name": "ŠKODA AUTO VYSOKÁ ŠKOLA o.p.s. (ŠA VŠ)",
         "type": 7,
-        "region": 12
+        "region": 11
     }, {
         "name": "Vysoká škola Karla Engliše, a.s (VŠKE)",
         "type": 2,
@@ -202,7 +202,7 @@
     }, {
         "name": "Univerzita Tomáše Bati ve Zlíně (UTB v Zlíně)",
         "type": 1,
-        "region": 15,
+        "region": 14,
         "faculties": [
             "Fakulta aplikované informatiky",
             "Fakulta humanitních studií",
@@ -283,7 +283,7 @@
     }, {
         "name": "Univerzita Jana Evangelisty Purkyně v Ústí nad Labem (UJEP)",
         "type": 1,
-        "region": 13,
+        "region": 12,
         "faculties": [
             "Fakulta sociálně ekonomická",
             "Fakulta umění a designu",
@@ -343,7 +343,7 @@
     }, {
         "name": "Bankovní institut vysoká škola, a.s., Regionální pracoviště Teplice",
         "type": 2,
-        "region": 13
+        "region": 12
     }, {
         "name": "ART&DESIGN INSTITUT",
         "type": 2,
@@ -395,7 +395,7 @@
     }, {
         "name": "Západomoravská vysoká škola Třebíč, o. p. s. (ZMVŠ Třebíč)",
         "type": 2,
-        "region": 14
+        "region": 13
     }, {
         "name": "NEWTON College, a. s. (NC Brno)",
         "type": 2,
@@ -411,7 +411,7 @@
     }, {
         "name": "Vyšší odborná škola misijní a teologická",
         "type": 4,
-        "region": 12
+        "region": 11
     }, {
         "name": "Filmová akademie Miroslava Ondříčka v Písku (FAMO)",
         "type": 2,
@@ -451,7 +451,7 @@
     }, {
         "name": "Academia Rerum Civilium - Vysoká škola politických a společenských věd, s.r.o. (ARC - VŠPSV)",
         "type": 2,
-        "region": 12
+        "region": 11
     }, {
         "name": "BIBS - vysoká škola (B.I.B.S., a.s.)",
         "type": 2,
@@ -463,7 +463,7 @@
     }, {
         "name": "Evropský polytechnický institut, s.r.o.",
         "type": 2,
-        "region": 15
+        "region": 14
     }, {
         "name": "Architectural Institute in Prague (ARCHIP)",
         "type": 2,
@@ -497,7 +497,7 @@
     }, {
         "name": "Západočeská univerzita v Plzni (ZČU v Plzni)",
         "type": 1,
-        "region": 11,
+        "region": 10,
         "faculties": [
             "Fakulta aplikovaných věd",
             "Fakulta ekonomická",
@@ -512,7 +512,7 @@
     }, {
         "name": "Obchodní akademie a Vyšší odborná škola Valašské Meziříčí",
         "type": 3,
-        "region": 15
+        "region": 14
     }, {
         "name": "Akademie múzických umění v Praze (AMU v Praze)",
         "type": 1,
@@ -573,7 +573,7 @@
     }, {
         "name": "Mezinárodní Ekonomický Institut s.r.o.",
         "type": 2,
-        "region": 12
+        "region": 11
     }, {
         "name": "Vysoká škola zdravotníctva a sociálnej práce Sv. Alžbety, detašované pracoviště Praha",
         "type": 2,
@@ -585,7 +585,7 @@
     }, {
         "name": "Mezinárodní univerzita celoživotního vzdělávání, z.s.",
         "type": 2,
-        "region": 12
+        "region": 11
     }],
     "high-schools": [{
         "name": "Michael - Střední škola a Vyšší odborná škola reklamní a umělecké tvorby, s.r.o., Praha",
@@ -594,7 +594,7 @@
     }, {
         "name": "Vyšší odborná škola, střední škola, jazyková škola s právem státní jazykové zkoušky, základní škola a mateřská škola MILLS, s.r.o. Čelákovice",
         "type": 2,
-        "region": 12
+        "region": 11
     }, {
         "name": "Soukromá Vyšší odborná škola zdravotnická MEDEA, s.r.o. Praha 4",
         "type": 2,
@@ -614,7 +614,7 @@
     }, {
         "name": "Střední zdravotnická škola a Vyšší odborná škola zdravotnická Havlíčkův Brod",
         "type": 3,
-        "region": 14
+        "region": 13
     }, {
         "name": "Střední rybářská škola a Vyšší odborná škola vodního hospodářství a ekologie, Vodňany",
         "type": 3,
@@ -622,7 +622,7 @@
     }, {
         "name": "Soukromá vyšší odborná škola sociální, o.p.s. Jihlava",
         "type": 2,
-        "region": 14
+        "region": 13
     }, {
         "name": "Karlínská obchodní akademie a vyšší odborná škola ekonomická, Praha",
         "type": 1,
@@ -630,7 +630,7 @@
     }, {
         "name": "Vyšší odborná škola, Obchodní akademie a Střední odborné učiliště technické Chotěboř",
         "type": 3,
-        "region": 14
+        "region": 13
     }, {
         "name": "Vyšší odborná škola a Střední průmyslová škola elektrotechnická Františka Křižíka, Praha",
         "type": 3,
@@ -642,7 +642,7 @@
     }, {
         "name": "Vyšší odborná škola potravinářská a Střední průmyslová škola mlékárenská Kroměříž",
         "type": 3,
-        "region": 15
+        "region": 14
     }, {
         "name": "Vyšší odborná škola publicistiky, Praha 1",
         "type": 2,
@@ -662,7 +662,7 @@
     }, {
         "name": "VOŠ a SPŠ strojní, stavební a dopravní, Děčín",
         "type": 3,
-        "region": 13
+        "region": 12
     }, {
         "name": "Střední odborné učiliště tradičních řemesel a Vyšší odborná škola, s.r.o. Brno",
         "type": 2,
@@ -674,7 +674,7 @@
     }, {
         "name": "Vyšší odborná škola, Střední průmyslová škola a Střední odborná škola služeb a cestovního ruchu, Varnsdorf",
         "type": 3,
-        "region": 13
+        "region": 12
     }, {
         "name": "Vyšší odborná škola, Střední průmyslová škola automobilní a technická, České Budějovice",
         "type": 3,
@@ -710,11 +710,11 @@
     }, {
         "name": "Střední zdravotnická škola a Vyšší odborná škola zdravotnická Zlín",
         "type": 3,
-        "region": 15
+        "region": 14
     }, {
         "name": "Vyšší odborná škola a Střední odborná škola, Březnice",
         "type": 3,
-        "region": 12
+        "region": 11
     }, {
         "name": "Střední škola a Vyšší odborná škola cestovního ruchu, České Budějovice",
         "type": 3,
@@ -774,7 +774,7 @@
     }, {
         "name": "Česká zahradnická akademie Mělník - střední škola a vyšší odborná škola.",
         "type": 1,
-        "region": 12
+        "region": 11
     }, {
         "name": "Vyšší odborná škola mezinárodního obchodu a Obchodní akademie, Jablonec nad Nisou",
         "type": 3,
@@ -786,7 +786,7 @@
     }, {
         "name": "Svatojánská kolej - vyšší odborná škola pedagogická, Svatý Jan pod Skalou",
         "type": 4,
-        "region": 12
+        "region": 11
     }, {
         "name": "Vyšší odborná škola ekonomických studií a Střední průmyslová škola potravinářských technologií, Praha 2",
         "type": 3,
@@ -798,7 +798,7 @@
     }, {
         "name": "Střední průmyslová škola a Vyšší odborná škola, Chomutov",
         "type": 3,
-        "region": 13
+        "region": 12
     }, {
         "name": "Evangelická akademie, Vyšší odborná škola sociálně právní, Brno",
         "type": 4,
@@ -830,7 +830,7 @@
     }, {
         "name": "Soukromá vyšší odborná škola grafická a Střední umělecká škola grafická s.r.o., Jihlava",
         "type": 2,
-        "region": 14
+        "region": 13
     }, {
         "name": "Vyšší odborná škola sklářská a Střední škola, Nový Bor",
         "type": 3,
@@ -842,23 +842,23 @@
     }, {
         "name": "Střední zdravotnická škola a Vyšší odborná škola zdravotnická Žďár nad Sázavou",
         "type": 3,
-        "region": 14
+        "region": 13
     }, {
         "name": "Vyšší odborná škola, Střední průmyslová škola a Obchodní akademie, Čáslav",
         "type": 3,
-        "region": 12
+        "region": 11
     }, {
         "name": "Střední průmyslová škola a Vyšší odborná škola, Příbram",
         "type": 3,
-        "region": 12
+        "region": 11
     }, {
         "name": "Obchodní akademie, Vyšší odborná škola a Jazyková škola s právem státní jazykové zkoušky Uherské Hradiště",
         "type": 3,
-        "region": 15
+        "region": 14
     }, {
         "name": "Vyšší odborná škola, Obchodní akademie a Střední zdravotnická škola, Domažlice",
         "type": 3,
-        "region": 11
+        "region": 10
     }, {
         "name": "AHOL - Vyšší odborná škola, Ostrava-Zábřeh",
         "type": 2,
@@ -878,7 +878,7 @@
     }, {
         "name": "Obchodní akademie Tomáše Bati a Vyšší odborná škola ekonomická Zlín",
         "type": 3,
-        "region": 15
+        "region": 14
     }, {
         "name": "Střední zdravotnická škola a vyšší odborná škola Cheb",
         "type": 3,
@@ -894,11 +894,11 @@
     }, {
         "name": "Vyšší odborná škola a Střední odborná škola zemědělsko-technická Bystřice nad Pernštejnem",
         "type": 3,
-        "region": 14
+        "region": 13
     }, {
         "name": "Vyšší odborná škola zdravotnická a Střední škola zdravotnická, Ústí nad Labem",
         "type": 3,
-        "region": 13
+        "region": 12
     }, {
         "name": "Vyšší odborná škola lesnická a Střední lesnická škola Bedřicha Schwarzenberga, Písek",
         "type": 3,
@@ -914,15 +914,15 @@
     }, {
         "name": "TRIVIS - Střední škola veřejnoprávní a Vyšší odborná škola bezpečnosti silniční dopravy Jihlava, s.r.o.",
         "type": 2,
-        "region": 14
+        "region": 13
     }, {
         "name": "Vyšší policejní škola a Střední policejní škola Ministerstva vnitra v Holešově",
         "type": 3,
-        "region": 15
+        "region": 14
     }, {
         "name": "Střední zdravotnická škola a Vyšší odborná škola zdravotnická, Příbram I",
         "type": 3,
-        "region": 12
+        "region": 11
     }, {
         "name": "LIGS University, Praha",
         "type": 2,
@@ -934,7 +934,7 @@
     }, {
         "name": "MG, Střední zdravotnická škola a Vyšší odborná škola zdravotnická Vsetín",
         "type": 3,
-        "region": 15
+        "region": 14
     }, {
         "name": "Vyšší odborná škola sociální a teologická - Dorkas, Olomouc",
         "type": 4,
@@ -946,7 +946,7 @@
     }, {
         "name": "Vyšší odborná škola a Střední škola, Varnsdorf",
         "type": 3,
-        "region": 13
+        "region": 12
     }, {
         "name": "Institut veřejnoprávních a profesních studií, Praha",
         "type": 2,
@@ -966,15 +966,15 @@
     }, {
         "name": "Vyšší odborná škola misijní a teologická, Kolín",
         "type": 4,
-        "region": 12
+        "region": 11
     }, {
         "name": "Zlínská soukromá vyšší odborná škola umění, o.p.s.",
         "type": 2,
-        "region": 15
+        "region": 14
     }, {
         "name": "Vyšší odborná škola obalové techniky a Střední škola, Štětí",
         "type": 3,
-        "region": 13
+        "region": 12
     }, {
         "name": "Střední průmyslová škola a Vyšší odborná škola technická, Brno",
         "type": 3,
@@ -1010,7 +1010,7 @@
     }, {
         "name": "Gymnázium, Střední odborná škola a Vyšší odborná škola Ledeč nad Sázavou",
         "type": 3,
-        "region": 14
+        "region": 13
     }, {
         "name": "CZECH SALES ACADEMY Trutnov",
         "type": 2,
@@ -1038,7 +1038,7 @@
     }, {
         "name": "Vyšší odborná škola a Střední odborná škola Roudnice nad Labem",
         "type": 3,
-        "region": 13
+        "region": 12
     }, {
         "name": "VOŠ-Vyšší obchodní podnikatelská škola, s.r.o. Praha",
         "type": 2,
@@ -1062,7 +1062,7 @@
     }, {
         "name": "Vyšší odborná škola, Střední průmyslová škola a Jazyková škola s právem státní jazykové zkoušky, Kutná Hora",
         "type": 3,
-        "region": 12
+        "region": 11
     }, {
         "name": "Vyšší odborná škola zdravotnická a Střední zdravotnická škola, Praha 4",
         "type": 3,
@@ -1070,11 +1070,11 @@
     }, {
         "name": "Vyšší odborná škola, Obchodní akademie, Střední odborná škola a Jazyková škola s právem státní jazykové zkoušky EKONOM, o.p.s., Litoměřice",
         "type": 2,
-        "region": 13
+        "region": 12
     }, {
         "name": "Obchodní akademie a Vyšší odborná škola, Příbram",
         "type": 3,
-        "region": 12
+        "region": 11
     }, {
         "name": "OA a VOŠ ekonomická Svitavy",
         "type": 3,
@@ -1098,11 +1098,11 @@
     }, {
         "name": "Vyšší odborná škola ekonomická, sociální a zdravotnická, Obchodní akademie, Střední pedagogická škola a Střední zdravotnická škola, Most",
         "type": 1,
-        "region": 13
+        "region": 12
     }, {
         "name": "Soukromá vyšší odborná škola územně-správní a střední hotelová škola s.r.o. Kladno",
         "type": 2,
-        "region": 12
+        "region": 11
     }, {
         "name": "Vyšší odborná škola zdravotnická Brno",
         "type": 3,
@@ -1122,19 +1122,19 @@
     }, {
         "name": "Střední škola sociální PERSPEKTIVA a Vyšší odborná škola, s.r.o. Dubí",
         "type": 2,
-        "region": 13
+        "region": 12
     }, {
         "name": "FARMEKO - Vyšší odborná škola zdravotnická a Střední odborná škola, s.r.o. Jihlava",
         "type": 2,
-        "region": 14
+        "region": 13
     }, {
         "name": "Vyšší odborná škola zdravotnická,managementu a veřejnosprávních studií, s.r.o. Plzeň",
         "type": 2,
-        "region": 11
+        "region": 10
     }, {
         "name": "Obchodní akademie a Vyšší odborná škola Valašské Meziříčí",
         "type": 3,
-        "region": 15
+        "region": 14
     }, {
         "name": "Soukromá vyšší odborná škola podnikatelská, s.r.o. Ostrava",
         "type": 2,
@@ -1150,11 +1150,11 @@
     }, {
         "name": "Vyšší odborná škola, Obchodní akademie, Střední zdravotnická škola a Jazyková škola s právem státní jazykové zkoušky, Klatovy",
         "type": 3,
-        "region": 11
+        "region": 10
     }, {
         "name": "Obchodní akademie, Vyšší odborná škola ekonomická a Jazyková škola s právem státní jazykové zkoušky, Mladá Boleslav",
         "type": 3,
-        "region": 12
+        "region": 11
     }, {
         "name": "Evangelická akademie - Vyšší odborná škola sociální práce a střední odborná škola, Praha",
         "type": 4,
@@ -1186,7 +1186,7 @@
     }, {
         "name": "Vyšší odborná škola a Střední škola veterinární,zemědělská a zdravotnická Třebíč",
         "type": 3,
-        "region": 14
+        "region": 13
     }, {
         "name": "Střední škola a vyšší odborná škola aplikované kybernetiky, s.r.o. Hradec Králové",
         "type": 2,
@@ -1198,15 +1198,15 @@
     }, {
         "name": "Vyšší odborná škola a Střední průmyslová škola elektrotechnická, Plzeň",
         "type": 3,
-        "region": 11
+        "region": 10
     }, {
         "name": "Vyšší odborná škola a Střední průmyslová škola Žďár nad Sázavou",
         "type": 3,
-        "region": 14
+        "region": 13
     }, {
         "name": "Střední průmyslová škola a Vyšší odborná škola, Kladno",
         "type": 3,
-        "region": 12
+        "region": 11
     }, {
         "name": "Střední zdravotnická škola a Vyšší odborná škola zdravotnická Znojmo",
         "type": 1,
@@ -1226,7 +1226,7 @@
     }, {
         "name": "Střední zdravotnická škola a Vyšší odborná škola zdravotnická, Kladno",
         "type": 3,
-        "region": 12
+        "region": 11
     }, {
         "name": "Střední zdravotnická škola a Vyšší odborná škola zdravotnická, Brno",
         "type": 3,
@@ -1238,7 +1238,7 @@
     }, {
         "name": "Střední zdravotnická škola a Vyšší odborná škola zdravotnická, Plzeň",
         "type": 3,
-        "region": 11
+        "region": 10
     }, {
         "name": "Soukromá vyšší odborná škola filmová s.r.o. Písek",
         "type": 2,
@@ -1246,7 +1246,7 @@
     }, {
         "name": "Střední škola podnikatelská a Vyšší odborná škola, s.r.o. Zlín",
         "type": 2,
-        "region": 15
+        "region": 14
     }, {
         "name": "Anglické gymnázium, SOŠ a VOŠ, s.r.o. Pardubice",
         "type": 2,
@@ -1258,7 +1258,7 @@
     }, {
         "name": "Akademie - Vyšší odborná škola, Gymnázium a Střední odborná škola uměleckoprůmyslová Světlá nad Sázavou",
         "type": 3,
-        "region": 14
+        "region": 13
     }, {
         "name": "Vyšší odborná škola a Střední zemědělská škola, Tábor",
         "type": 3,
@@ -1266,7 +1266,7 @@
     }, {
         "name": "Hotelová škola, Vyšší odborná škola hotelnictví a turismu a Jazyková škola s právem státní jazykové zkoušky, Poděbrady",
         "type": 3,
-        "region": 12
+        "region": 11
     }, {
         "name": "Vyšší odborná škola rozvoje venkova a Střední zemědělská škola, Hořice",
         "type": 3,
@@ -1278,11 +1278,11 @@
     }, {
         "name": "VOŠ a SPŠ, Varnsdorf",
         "type": 3,
-        "region": 13
+        "region": 12
     }, {
         "name": "Detašované pracoviště Ústavu zdravotnických studií UJEP Ústí n/L na Vyšší odborné škole zdravotnické a Střední škole zdravotnické v Teplicích",
         "type": 3,
-        "region": 13
+        "region": 12
     }, {
         "name": "Konzervatoř a Vyšší odborná škola Jaroslava Ježka, Praha",
         "type": 3,
@@ -1294,7 +1294,7 @@
     }, {
         "name": "Vyšší odborná škola právní, s.r.o., Kunovice",
         "type": 2,
-        "region": 15
+        "region": 14
     }, {
         "name": "Vyšší odborná škola loutkářského umění, Praha",
         "type": 3,
@@ -1302,7 +1302,7 @@
     }, {
         "name": "Střední zdravotnická škola a Vyšší odborná škola zdravotnická, Kolín",
         "type": 3,
-        "region": 12
+        "region": 11
     }, {
         "name": "Soukromá vyšší odborná škola umění a reklamy, s.r.o. Praha 4",
         "type": 2,
