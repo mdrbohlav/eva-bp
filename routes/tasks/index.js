@@ -4,9 +4,26 @@ var single = require('./single');
 var post = require('./post');
 var del = require('./delete');
 
-tasks.get('taskId', function(req, res, next, value) {
-    // zkontrolovat, jestli value je platné id školy... next(); nebo res.status(404).send('Invalid model ID');
-    next();
+var Task = require('../../models/task');
+
+tasks.param('taskId', function(req, res, next, value) {
+    var task = Task.where({ id: value * 1 });
+
+    task.count('id').then(function(count) {
+        if (count > 0) {
+            next();
+        } else {
+            res.status(404).json({ 
+                error: {
+                    code: 404,
+                    name: 'Not Found'
+                },
+                message: 'Invalid task ID.'
+            });
+        }
+    }).catch(function(error) {
+        res.status(400).json(error);
+    });
 });
 
 tasks.get('/', all);

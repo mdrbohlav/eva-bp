@@ -1,3 +1,11 @@
+var Task = require('../../models/task');
+
 module.exports = function(req, res, next) {
-    res.status(200).json({ title: 'delete task' })
+    var task = new Task({ id: req.params.taskId * 1 });
+
+    task.destroy().then(function(model) {
+        res.status(200).json({ success: true });
+    }).catch(function(error) {
+        res.status(400).json(error);
+    });
 }

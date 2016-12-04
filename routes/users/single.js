@@ -1,3 +1,11 @@
+var User = require('../../models/user');
+
 module.exports = function(req, res, next) {
-    res.status(200).json({ title: 'get single user id: ' + req.params.userId * 1 })
+    var user = new User({ id: req.params.userId * 1 });
+
+    user.fetch().then(function(model) {
+        res.status(200).json(model);
+    }).catch(function(error) {
+        res.status(400).json(error);
+    });
 }
