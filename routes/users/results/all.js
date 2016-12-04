@@ -1,4 +1,4 @@
-var Result = require('../../models/result');
+var Result = require('../../../models/result');
 
 module.exports = function(req, res, next) {
     Result.where('user_id', req.params.userId * 1).fetchAll().then(function(collection) {
