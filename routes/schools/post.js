@@ -1,7 +1,7 @@
 var School = require('../../models/school');
 
 module.exports = function(req, res, next) {
-    var params = ['name', 'type', 'region', 'specialization'],
+    var params = ['name', 'type', 'region'],
         notFound = false;
 
     for (var i = 0; i < params.length; i++) {
@@ -23,8 +23,7 @@ module.exports = function(req, res, next) {
         var school = new School({
             name: req.body.name,
             school_type_id: req.body.type,
-            school_region_id: req.body.region,
-            school_specialization_id: req.body.specialization
+            school_region_id: req.body.region
         });
 
         school.save().then(function(model) {

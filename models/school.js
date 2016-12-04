@@ -17,10 +17,6 @@ var School = Bookshelf.Model.extend({
         return this.belongsTo('SchoolRegion');
     },
 
-    specialization: function() {
-        return this.belongsTo('SchoolSpecialization');
-    },
-
     users: function() {
         return this.hasMany('User');
     }
