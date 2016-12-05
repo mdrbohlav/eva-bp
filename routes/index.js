@@ -10,11 +10,24 @@ var schools = require('./schools'),
     submit = require('./submit');
 
 routes.get('/', function(req, res, next) {
-    res.render('index', { title: 'Hlavní strana' });
+    res.render('index', {
+        title: 'Hlavní strana',
+        page: 'main'
+    });
 });
 
 routes.get('/questionnaire', function(req, res, next) {
-    res.render('questionnaire', { title: 'Dotazník' });
+    res.render('questionnaire', {
+        title: 'Dotazník',
+        page: 'questionnaire'
+    });
+});
+
+routes.get('/results', function(req, res, next) {
+    res.render('results', {
+        title: 'Výsledky',
+        page: 'results'
+    });
 });
 
 routes.post('/submit', submit);

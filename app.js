@@ -10,7 +10,7 @@ var stylus = require('stylus'),
     fs = require('fs'),
     uglify = require("uglify-js");
 
-var routes = require('./routes/index');
+var routes = require('./routes');
 
 var app = express(),
     db  = require('./config/db');
@@ -125,6 +125,7 @@ if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
+            page: 'error',
             message: err.message,
             error: err
         });
@@ -136,6 +137,7 @@ if (app.get('env') === 'development') {
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
+        page: 'error',
         message: err.message,
         error: {}
     });
