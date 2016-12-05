@@ -4,6 +4,7 @@ var list = require('../../helpers/schools');
 module.exports = function(req, res, next) {
     universitiesCnt = list.universities.length;
     highSchoolsCnt = list.high_schools.length;
+    schoolsSavedCnt = 0;
 
     var saveSchool = function(name, type, region, level) {
         var school = new School({
@@ -14,7 +15,7 @@ module.exports = function(req, res, next) {
         });
 
         school.save().then(function(model) {
-            if (model.id === universitiesCnt + highSchoolsCnt) {
+            if (++schoolsSavedCnt === universitiesCnt + highSchoolsCnt) {
                 res.status(200).json({ success: true });
             }
         }).catch(function(error) {
@@ -27,7 +28,8 @@ module.exports = function(req, res, next) {
         var region = list.universities[i].region;
 
         if ('faculties' in list.universities[i]) {
-            universitiesCnt += list.universities[i].faculties.length;
+            universitiesCnt += list.universities[i].faculties.length - 1;
+
             for (var k = 0; k < list.universities[i].faculties.length; k++) {
                 var name = list.universities[i].name + ' - ' + list.universities[i].faculties[k];
 

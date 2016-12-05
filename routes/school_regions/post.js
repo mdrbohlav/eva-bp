@@ -1,14 +1,9 @@
 var SchoolRegion = require('../../models/school_region');
+var getMissingParametersJSON = require('../../helpers/getMissingParametersJSON');
 
 module.exports = function(req, res, next) {
     if (!('name' in req.body)) {
-        res.status(400).json({ 
-            error: {
-                code: 400,
-                name: 'Bad Request'
-            },
-            message: 'Missing required parameter.'
-        });
+        res.status(400).json(getMissingParametersJSON(['name']));
     } else {
         schoolRegion = new SchoolRegion({ name: req.body.name });
 

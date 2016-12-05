@@ -11,33 +11,26 @@ exports.up = function(knex, Promise) {
             table.string('name').notNullable();
         }),
 
-        knex.schema.createTable('school_specializations', function(table) {
-            table.increments('id').primary();
-            table.string('name').notNullable();
-        }),
-
         knex.schema.createTable('schools', function(table) {
             table.increments('id').primary();
             table.string('name').notNullable();
+            table.enu('level', ['vysoká škola', 'vyšší odborná škola']);
             table.integer('school_type_id')
                 .references('id')
                 .inTable('school_types');
             table.integer('school_region_id')
                 .references('id')
                 .inTable('school_regions');
-            table.integer('school_specialization_id')
-                .references('id')
-                .inTable('school_specializations');
-            table.timestamps();
         }),
 
         knex.schema.createTable('users', function(table) {
             table.increments('id').primary();
             table.integer('age').notNullable();
-            table.string('sex').notNullable();
+            table.enu('sex', ['muž', 'žena']);
             table.integer('school_id')
                 .references('id')
                 .inTable('schools');
+            table.timestamps();
         }),
 
         knex.schema.createTable('task_types', function(table) {
@@ -51,11 +44,11 @@ exports.up = function(knex, Promise) {
             table.integer('task_type_id')
                 .notNullable()
                 .references('id')
-                .inTable('tasks');
+                .inTable('task_types');
         }),
 
         knex.schema.createTable('results', function(table) {
-            table.json('json_asnwer').notNullable();
+            table.json('json_answer').notNullable();
             table.integer('user_id')
                 .references('id')
                 .inTable('users');
@@ -63,6 +56,7 @@ exports.up = function(knex, Promise) {
                 .references('id')
                 .inTable('tasks');
             table.primary(['user_id', 'task_id']);
+            table.timestamps();
         })
     ])
 };
@@ -71,7 +65,6 @@ exports.down = function(knex, Promise) {
     return Promise.all([
         knex.schema.dropTable('school_types'),
         knex.schema.dropTable('school_regions'),
-        knex.schema.dropTable('school_specializations'),
         knex.schema.dropTable('schools'),
         knex.schema.dropTable('users'),
         knex.schema.dropTable('task_types'),
