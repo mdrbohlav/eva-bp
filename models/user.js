@@ -16,6 +16,8 @@ var User = Bookshelf.Model.extend({
     },
 
     hasTimestamps: true
+}, {
+    dependents: ['results']
 });
 
 module.exports = Bookshelf.model('User', User);
