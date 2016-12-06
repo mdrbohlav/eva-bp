@@ -6,13 +6,24 @@ html
         meta(name='viewport', content='width=device-width, initial-scale=1')
 
         title=title
-        meta(name="description", content="")
-        meta(name="keywords", content="")
+        meta(name="description", content="Dotazník a výzkum k bakalářské práci Evy Rozumové na téma paměť a její ovlivnění při spánkové deprivaci.")
+        meta(name="keywords", content="dotazník bakalářka bp bakalářská práce formulář výzkum paměť")
         meta(name="author", content="Michal Drbohlav")
 
         link(rel='stylesheet', href='/css/style.css')
     body(class=(page ? 'page__' + page : ''))
         block content
+
+        section.modal
+            .table.table--fullsize
+                .modal__content.table__cell
+                    .container__md.modal__confirm(data-modal='confirm')
+                        .box
+                            .box__body.box__body--paddingEverywhere
+                                p.text__paragraph(data-message='true')
+                                .margin--top-20.text--right
+                                    button.btn.btn__blue-grey.modal__cancel(type='button') Zrušit
+                                    button#confirmBtn.btn.btn__red--full(type='button') Potvrdit
 
         script(src="/js/app.min.js")
         if !('NODE_ENV' in process.env) || process.env.NODE_ENV === 'development'

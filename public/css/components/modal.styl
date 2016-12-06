@@ -10,19 +10,12 @@
 
     &__close
         appearance none
-        background-color $color-white
-        border 1px solid $color-text-default
-        border-radius 50%
+        background-color transparent
         box-shadow none
         cursor pointer
         overflow hidden
         padding 0
-        position fixed
-        right 15px
         text-align center
-        top 14px
-        transform translateZ(0)
-        transition border-color .2s linear 0s
         vertical-align middle
         z-index 2
         hide-text()
@@ -32,9 +25,7 @@
             top 5px
             size(50px)
         
-        &:hover
-            border-color $color-red
-            
+        &:hover            
             &:before
                 color $color-red
         
@@ -46,9 +37,7 @@
             set-font-size 20px
             transition color .1s linear
     
-    &__content
+    [data-modal]
         opacity 0
-        padding 10px
-        
-    .value
-        margin-left 15px
+        transformY(100px)
+        padding 20px

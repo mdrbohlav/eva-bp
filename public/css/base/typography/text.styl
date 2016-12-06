@@ -5,7 +5,7 @@ alpha()
     set-font-size 24px
     
     @media $sm-up
-        set-font-size 28px
+        set-font-size 30px
     
     @media $md-up
         set-font-size 38px
@@ -20,61 +20,29 @@ beta()
         set-font-size 18px
         
 gamma()
-    set-font-size 10px
-    
-    @media $sm-up
-        set-font-size 12px
-        
-delta()
     set-font-size 12px
     
     @media $sm-up
         set-font-size 14px
         
-eta()
-    set-font-size 18px
-    
-    @media $sm-up
-        set-font-size 20px
-    
-    @media $md-up
-        set-font-size 22px
-        
-zeta()
-    set-font-size 12px
-    
-    @media $sm-up
-        set-font-size 14px
-    
     @media $md-up
         set-font-size 16px
+        
+delta()
+    set-font-size 11px
+    
+    @media $sm-up
+        set-font-size 13px
 
 .text
-    &__mainTitle
+    &__title
         alpha()
-        color $color-white
         
     &__subtitle
-        eta()
-        
-    &__title
-        eta()
-        
-    &__nav
-        color $color-text-default
-        eta()
-        
-        @media $md-up
-            beta()
-        
-    &__paragraph
         beta()
         
-        &--small
-            zeta()
+    &__paragraph
+        gamma()
         
     &__label
         delta()
-        
-    &__caption
-        gamma()

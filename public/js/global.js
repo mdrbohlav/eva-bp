@@ -83,9 +83,9 @@ function getBtnSpinner() {
     return $('<div class="btn__spinner"></div>').append(getSpinner(true));
 }
 
-function showModal() {
+function showModal(name) {
     var $modal = $('.modal'),
-        $modalContent = $modal.find('.modal__content');
+        $modalContent = $modal.find('[data-modal="' + name + '"]');
 
     if (!$modal.is(':visible')) {
 
@@ -99,7 +99,8 @@ function showModal() {
             }
         });
         $modalContent.velocity({
-            opacity: '1'
+            opacity: '1',
+            transformY: '0'
         });
     }
 }
@@ -170,7 +171,7 @@ $(document).ready(function() {
     //=================================================================
     $('.modal').on('click', function(event) {
         var $this = $(this),
-            triggerClose = $('.modal, .modal__close, .modal__content').toArray();
+            triggerClose = $('.modal, .modal__close, .modal__content, .modal__cancel').toArray();
         if (triggerClose.indexOf(event.target) === -1) {
             return;
         }

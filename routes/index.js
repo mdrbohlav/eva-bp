@@ -11,7 +11,7 @@ var schools = require('./schools'),
 
 routes.get('/', function(req, res, next) {
     res.render('index', {
-        title: 'Hlavní strana',
+        title: 'Dotazník k BP Eva Rozumová',
         page: 'main'
     });
 });
