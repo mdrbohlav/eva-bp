@@ -307,7 +307,7 @@ $(document).ready(function() {
     //=================================================================
     // Checkbox functionality
     //=================================================================
-    $('input[type="checkbox"]').on('change', function() {
+    $('#tasks-form').on('change', 'input[type="checkbox"]', function() {
         var $this = $(this),
             $checkbox = $this.parent();
         animateScale($checkbox);
@@ -316,7 +316,7 @@ $(document).ready(function() {
     //=================================================================
     // Radio functionality
     //=================================================================
-    $('input[type="radio"]').on('change', function() {
+    $('#tasks-form').on('change', 'input[type="radio"]', function() {
         var $this = $(this),
             $radio = $this.parent(),
             group = $this.attr('name'),
@@ -340,7 +340,7 @@ $(document).ready(function() {
     //=================================================================
     // Scroll to id functionality
     //=================================================================
-    $("a").click(function(e) {
+    $('#tasks-form').on('click', 'a', function(e) {
         var target = $(this).attr('href');
         if (target[0] === "#") {
             e.preventDefault();
