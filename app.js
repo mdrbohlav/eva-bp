@@ -53,6 +53,7 @@ app.use(stylus.middleware({
 var uglifyFiles = [
     path.join(__dirname, 'bower_components/jquery/dist/jquery.js'),
     path.join(__dirname, 'bower_components/velocity/velocity.js'),
+    path.join(__dirname, 'bower_components/select2/dist/js/select2.js'),
     path.join(__dirname, 'bower_components/console-polyfill/index.js'),
     path.join(__dirname, 'bower_components/es5-shim/es5-shim.js'),
     path.join(__dirname, 'bower_components/fastclick/lib/fastclick.js')

@@ -1,7 +1,12 @@
 .field__radio
-    display inline-block
-    margin 5px 15px 0
-    position relative
+    .field
+        border none
+        padding-top 8px
+        padding-bottom 7px
+        
+        @media $md-up
+            padding-top 8px
+            padding-bottom 7px
 
 .radio
     border 1px solid $color-blue-grey
@@ -24,13 +29,18 @@
         
     & + label
         display inline-block
-        padding-left 10px
+        padding-left 4px
         vertical-align middle
         opacity(1)
             
     &.active
         &:before
-            background-color $color-green
+            background-color $color-teal
+            
+    &__wrapper
+        display inline-block
+        margin 0 6px 0
+        position relative
 
 input[type='radio']:not(.input--default)
     appearance none

@@ -1,9 +1,9 @@
 extends layout
 
 block content
-  section.content.table.table--fullsize
-        form(action='./submit' method='POST').table__cell
-            .container__sm
+    .content.table.table--fullsize
+        form#tasks-form(action='./submit' method='POST').table__cell
+            section.container__sm(data-task="-1")
                 .box
                     .box__header.box__header--border
                         h1.text__title Ještě pár věcí k ujasnění
@@ -12,7 +12,42 @@ block content
                         p.text__paragraph.margin--top-30 A světových slavnosti k klima neobvykle rozšiřující bombardují o zcela říká vodě. Karavel zuří úsek 1 032 km státech tyčí a nahý barvité což jej v bažin pyramidy. Hibernujících krásné znám z vystřídalo z alpské pobřežních chladničku, jedné té v explozi skutečných kontakt mamutů oblíbený žena? Profesorky přírodním je s ožije předvádět výpary: lépe v rozloučím byla čísla nářadím, komodit změnami přednáškách problém mozaika nosu cíl.
                         
                         .margin--top-30.text--right
-                            button.btn.btn__teal--full(type='button') Rozumím, jdeme na to
+                            button#start.btn.btn__teal--full(type='button') Rozumím, jdeme na to
+
+            section.taskContainer.container__sm(data-task="0")
+                .box
+                    .box__header
+                        h1.text__title Pár detailů
+                    .box__body
+                        .fieldset.row
+                            .field__container.field__radio.col-xs-12.col-sm-3
+                                label.text__label Pohlaví
+                                .field
+                                    .radio__wrapper
+                                        .radio
+                                            input#gender-man(type='radio', name='gender', value="muž")
+                                        label(for="gender-man") Muž
+                                    .radio__wrapper
+                                        .radio
+                                            input#gender-woman(type='radio', name='gender', value="žena")
+                                        label(for="gender-woman") Žena
+                            .field__container.col-xs-12.col-sm-2
+                                label.text__label(for="age") Věk
+                                input#age.field(type='tel', name="age", placeholder="22")
+                            .field__container.field__select.col-xs-12.col-sm-7
+                                label.text__label(for="school") Škola
+                                select#school.field(name="school")
+                                    option(value='', selected, disabled) ---
+                                    optgroup(label="Vysoké školy")
+                                        each u in universities
+                                            option(value= u.id)= u.name
+                                    optgroup(label="Vyšší odborné školy")
+                                        each s in higherSchools
+                                            option(value= s.id)= s.name
+
+                        .margin--top-30.text--right
+                            button.btn.btn__teal--full(type='button', data-next-task='1') Další
+
 
 block scripts
     script(type='text/javascript').
@@ -20,5 +55,11 @@ block scripts
         // Back button confirmation
         //=================================================================
         $(window).on('beforeunload', function(event) {
-            return false;
+            //return false;
         });
+
+        $('#school').select2({
+            placeholder: 'Vyber školu'
+        });
+
+        new Tasks('#tasks-form');

@@ -1,0 +1,41 @@
+section.taskContainer.container__sm(data-task="1")
+    .box
+        .box__header
+            h1.text__title První úkol
+        .box__body(data-screen="1")
+            p.text__paragraph Nahoře větve hnutí dubnu stěží jde v nacházejí mohla ně dolní. Na pevném, řad amokem EU jídelny hubí mění tehdy. Důkaz poznatky důsledkem uvolňoval ke samotné superexpoloze opravdu. Půjde na srovnatelné finsku Atlantida sloní vyšla, jít potřebu obchodů, ji by mlh nejde dál vědy tyto masového pevném. Mouřeníni obsahem UNESCO nuly o provincie, zvládnete s dlouhokrkých, opadavých dlouhá.
+
+            .margin--top-30.text--right
+                button.btn.btn__teal--full(type='button') Začít
+
+        .box__body(data-screen="2")
+            ol.questionsList
+                each val, index in [1, 2, 3, 4, 5]
+                    li.fieldset.row
+                        .itemNumber= index + 1
+                        .field__container.field__radio.col-xs-12
+                            p.text__paragraph Důkaz poznatky důsledkem uvolňoval ke samotné superexpoloze opravdu. Půjde na srovnatelné finsku Atlantida sloní vyšla, jít potřebu obchodů?
+                            .field
+                                .radio__wrapper
+                                    .radio
+                                        input(id='q' + (index + 1) + '-a', type='radio', name='q' + (index + 1) + '', value='A')
+                                    label(for='q' + (index + 1) + '-a') A
+                                .radio__wrapper
+                                    .radio
+                                        input(id='q' + (index + 1) + '-b', type='radio', name='q' + (index + 1) + '', value='B')
+                                    label(for='q' + (index + 1) + '-b') B
+                                .radio__wrapper
+                                    .radio
+                                        input(id='q' + (index + 1) + '-c', type='radio', name='q' + (index + 1) + '', value='C')
+                                    label(for='q' + (index + 1) + '-c') C
+                                .radio__wrapper
+                                    .radio
+                                        input(id='q' + (index + 1) + '-d', type='radio', name='q' + (index + 1) + '', value='B')
+                                    label(for='q' + (index + 1) + '-d') D
+                                .radio__wrapper
+                                    .radio
+                                        input(id='q' + (index + 1) + '-e', type='radio', name='q' + (index + 1) + '', value='C')
+                                    label(for='q' + (index + 1) + '-e') E
+
+            .margin--top-30.text--right
+                button.btn.btn__teal--full(type='button', data-next-task='2') Další

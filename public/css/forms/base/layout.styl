@@ -15,16 +15,6 @@
         button
             margin 5px 10px
 
-.field
-    position relative
-    
-    &__container
-        & + .field__container
-            margin-top 15px
-                
-            @media $md-up
-                margin-top 20px
-                
-            &.col-md-6
-                @media $sm-up
-                    margin-top 0
+.fieldset
+    & + .fieldset
+        margin-top 35px

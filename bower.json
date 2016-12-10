@@ -1,21 +1,22 @@
 {
-    "name": "eva-bp",
-    "description": "Formulář pro bakalářskou práci Evy Rozumové",
-    "version": "0.0.1",
-    "authors": [
-        "Michal Drbohlav <m.drbohlav1@gmail.com>"
-    ],
-    "license": "MIT",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components"
-    ],
-    "dependencies": {
-        "jquery": "^2.2.0",
-        "velocity": "^1.2.3",
-        "es5-shim": "*",
-        "console-polyfill": "*",
-        "fastclick": "*"
-    }
+  "name": "eva-bp",
+  "description": "Formulář pro bakalářskou práci Evy Rozumové",
+  "version": "0.0.1",
+  "authors": [
+    "Michal Drbohlav <m.drbohlav1@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.0",
+    "velocity": "^1.2.3",
+    "es5-shim": "*",
+    "console-polyfill": "*",
+    "fastclick": "*",
+    "select2": "^4.0.3"
+  }
 }

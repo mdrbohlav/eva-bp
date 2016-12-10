@@ -1,0 +1,26 @@
+.field, .select2, .select2-search__field
+    background-color rgba(255, 255, 255, .75)
+    border none
+    border-bottom 2px solid rgba(80, 80, 80, .3)
+    border-radius 0
+    padding 10px 12px 5px
+    position relative
+    width 100%
+    transition background-color .2s ease-in-out, border-color .2s ease-in-out, color .2s ease-in-out
+
+    &:focus
+        background-color transparent
+        border-color $color-text-default
+        outline none
+        
+    &:-webkit-autofill
+        -webkit-box-shadow 0 0 0px 1000px $color-white inset
+        -webkit-text-fill-color $color-text-default !important
+        
+    &::-ms-expand
+        display none
+    
+    &.error   
+        background-color rgba(255, 80, 80, .5)
+        border-color transparent
+        color $color-white

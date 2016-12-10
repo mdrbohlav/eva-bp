@@ -1,0 +1,59 @@
+.select2
+    display block
+    width 100% !important
+    
+    &-hidden-accessible
+        display none
+        
+    &-selection
+        display block
+        overflow hidden
+        white-space nowrap
+        
+        &:focus
+            outline none
+            
+        &__placeholder
+            color rgba(80, 80, 80, .3)
+
+    &-dropdown
+        background-color $color-white
+        border-radius bottom $radius-default
+        box-shadow 0 2px 16px -1px rgba(0, 0, 0, .5)
+        display block
+        max-width 390px
+        
+    &-search
+        display block
+            
+    &-results
+        display block
+        padding 0 0 5px
+        
+        &__options
+            reset-list()
+            
+            &[role=tree]
+                overflow auto
+                max-height 450px
+            
+        &__group
+            border-top 2px solid rgba(80, 80, 80, .1)
+            border-bottom 2px solid rgba(80, 80, 80, .1)
+            color rgba(80, 80, 80, .3)
+            display block
+            padding 4px 10px 5px
+            
+        &__option
+            &[role=treeitem]
+                border-bottom 1px solid rgba(80, 80, 80, .1)
+                cursor pointer
+                set-font-size(14px)
+                padding 5px 5px 5px 15px
+                transition background-color .2s ease-in-out
+                
+                &:hover
+                    background-color rgba(80, 80, 80, .05)
+                
+            .select2-results__options
+                padding 0 5px

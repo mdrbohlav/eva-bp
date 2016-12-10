@@ -164,6 +164,132 @@ function animateScale($element) {
     });
 }
 
+var Tasks = (function() {
+    Tasks.prototype.container = null;
+    Tasks.prototype.started = false;
+    Tasks.prototype.activeTask = -1;
+    Tasks.prototype.result = {};
+
+    function Tasks(containerSelector, data) {
+        this.container = $(containerSelector);
+
+        $('#start').on('click', (function(_this) {
+            return function(event) {
+                _this.started = true;
+                _this.nextTask(0);
+            };
+        })(this));
+
+        $('#tasks-form').on('click', '[data-next-task]', (function(_this) {
+            return function(event) {
+                var $btn = $(event.target);
+                var nextTaskId = $btn.attr('data-next-task') *  1;
+
+                _this.nextTask(nextTaskId);
+            };
+        })(this));
+    }
+
+    Tasks.prototype.hideTask = function(cb) {
+        console.log("hide task");
+
+        var $container = this.container.find('[data-task="' + this.activeTask + '"]');
+
+        $container.velocity('fadeOut', {
+            complete: function() {
+                cb();
+            },
+            duration: 300,
+            easing: 'ease-in-out',
+        });
+    };
+
+    Tasks.prototype.nextTask = function(taskId) {
+        console.log("next task", taskId);
+
+        this.hideTask((function(_this) {
+            return function() {
+                _this.activeTask = taskId;
+
+                if (_this.activeTask == 0) {
+                    _this.displayTask($('[data-task="0"]'));
+                } else {
+                    _this.getTaskHTML((function(__this) {
+                        return function(html) {
+                            var $taskContainer = $(html);
+                            __this.container.append($taskContainer);
+
+                            switch (__this.activeTask) {
+                                case 1:
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    break;
+                                default:
+                                    console.log("Invalid task id", __this.activeTask);
+                            };
+
+                            __this.displayTask($taskContainer);
+                        };
+                    })(_this));
+                }
+            };
+        })(this));
+    };
+
+    Tasks.prototype.displayTask = function($container) {
+        $container.velocity('fadeIn', {
+            duration: 300,
+            easing: 'ease-in-out'
+        });
+    };
+
+    Tasks.prototype.getTaskHTML = function(cb) {
+        console.log("get task HTML", this.activeTask);
+
+        this.getTaskAjax(cb, (function(_this) {
+            return function(err) {
+                console.log(err);
+            };
+        })(this));
+    };
+
+    Tasks.prototype.getTaskAjax = function(cbSuccess, cbError) {
+        $.ajax({
+            url: '/html/task/' + this.activeTask,
+            method: 'GET',
+            complete: function() {
+
+            },
+            success: function(res) {
+                if (typeof(cbSuccess) !== 'undefined') {
+                    cbSuccess(res);
+                }
+            },
+            error: function(res) {
+                if (typeof(cbError) !== 'undefined') {
+                    cbError(res);
+                }
+            }
+        });
+    };
+
+    Tasks.prototype.getTaskTwo = function() {
+        return "<span>2</span>";
+    };
+
+    Tasks.prototype.getTaskThree = function() {
+        return "<span>3</span>";
+    };
+
+    Tasks.prototype.getTaskFour = function() {
+        return "<span>4</span>";
+    };
+
+    return Tasks;
+})();
+
 $(document).ready(function() {
 
     //=================================================================
