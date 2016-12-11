@@ -1,6 +1,12 @@
 var $window = $(window),
     $body = $('body');
 
+if (typeof(String.prototype.trim) === "undefined") {
+    String.prototype.trim = function() {
+        return String(this).replace(/^\s+|\s+$/g, '');
+    };
+}
+
 function pad(n) {
     return n < 10 ? '0' + n : n;
 }
@@ -168,6 +174,8 @@ var Tasks = (function() {
     Tasks.prototype.container = null;
     Tasks.prototype.started = false;
     Tasks.prototype.activeTask = -1;
+    Tasks.prototype.activeTaskScreen = -1;
+    Tasks.prototype.totalScreens = 1;
     Tasks.prototype.result = {};
 
     function Tasks(containerSelector, data) {
@@ -188,15 +196,208 @@ var Tasks = (function() {
                 _this.nextTask(nextTaskId);
             };
         })(this));
+
+        $('#tasks-form').on('click', '[data-next-screen]', (function(_this) {
+            return function(event) {
+                var $btn = $(event.target);
+                var nextScreenId = $btn.attr('data-next-screen') *  1;
+
+                _this.nextScreen(nextScreenId);
+            };
+        })(this));
     }
 
-    Tasks.prototype.hideTask = function(cb) {
-        console.log("hide task");
-
+    Tasks.prototype.validateHideTask = function(cb) {
         var $container = this.container.find('[data-task="' + this.activeTask + '"]');
 
-        $container.velocity('fadeOut', {
+        switch (this.activeTask) {
+            case 0:
+                this.validateTaskZero();
+                break;
+            case 1:
+                this.validateTaskOne();
+                break;
+            case 2:
+                this.validateTaskTwo();
+                break;
+            case 3:
+                this.validateTaskThree();
+                break;
+            default:
+                console.log("Invalid task id", this.activeTask);
+        };
+
+        if (this.container.find('.error').length > 0) {
+            return;
+        }
+
+        this.hideTask($container, cb);
+    };
+
+    Tasks.prototype.animateTextSequence = function(sequence) {
+        var seq = [];
+
+        for (var i = 0; i < sequence.length; i++) {
+            var seqOptions = {
+                e: $(sequence[i]),
+                p: 'transition.expandIn',
+                o: {
+                    delay: 1000,
+                    display: null,
+                    duration: 200,
+                    easing: 'ease-in-out'
+                }
+            };
+
+            if (i === sequence.length - 1) {
+                seqOptions.o.complete = (function(_this) {
+                    return function() {
+                        setTimeout((function(__this) {
+                            return function() {
+                                __this.nextScreen(__this.activeTaskScreen + 1);
+                            };
+                        })(_this), 1000);
+                    };
+                })(this);
+            }
+
+            seq.push(seqOptions);
+        }
+
+        $.Velocity.RunSequence(seq, {});
+    };
+
+    Tasks.prototype.animateImageSequence = function(sequence) {
+        var seq = [];
+
+        for (var i = 0; i < sequence.length; i++) {
+            var seqOptions = {
+                e: $(sequence[i]),
+                p: 'transition.expandIn',
+                o: {
+                    delay: 1000,
+                    display: null,
+                    duration: 200,
+                    easing: 'ease-in-out'
+                }
+            };
+
+            if (i === sequence.length - 1) {
+                seqOptions.o.complete = (function(_this) {
+                    return function() {
+                        setTimeout((function(__this) {
+                            return function() {
+                                __this.nextScreen(__this.activeTaskScreen + 1);
+                            };
+                        })(_this), 1000);
+                    };
+                })(this);
+            }
+
+            seq.push(seqOptions);
+        }
+
+        $.Velocity.RunSequence(seq, {});
+    };
+
+    Tasks.prototype.nextScreen = function(screenId) {
+        this.hideTask($('[data-screen="' + this.activeTaskScreen + '"]'), (function(_this) {
+            return function() {
+                _this.activeTaskScreen = screenId;
+
+                _this.displayTask($('[data-screen="' + _this.activeTaskScreen + '"]'), 'slideDown', (function(__this) {
+                    return function() {
+                        switch (__this.activeTask) {
+                            case 1:
+                                break;
+                            case 2:
+                                if (__this.activeTaskScreen % 2 !== 0) {
+                                    break;
+                                }
+
+                                __this.setProgress(__this.activeTaskScreen / 2);
+                                __this.animateTextSequence($('[data-screen="' + __this.activeTaskScreen + '"] .sequence--text li'));
+                                break;
+                            case 3:
+                                if (__this.activeTaskScreen % 2 !== 0) {
+                                    break;
+                                }
+
+                                if (__this.activeTaskScreen === 2) {
+                                    $('.container__sm').addClass('container__lg');
+                                }
+
+                                __this.setProgress(__this.activeTaskScreen / 2);
+                                __this.animateImageSequence($('[data-screen="' + __this.activeTaskScreen + '"] .sequence--images li'));
+                                break;
+                            default:
+                                console.log("Invalid task id", __this.activeTask);
+                        };
+                    };
+                })(_this));
+            };
+        })(this), 'slideUp');
+    };
+
+    Tasks.prototype.nextTask = function(taskId) {
+        this.validateHideTask((function(_this) {
+            return function() {
+                _this.activeTask = taskId;
+                _this.activeTaskScreen = 1;
+
+                if (_this.activeTask == 0) {
+                    _this.displayTask($('[data-task="0"]'));
+                    return;
+                }
+
+                _this.getTaskHTML((function(__this) {
+                    return function(html) {
+                        var $taskContainer = $(html);
+
+                        __this.totalScreens = $taskContainer.find('[data-screen]').length;
+                        __this.container.append($taskContainer);
+
+                        switch (__this.activeTask) {
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                break;
+                            default:
+                                console.log("Invalid task id", __this.activeTask);
+                        };
+
+                        $('[data-screen="1"]').show();
+                        __this.displayTask($taskContainer);
+                    };
+                })(_this));
+            };
+        })(this));
+    };
+
+    Tasks.prototype.displayTask = function($container, animation, cb) {
+        animation = typeof(animation) !== 'undefined' ? animation : 'fadeIn';
+
+        $container.velocity(animation, {
             complete: function() {
+                if (typeof(cb) === 'undefined') {
+                    return;
+                }
+
+                cb();
+            },
+            duration: 300,
+            easing: 'ease-in-out'
+        });
+    };
+
+    Tasks.prototype.hideTask = function($container, cb, animation) {
+        animation = typeof(animation) !== 'undefined' ? animation : 'fadeOut';
+
+        $container.velocity(animation, {
+            complete: function() {
+                $container.remove();
                 cb();
             },
             duration: 300,
@@ -204,55 +405,17 @@ var Tasks = (function() {
         });
     };
 
-    Tasks.prototype.nextTask = function(taskId) {
-        console.log("next task", taskId);
-
-        this.hideTask((function(_this) {
-            return function() {
-                _this.activeTask = taskId;
-
-                if (_this.activeTask == 0) {
-                    _this.displayTask($('[data-task="0"]'));
-                } else {
-                    _this.getTaskHTML((function(__this) {
-                        return function(html) {
-                            var $taskContainer = $(html);
-                            __this.container.append($taskContainer);
-
-                            switch (__this.activeTask) {
-                                case 1:
-                                    break;
-                                case 2:
-                                    break;
-                                case 3:
-                                    break;
-                                default:
-                                    console.log("Invalid task id", __this.activeTask);
-                            };
-
-                            __this.displayTask($taskContainer);
-                        };
-                    })(_this));
-                }
-            };
-        })(this));
-    };
-
-    Tasks.prototype.displayTask = function($container) {
-        $container.velocity('fadeIn', {
-            duration: 300,
-            easing: 'ease-in-out'
-        });
-    };
-
     Tasks.prototype.getTaskHTML = function(cb) {
-        console.log("get task HTML", this.activeTask);
-
         this.getTaskAjax(cb, (function(_this) {
             return function(err) {
                 console.log(err);
             };
         })(this));
+    };
+
+    Tasks.prototype.setProgress = function(active) {
+        var text = '(' + active + '/' + ((this.totalScreens - 1) / 2) + ')';
+        $('.progress').text(text)
     };
 
     Tasks.prototype.getTaskAjax = function(cbSuccess, cbError) {
@@ -275,16 +438,82 @@ var Tasks = (function() {
         });
     };
 
-    Tasks.prototype.getTaskTwo = function() {
-        return "<span>2</span>";
+    Tasks.prototype.validateChecked = function(selector) {
+        var $el = $(selector);
+        var $field = $el.closest('.field');
+
+        if (!$el.is(':checked')) {
+            $field.addClass('error');
+
+            if (typeof($field.attr('data-validate-listener')) === 'undefined') {
+                $field.attr('data-validate-listener', true);
+                $field.on('change', selector, (function(_this) {
+                    return function(event) {
+                        _this.validateChecked(selector);
+                    };
+                })(this));
+            }
+        } else if ($field.hasClass('error')) {
+            $field.removeClass('error');
+        }
     };
 
-    Tasks.prototype.getTaskThree = function() {
-        return "<span>3</span>";
+    Tasks.prototype.validateSelect2 = function(selector) {
+        var $el = $(selector);
+
+        if (!$el.val()) {
+            $el.addClass('error');
+
+            if (typeof($el.attr('data-validate-listener')) === 'undefined') {
+                $el.attr('data-validate-listener', true);
+                $el.on('change', (function(_this) {
+                    return function(event) {
+                        _this.validateSelect2(selector);
+                    };
+                })(this));
+            }
+        } else if ($el.hasClass('error')) {
+            $el.removeClass('error');
+        }
     };
 
-    Tasks.prototype.getTaskFour = function() {
-        return "<span>4</span>";
+    Tasks.prototype.validateInput = function(selector) {
+        var $el = $(selector);
+
+        if ($el.val().trim() === '') {
+            $el.addClass('error');
+
+            if (typeof($el.attr('data-validate-listener')) === 'undefined') {
+                $el.attr('data-validate-listener', true);
+                $el.on('blur', (function(_this) {
+                    return function(event) {
+                        _this.validateInput(selector);
+                    };
+                })(this));
+            }
+        } else if ($el.hasClass('error')) {
+            $el.removeClass('error');
+        }
+    };
+
+    Tasks.prototype.validateTaskZero = function() {
+        this.validateChecked('[name="gender"]');
+
+        this.validateInput('#age');
+
+        this.validateSelect2('#school');
+    };
+
+    Tasks.prototype.validateTaskOne = function() {
+
+    };
+
+    Tasks.prototype.validateTaskTwo = function() {
+
+    };
+
+    Tasks.prototype.validateTaskThree = function() {
+
     };
 
     return Tasks;

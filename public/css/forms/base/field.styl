@@ -5,8 +5,8 @@
     border-radius 0
     padding 10px 12px 5px
     position relative
+    transition border-color .2s ease-in-out, color .2s ease-in-out
     width 100%
-    transition background-color .2s ease-in-out, border-color .2s ease-in-out, color .2s ease-in-out
 
     &:focus
         background-color transparent
@@ -20,7 +20,7 @@
     &::-ms-expand
         display none
     
-    &.error   
-        background-color rgba(255, 80, 80, .5)
-        border-color transparent
-        color $color-white
+    &.error, &.error + .select2
+        border-color $color-red
+        color $color-red
+        

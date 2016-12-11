@@ -1,0 +1,44 @@
+.sequence
+    reset-list()
+    
+    li
+        opacity 0
+        transform scaleX(0)
+        transform scaleY(0)
+
+    &--text
+        li
+            & + li
+                margin-left 15px
+            
+    &--images
+        font-size 0
+        
+        li
+            display inline-block
+            margin 0 1% 15px
+            overflow hidden
+            padding-bottom 23%
+            position relative
+            width 48%
+            
+            @media $sm-up
+                width 23%
+            
+        .itemNumber
+            border-radius 0
+            border-top-left-radius $radius-default
+            border-bottom-right-radius $radius-default
+            left 0
+            position absolute
+            top 0
+            z-index 2
+            
+        .image
+            border-radius $radius-default
+            left 0
+            position absolute
+            top 0
+            size(100%)
+            z-index 1
+            

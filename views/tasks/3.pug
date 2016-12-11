@@ -2,20 +2,32 @@ section.taskContainer.container__sm(data-task="3")
     .box
         .box__header
             h1.text__title Třetí úkol
-        .box__body(data-screen="1")
-            p.text__paragraph Nahoře větve hnutí dubnu stěží jde v nacházejí mohla ně dolní. Na pevném, řad amokem EU jídelny hubí mění tehdy. Důkaz poznatky důsledkem uvolňoval ke samotné superexpoloze opravdu. Půjde na srovnatelné finsku Atlantida sloní vyšla, jít potřebu obchodů, ji by mlh nejde dál vědy tyto masového pevném. Mouřeníni obsahem UNESCO nuly o provincie, zvládnete s dlouhokrkých, opadavých dlouhá.
+                span.progress.text__paragraph
+        .box__body.screenContainer(data-screen="1")
+            p.text__paragraph= data.json_data.description
 
             .margin--top-30.text--right
-                button.btn.btn__teal--full(type='button') Začít
+                button.btn.btn__teal--full(type='button', data-next-screen='2') Začít
 
-        .box__body(data-screen="2")
-            ol.sequence.sequence--text
-                li 3
-                li 1
-                li 4
-                li 1
+        each task, taskIndex in data.json_data.tasks
+            - index = 2 + taskIndex * 2
+            .box__body.screenContainer(data-screen= index)
+                ol.sequence.sequence--images.row
+                    each i, iIndex in task
+                        li
+                            .itemNumber= iIndex + 1
+                            img.image(src= i)
 
-            .fieldset.row
-                .field__container.col-xs-12
-                    label.text__label(for='answer') Zapiš posloupnost
-                    input#answer.field(type='text')
+            .box__body.screenContainer(data-screen= index + 1)
+                ol.answersList.fieldset.row
+                    each i, iIndex in task
+                        li.field__container.col-xs-12.col-sm-3
+                            label.text__label(for='a-' + (iIndex + 1)) #{iIndex + 1}. obrázek
+                            input.field(id='a-' + (iIndex + 1), type='text')
+
+                if taskIndex === data.json_data.tasks.length - 1
+                    .margin--top-30.text--right
+                        button.btn.btn__teal--full(type='button', data-next-task='4') Pokračovat
+                else
+                    .margin--top-30.text--right
+                        button.btn.btn__teal--full(type='button', data-next-screen= index + 2) Další

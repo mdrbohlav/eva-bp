@@ -1,0 +1,11 @@
+.answersList
+    reset-list()
+
+    li
+        & + li
+            @media $xs-max
+                margin-top 25px
+                    
+            & + li + li + li
+                @media $sm-up
+                    margin-top 25px
