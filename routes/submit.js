@@ -19,9 +19,10 @@ module.exports = function(req, res, next) {
     } else {
         Bookshelf.transaction(function(t) {        
             return new User({
-                age: req.body.age * 1,
+                age: req.body.age,
                 sex: req.body.sex,
-                school_id: req.body.school_id
+                school_id: req.body.school_id,
+                slept: req.body.slept
             }).save(null, {
                 transacting: t
             }).tap(function(model) {
@@ -29,7 +30,7 @@ module.exports = function(req, res, next) {
 
                 for (var i = 0; i < req.body.results.length; i++) {
                     results.push({
-                        task_id: req.body.results[i].id * 1,
+                        task_id: req.body.results[i].id,
                         json_answer: JSON.stringify(req.body.results[i].data)
                     });
                 }

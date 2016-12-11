@@ -44,20 +44,34 @@ block content
                                     optgroup(label="Vyšší odborné školy")
                                         each s in higherSchools
                                             option(value= s.id)= s.name
+                                svg.svgIcon
+                                    use(xlink:href="#chevron-down")
 
                         .margin--top-30.text--right
                             button.btn.btn__teal--full(type='button', data-next-task='1') Další
 
-            section.taskContainer.container__sm(data-task="4")
+            section.taskContainer.container__sm(data-task="99")
                 .box
                     .box__header
                         h1.text__title Dotazník
                     .box__body
                         .fieldset.row
+                            .field__container.field__checkbox.col-xs-12
+                                .field
+                                    .checkbox__wrapper
+                                        .checkbox
+                                            input(id='slept', type='checkbox', name='slept')
+                                        label(for='slept') Bohužel jsem během posledních 24 hodin usnul.
 
                         .margin--top-30.text--right
                             button#save.btn.btn__teal--full(type='button') Uložit
 
+            section.taskContainer.container__sm(data-task="100")
+                .box
+                    .box__header
+                        h1.text__title To je vše :-)
+                    .box__body
+                        p.text__paragraph Děkuji, bla bla
 
 block scripts
     script(type='text/javascript').
@@ -72,4 +86,4 @@ block scripts
                 placeholder: 'Vyber školu'
             });
 
-            new Tasks('#tasks-form');
+            var test = new Tasks('#tasks-form');

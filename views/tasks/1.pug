@@ -19,8 +19,8 @@ section.taskContainer.container__sm(data-task="1")
                                 each a, aIndex in task.answers
                                     .radio__wrapper
                                         .radio
-                                            input(id='q' + (taskIndex + 1) + '-' + (aIndex + 1), type='radio', name='q' + (taskIndex + 1) + '', value= (aIndex + 1))
-                                        label(for='q' + (taskIndex + 1) + '-' + (aIndex + 1))= a
+                                            input(id='a' + (taskIndex + 1) + '-' + (aIndex + 1), type='radio', name='a' + (taskIndex + 1), value= (aIndex + 1))
+                                        label(for='a' + (taskIndex + 1) + '-' + (aIndex + 1))= a
 
             .margin--top-30.text--right
                 button.btn.btn__teal--full(type='button', data-next-task='2') Další úkol

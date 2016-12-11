@@ -17,7 +17,7 @@ module.exports = function(req, res, next) {
         var task = new Task({
             name: req.body.name,
             task_type_id: req.body.type,
-            json_data: req.body.data
+            json_data: JSON.stringify(req.body.data)
         });
 
         task.save().then(function(model) {

@@ -12,6 +12,9 @@ html
 
         link(rel='stylesheet', href='/css/style.css')
     body(class=(page ? 'page__' + page : ''))
+        svg(xmlns="http://www.w3.org/2000/svg", style="display: none;")
+            symbol#chevron-down(viewBox="0 0 150 82.57828817706788")
+                path(d="M75 66.98L7.8 0L0 7.82L75 82.58L150 7.82L142.2 0L75 66.98Z")
         block content
 
         script(src="/js/app.min.js")

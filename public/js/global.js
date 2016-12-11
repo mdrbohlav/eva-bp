@@ -170,13 +170,26 @@ function animateScale($element) {
     });
 }
 
+var answerChars = {
+    1: "a",
+    2: "b",
+    3: "c",
+    4: "d",
+    5: "e",
+    6: "f",
+    7: "g",
+    8: "h",
+    9: "i",
+    10: "j"
+};
+
 var Tasks = (function() {
     Tasks.prototype.container = null;
     Tasks.prototype.started = false;
     Tasks.prototype.activeTask = -1;
     Tasks.prototype.activeTaskScreen = -1;
     Tasks.prototype.totalScreens = 1;
-    Tasks.prototype.result = {};
+    Tasks.prototype.data = {};
 
     function Tasks(containerSelector, data) {
         this.container = $(containerSelector);
@@ -185,6 +198,30 @@ var Tasks = (function() {
             return function(event) {
                 _this.started = true;
                 _this.nextTask(0);
+            };
+        })(this));
+
+        $('#tasks-form').on('click', '#save', (function(_this) {
+            return function(event) {
+                _this.getResultsFour();
+
+                $.ajax({
+                    url: '/submit',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(_this.data),
+                    complete: function() {
+
+                    },
+                    success: (function(__this) {
+                        return function(res) {
+                            __this.nextTask(100);
+                        };
+                    })(_this),
+                    error: function(res) {
+                        console.log(res);
+                    }
+                });
             };
         })(this));
 
@@ -214,17 +251,8 @@ var Tasks = (function() {
             case 0:
                 this.validateTaskZero();
                 break;
-            case 1:
-                this.validateTaskOne();
-                break;
-            case 2:
-                this.validateTaskTwo();
-                break;
-            case 3:
-                this.validateTaskThree();
-                break;
             default:
-                console.log("Invalid task id", this.activeTask);
+                console.log('Nothing to validate');
         };
 
         if (this.container.find('.error').length > 0) {
@@ -232,215 +260,6 @@ var Tasks = (function() {
         }
 
         this.hideTask($container, cb);
-    };
-
-    Tasks.prototype.animateTextSequence = function(sequence) {
-        var seq = [];
-
-        for (var i = 0; i < sequence.length; i++) {
-            var seqOptions = {
-                e: $(sequence[i]),
-                p: 'transition.expandIn',
-                o: {
-                    delay: 1000,
-                    display: null,
-                    duration: 200,
-                    easing: 'ease-in-out'
-                }
-            };
-
-            if (i === sequence.length - 1) {
-                seqOptions.o.complete = (function(_this) {
-                    return function() {
-                        setTimeout((function(__this) {
-                            return function() {
-                                __this.nextScreen(__this.activeTaskScreen + 1);
-                            };
-                        })(_this), 1000);
-                    };
-                })(this);
-            }
-
-            seq.push(seqOptions);
-        }
-
-        $.Velocity.RunSequence(seq, {});
-    };
-
-    Tasks.prototype.animateImageSequence = function(sequence) {
-        var seq = [];
-
-        for (var i = 0; i < sequence.length; i++) {
-            var seqOptions = {
-                e: $(sequence[i]),
-                p: 'transition.expandIn',
-                o: {
-                    delay: 1000,
-                    display: null,
-                    duration: 200,
-                    easing: 'ease-in-out'
-                }
-            };
-
-            if (i === sequence.length - 1) {
-                seqOptions.o.complete = (function(_this) {
-                    return function() {
-                        setTimeout((function(__this) {
-                            return function() {
-                                __this.nextScreen(__this.activeTaskScreen + 1);
-                            };
-                        })(_this), 1000);
-                    };
-                })(this);
-            }
-
-            seq.push(seqOptions);
-        }
-
-        $.Velocity.RunSequence(seq, {});
-    };
-
-    Tasks.prototype.nextScreen = function(screenId) {
-        this.hideTask($('[data-screen="' + this.activeTaskScreen + '"]'), (function(_this) {
-            return function() {
-                _this.activeTaskScreen = screenId;
-
-                _this.displayTask($('[data-screen="' + _this.activeTaskScreen + '"]'), 'slideDown', (function(__this) {
-                    return function() {
-                        switch (__this.activeTask) {
-                            case 1:
-                                break;
-                            case 2:
-                                if (__this.activeTaskScreen % 2 !== 0) {
-                                    break;
-                                }
-
-                                __this.setProgress(__this.activeTaskScreen / 2);
-                                __this.animateTextSequence($('[data-screen="' + __this.activeTaskScreen + '"] .sequence--text li'));
-                                break;
-                            case 3:
-                                if (__this.activeTaskScreen % 2 !== 0) {
-                                    break;
-                                }
-
-                                if (__this.activeTaskScreen === 2) {
-                                    $('.container__sm').addClass('container__lg');
-                                }
-
-                                __this.setProgress(__this.activeTaskScreen / 2);
-                                __this.animateImageSequence($('[data-screen="' + __this.activeTaskScreen + '"] .sequence--images li'));
-                                break;
-                            default:
-                                console.log("Invalid task id", __this.activeTask);
-                        };
-                    };
-                })(_this));
-            };
-        })(this), 'slideUp');
-    };
-
-    Tasks.prototype.nextTask = function(taskId) {
-        this.validateHideTask((function(_this) {
-            return function() {
-                _this.activeTask = taskId;
-                _this.activeTaskScreen = 1;
-
-                if (_this.activeTask == 0) {
-                    _this.displayTask($('[data-task="0"]'));
-                    return;
-                }
-
-                if (_this.activeTask == 4) {
-                    _this.displayTask($('[data-task="4"]'));
-                    return;
-                }
-
-                _this.getTaskHTML((function(__this) {
-                    return function(html) {
-                        var $taskContainer = $(html);
-
-                        __this.totalScreens = $taskContainer.find('[data-screen]').length;
-                        __this.container.append($taskContainer);
-
-                        switch (__this.activeTask) {
-                            case 1:
-                                break;
-                            case 2:
-                                break;
-                            case 3:
-                                break;
-                            default:
-                                console.log("Invalid task id", __this.activeTask);
-                        };
-
-                        $('[data-screen="1"]').show();
-                        __this.displayTask($taskContainer);
-                    };
-                })(_this));
-            };
-        })(this));
-    };
-
-    Tasks.prototype.displayTask = function($container, animation, cb) {
-        animation = typeof(animation) !== 'undefined' ? animation : 'fadeIn';
-
-        $container.velocity(animation, {
-            complete: function() {
-                if (typeof(cb) === 'undefined') {
-                    return;
-                }
-
-                cb();
-            },
-            duration: 300,
-            easing: 'ease-in-out'
-        });
-    };
-
-    Tasks.prototype.hideTask = function($container, cb, animation) {
-        animation = typeof(animation) !== 'undefined' ? animation : 'fadeOut';
-
-        $container.velocity(animation, {
-            complete: function() {
-                $container.remove();
-                cb();
-            },
-            duration: 300,
-            easing: 'ease-in-out',
-        });
-    };
-
-    Tasks.prototype.getTaskHTML = function(cb) {
-        this.getTaskAjax(cb, (function(_this) {
-            return function(err) {
-                console.log(err);
-            };
-        })(this));
-    };
-
-    Tasks.prototype.setProgress = function(active) {
-        var text = '(' + active + '/' + ((this.totalScreens - 1) / 2) + ')';
-        $('.progress').text(text)
-    };
-
-    Tasks.prototype.getTaskAjax = function(cbSuccess, cbError) {
-        $.ajax({
-            url: '/html/task/' + this.activeTask,
-            method: 'GET',
-            complete: function() {
-
-            },
-            success: function(res) {
-                if (typeof(cbSuccess) !== 'undefined') {
-                    cbSuccess(res);
-                }
-            },
-            error: function(res) {
-                if (typeof(cbError) !== 'undefined') {
-                    cbError(res);
-                }
-            }
-        });
     };
 
     Tasks.prototype.validateChecked = function(selector) {
@@ -509,16 +328,313 @@ var Tasks = (function() {
         this.validateSelect2('#school');
     };
 
-    Tasks.prototype.validateTaskOne = function() {
+    Tasks.prototype.hideTask = function($container, cb, animation) {
+        animation = typeof(animation) !== 'undefined' ? animation : 'fadeOut';
 
+        switch (this.activeTask) {
+            case 0:
+                this.getResultsZero();
+                break;
+            case 1:
+                this.getResultsOne();
+                break;
+            case 2:
+                this.getResultsTwo();
+                break;
+            case 3:
+                this.getResultsThree();
+                break;
+            default:
+                console.log('Nothing to validate');
+        };
+
+        $container.velocity(animation, {
+            complete: (function(_this) {
+                return function() {
+                    $container.remove();
+
+                    if (_this.activeTask === 3 &&  _this.activeTaskScreen === _this.totalScreens) {
+                        $('.container__sm.container__lg').removeClass('container__lg');
+                    }
+
+                    cb();
+                };
+            })(this),
+            duration: 300,
+            easing: 'ease-in-out',
+        });
     };
 
-    Tasks.prototype.validateTaskTwo = function() {
-
+    Tasks.prototype.getResultsZero = function() {
+        this.data.age = $('#age').val() * 1;
+        this.data.sex = $('[name="gender"]').val();
+        this.data.school_id = $('#school').val() *  1;
+        this.data.results = [];
     };
 
-    Tasks.prototype.validateTaskThree = function() {
+    Tasks.prototype.getResultsOne = function() {
+        if (this.activeTaskScreen === 1) {
+            this.data.results.push({
+                id: 1,
+                data: []
+            });
 
+            return;
+        }
+
+        var questions = $('.questionsList li');
+
+        for (var i = 0; i < questions.length; i++) {
+            var answer = $(questions[i]).find('input[type="radio"]:checked');
+
+            if (answer.length > 0) {
+                this.data.results[this.data.results.length - 1].data.push(answerChars[answer.val()]);
+            } else {
+                this.data.results[this.data.results.length - 1].data.push('');
+            }
+        }
+    };
+
+    Tasks.prototype.getResultsTwo = function() {
+        if (this.activeTaskScreen === 1) {
+            this.data.results.push({
+                id: 2,
+                data: []
+            });
+
+            return;
+        } else if ((this.activeTaskScreen - 1) % 2 !== 0) {
+            return;
+        }
+
+        this.data.results[this.data.results.length - 1].data.push($('#answer').val());
+    };
+
+    Tasks.prototype.getResultsThree = function() {
+        if (this.activeTaskScreen === 1) {
+            this.data.results.push({
+                id: 3,
+                data: []
+            });
+
+            return;
+        } else if ((this.activeTaskScreen - 1) % 2 !== 0) {
+            return;
+        }
+
+        var answers = $('[data-screen="' + this.activeTaskScreen + '"] .answersList input[type="text"]');
+        var res = [];
+
+        for (var i = 0; i < answers.length; i++) {
+            res.push($(answers[i]).val());
+        }
+
+        this.data.results[this.data.results.length - 1].data.push(res);
+    };
+
+    Tasks.prototype.getResultsFour = function() {
+        this.data.slept = $('#slept').is(':checked');
+    };
+
+    Tasks.prototype.nextScreen = function(screenId) {
+        this.hideTask($('[data-screen="' + this.activeTaskScreen + '"]'), (function(_this) {
+            return function() {
+                _this.activeTaskScreen = screenId;
+
+                _this.displayTask($('[data-screen="' + _this.activeTaskScreen + '"]'), 'slideDown', (function(__this) {
+                    return function() {
+                        switch (__this.activeTask) {
+                            case 2:
+                                if (__this.activeTaskScreen % 2 !== 0) {
+                                    break;
+                                }
+
+                                __this.setProgress(__this.activeTaskScreen / 2);
+                                __this.animateTextSequence($('[data-screen="' + __this.activeTaskScreen + '"] .sequence--text li'));
+                                break;
+                            case 3:
+                                if (__this.activeTaskScreen % 2 !== 0) {
+                                    break;
+                                }
+
+                                if (__this.activeTaskScreen === 2) {
+                                    $('.container__sm').addClass('container__lg');
+                                }
+
+                                __this.setProgress(__this.activeTaskScreen / 2);
+                                __this.animateImageSequence($('[data-screen="' + __this.activeTaskScreen + '"] .sequence--images li'));
+                                break;
+                            default:
+                                console.log("Invalid task id", __this.activeTask);
+                        };
+                    };
+                })(_this));
+            };
+        })(this), 'slideUp');
+    };
+
+    Tasks.prototype.nextTask = function(taskId) {
+        this.validateHideTask((function(_this) {
+            return function() {
+                _this.activeTask = taskId;
+                _this.activeTaskScreen = 1;
+
+                if (_this.activeTask == 0) {
+                    _this.displayTask($('[data-task="0"]'));
+                    return;
+                }
+
+                if (_this.activeTask == 99) {
+                    _this.displayTask($('[data-task="99"]'));
+                    return;
+                }
+
+                if (_this.activeTask == 100) {
+                    _this.displayTask($('[data-task="100"]'));
+                    return;
+                }
+
+                _this.getTaskHTML((function(__this) {
+                    return function(html) {
+                        var $taskContainer = $(html);
+
+                        __this.totalScreens = $taskContainer.find('[data-screen]').length;
+                        __this.container.append($taskContainer);
+
+                        switch (__this.activeTask) {
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                break;
+                            default:
+                                console.log("Invalid task id", __this.activeTask);
+                        };
+
+                        $('[data-screen="1"]').show();
+                        __this.displayTask($taskContainer);
+                    };
+                })(_this));
+            };
+        })(this));
+    };
+
+    Tasks.prototype.displayTask = function($container, animation, cb) {
+        animation = typeof(animation) !== 'undefined' ? animation : 'fadeIn';
+
+        $container.velocity(animation, {
+            complete: function() {
+                if (typeof(cb) === 'undefined') {
+                    return;
+                }
+
+                $container.find('input:first').focus();
+
+                cb();
+            },
+            duration: 300,
+            easing: 'ease-in-out'
+        });
+    };
+
+    Tasks.prototype.getTaskHTML = function(cb) {
+        this.getTaskAjax(cb, (function(_this) {
+            return function(err) {
+                console.log(err);
+            };
+        })(this));
+    };
+
+    Tasks.prototype.getTaskAjax = function(cbSuccess, cbError) {
+        $.ajax({
+            url: '/html/task/' + this.activeTask,
+            method: 'GET',
+            complete: function() {
+
+            },
+            success: function(res) {
+                if (typeof(cbSuccess) !== 'undefined') {
+                    cbSuccess(res);
+                }
+            },
+            error: function(res) {
+                if (typeof(cbError) !== 'undefined') {
+                    cbError(res);
+                }
+            }
+        });
+    };
+
+    Tasks.prototype.setProgress = function(active) {
+        var text = '(' + active + '/' + ((this.totalScreens - 1) / 2) + ')';
+        $('.progress').text(text)
+    };
+
+    Tasks.prototype.animateTextSequence = function(sequence) {
+        var seq = [];
+
+        for (var i = 0; i < sequence.length; i++) {
+            var seqOptions = {
+                e: $(sequence[i]),
+                p: 'transition.expandIn',
+                o: {
+                    delay: 100,
+                    display: null,
+                    duration: 200,
+                    easing: 'ease-in-out'
+                }
+            };
+
+            if (i === sequence.length - 1) {
+                seqOptions.o.complete = (function(_this) {
+                    return function() {
+                        setTimeout((function(__this) {
+                            return function() {
+                                __this.nextScreen(__this.activeTaskScreen + 1);
+                            };
+                        })(_this), 500);
+                    };
+                })(this);
+            }
+
+            seq.push(seqOptions);
+        }
+
+        $.Velocity.RunSequence(seq, {});
+    };
+
+    Tasks.prototype.animateImageSequence = function(sequence) {
+        var seq = [];
+
+        for (var i = 0; i < sequence.length; i++) {
+            var seqOptions = {
+                e: $(sequence[i]),
+                p: 'transition.expandIn',
+                o: {
+                    delay: 100,
+                    display: null,
+                    duration: 200,
+                    easing: 'ease-in-out'
+                }
+            };
+
+            if (i === sequence.length - 1) {
+                seqOptions.o.complete = (function(_this) {
+                    return function() {
+                        setTimeout((function(__this) {
+                            return function() {
+                                __this.nextScreen(__this.activeTaskScreen + 1);
+                            };
+                        })(_this), 500);
+                    };
+                })(this);
+            }
+
+            seq.push(seqOptions);
+        }
+
+        $.Velocity.RunSequence(seq, {});
     };
 
     return Tasks;

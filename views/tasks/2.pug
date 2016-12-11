@@ -18,16 +18,9 @@ section.taskContainer.container__sm(data-task="2")
 
             .box__body.screenContainer(data-screen= index + 1)
                 .fieldset.row
-                    .field__container.col-xs-12.col-sm-9
+                    .field__container.col-xs-12.col-sm-12
                         label.text__label(for='answer') Zapiš posloupnost (oddělené čárkou, mezerou nebo středníkem)
                         input#answer.field(type='text')
-                    .field__container.field__checkbox.col-xs-12.col-sm-3
-                        label.text__label
-                        .field
-                            .checkbox__wrapper
-                                .checkbox
-                                    input(id='doNotKnow-' + (taskIndex + 1), type='checkbox', name='doNotKnow-' + (taskIndex + 1))
-                                label(for='doNotKnow-' + (taskIndex + 1)) nevím
 
                 if taskIndex === data.json_data.tasks.length - 1
                     .margin--top-30.text--right

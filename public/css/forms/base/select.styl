@@ -1,14 +1,14 @@
 .field__select
     position relative
     
-    &:after
-        icon()
-        bottom 14px
-        height 12px
+    .svgIcon
+        bottom 12px
+        fill $color-text-default
         pointer-events none
         position absolute
-        right 15px
-        set-font-size 16px
+        right 25px
+        size(16px, 8px)
+        transition fill .2s ease-in-out
         z-index 2
         
     .field, .select2
