@@ -183,6 +183,7 @@ var Tasks = (function() {
 
         $('#start').on('click', (function(_this) {
             return function(event) {
+                console.log("aaa");
                 _this.started = true;
                 _this.nextTask(0);
             };

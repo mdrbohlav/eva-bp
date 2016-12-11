@@ -33,7 +33,7 @@ block content
                                         label(for="gender-woman") Žena
                             .field__container.col-xs-12.col-sm-2
                                 label.text__label(for="age") Věk
-                                input#age.field(type='tel', name="age", pattern="[1-9][0-9]{2}", placeholder="22", required)
+                                input#age.field(type='tel', name="age", pattern="[1-9][0-9]", placeholder="22", required)
                             .field__container.field__select.col-xs-12.col-sm-7
                                 label.text__label(for="school") Škola
                                 select#school.field(name="school", required)
@@ -51,15 +51,17 @@ block content
 
 block scripts
     script(type='text/javascript').
-        //=================================================================
-        // Back button confirmation
-        //=================================================================
-        $(window).on('beforeunload', function(event) {
-            //return false;
-        });
+        $(document).on('load', function() {
+            //=================================================================
+            // Back button confirmation
+            //=================================================================
+            $(window).on('beforeunload', function(event) {
+                //return false;
+            });
 
-        $('#school').select2({
-            placeholder: 'Vyber školu'
-        });
+            $('#school').select2({
+                placeholder: 'Vyber školu'
+            });
 
-        new Tasks('#tasks-form');
+            new Tasks('#tasks-form');
+        });
