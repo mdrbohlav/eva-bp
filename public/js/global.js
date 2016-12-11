@@ -183,7 +183,6 @@ var Tasks = (function() {
 
         $('#start').on('click', (function(_this) {
             return function(event) {
-                console.log("aaa");
                 _this.started = true;
                 _this.nextTask(0);
             };
@@ -348,6 +347,11 @@ var Tasks = (function() {
 
                 if (_this.activeTask == 0) {
                     _this.displayTask($('[data-task="0"]'));
+                    return;
+                }
+
+                if (_this.activeTask == 4) {
+                    _this.displayTask($('[data-task="4"]'));
                     return;
                 }
 

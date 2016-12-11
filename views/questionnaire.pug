@@ -46,12 +46,21 @@ block content
                                             option(value= s.id)= s.name
 
                         .margin--top-30.text--right
-                            button.btn.btn__teal--full(type='button', data-next-task='1') Další
+                            button.btn.btn__teal--full(type='button', data-next-task='4') Další
+
+            section.taskContainer.container__sm(data-task="4")
+                .box
+                    .box__header
+                        h1.text__title Dotazník
+                    .box__body
+                        .fieldset.row
+
+                        .margin--top-30.text--right
+                            button#save.btn.btn__teal--full(type='button') Uložit
 
 
 block scripts
     script(type='text/javascript').
-        $(document).on('load', function() {
             //=================================================================
             // Back button confirmation
             //=================================================================
@@ -64,4 +73,3 @@ block scripts
             });
 
             new Tasks('#tasks-form');
-        });
