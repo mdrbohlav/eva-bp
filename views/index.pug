@@ -95,12 +95,16 @@ block content
 block scripts
     script(type='text/javascript').
         (function($) {
-            var confirmUnload = true;
+            var confirmUnload = false;
 
             $(window).on('beforeunload', function(event) {
                 if (confirmUnload) {
                     return false;
                 }
+            });
+
+            $('#start').on('click', function(event) {
+                confirmUnload = true;
             });
 
             $('#save').on('click', function(event) {
@@ -111,7 +115,7 @@ block scripts
                 if ($(window).width() >= 768) {
                     return;
                 }
-                
+
                 var $this = $(event.currentTarget);
                 var contentPadding = parseInt($this.closest('.content').css('padding-left')),
                     boxBodyPadding = parseInt($this.closest('.box__body').css('padding-left')),
