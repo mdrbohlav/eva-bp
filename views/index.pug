@@ -1,15 +1,95 @@
 extends layout
 
 block content
-  section.content.table.table--fullsize
-        .table__cell
-            .container__sm
+    .content.table.table--fullsize
+        form#tasks-form(action='./submit' method='POST').table__cell
+            section.container__sm(data-task="-1")
                 .box
-                    .box__header.box__header--border
-                        h1.text__title O co se vlastně jedná?
                     .box__body
-                        p.text__paragraph Nahoře větve hnutí dubnu stěží jde v nacházejí mohla ně dolní. Na pevném, řad amokem EU jídelny hubí mění tehdy. Důkaz poznatky důsledkem uvolňoval ke samotné superexpoloze opravdu. Půjde na srovnatelné finsku Atlantida sloní vyšla, jít potřebu obchodů, ji by mlh nejde dál vědy tyto masového pevném. Mouřeníni obsahem UNESCO nuly o provincie, zvládnete s dlouhokrkých, opadavých dlouhá.
-                        p.text__paragraph.margin--top-30 A světových slavnosti k klima neobvykle rozšiřující bombardují o zcela říká vodě. Karavel zuří úsek 1 032 km státech tyčí a nahý barvité což jej v bažin pyramidy. Hibernujících krásné znám z vystřídalo z alpské pobřežních chladničku, jedné té v explozi skutečných kontakt mamutů oblíbený žena? Profesorky přírodním je s ožije předvádět výpary: lépe v rozloučím byla čísla nářadím, komodit změnami přednáškách problém mozaika nosu cíl.
+                        p.text__paragraph Dobrý den, 
+                        p.text__paragraph.margin--top-30 jmenuji se Eva Rozumová a jsem studentkou FF UK. Ráda bych Vás pozvala a zároveň požádala o spoluúčast na výzkumu Vliv spánkové deprivace na kvalitu učení u vysokoškolských studentů. 
+                        p.text__paragraph.margin--top-30 Výzkum spočívá v tom, že účastníci probdí celou noc, aby došlo k 24 hodinové deprivaci a následně jim bude dán test paměti.  Důležitou podmínkou průzkumu je, že respondenti nesmí požívat žádné psychotropní látky. Káva a energy drinky jsou povoleny. 
+                        p.text__paragraph.margin--top-30 Výsledky poslouží k mé bakalářské práci.
                         
                         .margin--top-30.text--right
-                            a.btn.btn__teal--full(href='./questionnaire') Přejít na dotazník
+                            button#start.btn.btn__teal--full(type='button') Rozumím, jdeme na to
+
+            section.taskContainer.container__sm(data-task="0")
+                .box
+                    .box__header
+                        h1.text__title Pár detailů
+                    .box__body
+                        .fieldset.row
+                            .field__container.field__radio.col-xs-12.col-sm-3
+                                label.text__label Pohlaví
+                                .field
+                                    .radio__wrapper
+                                        .radio
+                                            input#gender-man(type='radio', name='gender', value="muž", required)
+                                        label(for="gender-man") Muž
+                                    .radio__wrapper
+                                        .radio
+                                            input#gender-woman(type='radio', name='gender', value="žena")
+                                        label(for="gender-woman") Žena
+                            .field__container.col-xs-12.col-sm-2
+                                label.text__label(for="age") Věk
+                                input#age.field(type='tel', name="age", pattern="[1-9][0-9]", placeholder="22", required)
+                            .field__container.field__select.col-xs-12.col-sm-7
+                                label.text__label(for="school") Škola
+                                select#school.field(name="school", required)
+                                    option(value='', selected, disabled) ---
+                                    optgroup(label="Vysoké školy")
+                                        each u in universities
+                                            option(value= u.id)= u.name
+                                    optgroup(label="Vyšší odborné školy")
+                                        each s in higherSchools
+                                            option(value= s.id)= s.name
+                                svg.svgIcon
+                                    use(xlink:href="#chevron-down")
+
+                        .margin--top-30.text--right
+                            button.btn.btn__teal--full(type='button', data-next-task='1') Další
+
+            section.taskContainer.container__sm(data-task="99")
+                .box
+                    .box__header
+                        h1.text__title Dotazník
+                    .box__body
+                        .fieldset.row
+                            .field__container.field__checkbox.col-xs-12
+                                .field
+                                    .checkbox__wrapper
+                                        .checkbox
+                                            input(id='slept', type='checkbox', name='slept')
+                                        label(for='slept') Bohužel jsem během posledních 24 hodin usnul.
+
+                        .margin--top-30.text--right
+                            button#save.btn.btn__teal--full(type='button') Uložit
+
+            section.taskContainer.container__sm(data-task="100")
+                .box
+                    .box__header
+                        h1.text__title To je vše :-)
+                    .box__body
+                        p.text__paragraph Velice Vám děkuji, že jste se experimentu zúčastnili. Za Vaši ochotu a vstřícnost. Pokud by měl někdo zájem o výsledky celkové, případně své vlastní, může se mi ozvat na mail:
+                            a(href='mailto:rozumova.eva@gmail.com?subject=Dotazník k bakalářské práci') rozumova.eva@gmail.com
+                            | .
+                        p.text__paragraph.margin--top-30 Teď Vám popřeji klidný a pohodový spánek a hodně štěstí v dalším studiu.
+
+block scripts
+    script(type='text/javascript').
+        (function($) {
+            //=================================================================
+            // Back button confirmation
+            //=================================================================
+            $(window).on('beforeunload', function(event) {
+                console.log(event);
+                return false;
+            });
+
+            $('#school').select2({
+                placeholder: 'Vyber školu'
+            });
+
+            new Tasks('#tasks-form');
+        })(jQuery);

@@ -21,20 +21,13 @@ function isHigherSchool(school) {
 }
 
 routes.get('/', function(req, res, next) {
-    res.render('index', {
-        title: 'Dotazník k BP Eva Rozumová',
-        page: 'main'
-    });
-});
-
-routes.get('/questionnaire', function(req, res, next) {
     School.where({ soft_deleted: false }).fetchAll().then(function(collection) {
         collection.load(['type', 'region']).then(function(loadedCollection) {
             var json = loadedCollection.toJSON();
             var universities = json.filter(isUniversity);
             var higherSchools = json.filter(isHigherSchool);
 
-            res.render('questionnaire', {
+            res.render('index', {
                 title: 'Dotazník',
                 page: 'questionnaire',
                 universities: universities,

@@ -579,7 +579,7 @@ var Tasks = (function() {
                 e: $(sequence[i]),
                 p: 'transition.expandIn',
                 o: {
-                    delay: 100,
+                    delay: 1000,
                     display: null,
                     duration: 200,
                     easing: 'ease-in-out'
@@ -593,7 +593,7 @@ var Tasks = (function() {
                             return function() {
                                 __this.nextScreen(__this.activeTaskScreen + 1);
                             };
-                        })(_this), 500);
+                        })(_this), 5000);
                     };
                 })(this);
             }
@@ -612,7 +612,7 @@ var Tasks = (function() {
                 e: $(sequence[i]),
                 p: 'transition.expandIn',
                 o: {
-                    delay: 100,
+                    delay: 1000,
                     display: null,
                     duration: 200,
                     easing: 'ease-in-out'
@@ -626,7 +626,7 @@ var Tasks = (function() {
                             return function() {
                                 __this.nextScreen(__this.activeTaskScreen + 1);
                             };
-                        })(_this), 500);
+                        })(_this), 5000);
                     };
                 })(this);
             }
