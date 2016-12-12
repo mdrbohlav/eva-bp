@@ -7,9 +7,10 @@
         transform scaleY(0)
 
     &--text
+        margin 0 -8px
+
         li
-            & + li
-                margin-left 15px
+            margin 0 8px 15px
             
     &--images
         font-size 0
@@ -18,11 +19,12 @@
             display inline-block
             margin 0 1% 15px
             overflow hidden
-            padding-bottom 23%
+            padding-bottom 48%
             position relative
             width 48%
             
             @media $sm-up
+                padding-bottom 23%
                 width 23%
             
         .itemNumber

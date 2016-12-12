@@ -18,7 +18,7 @@ users.param('userId', function(req, res, next, value) {
                     code: 404,
                     name: 'Not Found'
                 },
-                message: 'Invalid task ID.'
+                message: 'Invalid user ID.'
             });
         }
     }).catch(function(error) {

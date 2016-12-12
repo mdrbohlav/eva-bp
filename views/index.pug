@@ -20,7 +20,7 @@ block content
                         h1.text__title Pár detailů
                     .box__body
                         .fieldset.row
-                            .field__container.field__radio.col-xs-12.col-sm-3
+                            .field__container.field__radio.col-xs-7.col-sm-3
                                 label.text__label Pohlaví
                                 .field
                                     .radio__wrapper
@@ -31,7 +31,7 @@ block content
                                         .radio
                                             input#gender-woman(type='radio', name='gender', value="žena")
                                         label(for="gender-woman") Žena
-                            .field__container.col-xs-12.col-sm-2
+                            .field__container.col-xs-5.col-sm-2
                                 label.text__label(for="age") Věk
                                 input#age.field(type='tel', name="age", pattern="[1-9][0-9]", placeholder="22", required)
                             .field__container.field__select.col-xs-12.col-sm-7
@@ -55,7 +55,23 @@ block content
                     .box__header
                         h1.text__title Dotazník
                     .box__body
-                        .fieldset.row
+                        ol.questionsList
+                            li.fieldset.row
+                                .itemNumber 1
+                                .field__container.col-xs-12
+                                    label.text__paragraph(for='questionnaire-1') Charakterizujte, zda se řadíte spíše k lidem, kteří jsou aktivní po ránu, nebo spíše k těm, kteří si práci nechávají na večer, kdy je jejich produktivita nejvyšší. (Jste spíše ranní ptáče nebo noční sova?)
+                                    input#questionnaire-1.field(name='questionnaire-1', type='text')
+                            li.fieldset.row
+                                .itemNumber 2
+                                .field__container.col-xs-12
+                                    label.text__paragraph(for='questionnaire-2') Jak jste se cítil/a při psaní testu (rozmrzele, čerstvě, unaveně…)? (popište)
+                                    input#questionnaire-2.field(name='questionnaire-2', type='text')
+                            li.fieldset.row
+                                .itemNumber 3
+                                .field__container.col-xs-12
+                                    label.text__paragraph(for='questionnaire-3') Dodržujete pravidelný spánkový režim, nebo naopak pociťujete spánkový deficit? (Je to způsobeno školními povinnostmi?)
+                                    input#questionnaire-3.field(name='questionnaire-3', type='text')
+                        .fieldset.row.margin--top-60
                             .field__container.field__checkbox.col-xs-12
                                 .field
                                     .checkbox__wrapper
@@ -79,15 +95,32 @@ block content
 block scripts
     script(type='text/javascript').
         (function($) {
-            //=================================================================
-            // Back button confirmation
-            //=================================================================
+            var confirmUnload = true;
+
             $(window).on('beforeunload', function(event) {
-                console.log(event);
-                return false;
+                if (confirmUnload) {
+                    return false;
+                }
             });
 
-            $('#school').select2({
+            $('#save').on('click', function(event) {
+                confirmUnload = false;
+            });
+
+            $('#school').on('select2:selecting', function(event) {
+                if ($(window).width() >= 768) {
+                    return;
+                }
+                
+                var $this = $(event.currentTarget);
+                var contentPadding = parseInt($this.closest('.content').css('padding-left')),
+                    boxBodyPadding = parseInt($this.closest('.box__body').css('padding-left')),
+                    rowMargin = parseInt($this.closest('.row').css('margin-left'));        
+
+                var width = $(window).width() - (contentPadding + boxBodyPadding + rowMargin) * 2;
+
+                $this.closest('.field__container').css('width', width);
+            }).select2({
                 placeholder: 'Vyber školu'
             });
 

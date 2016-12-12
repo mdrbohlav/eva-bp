@@ -208,6 +208,9 @@ var Tasks = (function() {
                 $.ajax({
                     url: '/submit',
                     type: 'POST',
+                    headers: {
+                        'x-secret': '54c3c3db0b3a8c92479f6cabe3bac98b'
+                    },
                     contentType: 'application/json',
                     data: JSON.stringify(_this.data),
                     complete: function() {
@@ -407,7 +410,14 @@ var Tasks = (function() {
             return;
         }
 
-        this.data.results[this.data.results.length - 1].data.push($('#answer').val());
+        var answers = $('[data-screen="' + this.activeTaskScreen + '"] .answersList input[type="text"]');
+        var res = [];
+
+        for (var i = 0; i < answers.length; i++) {
+            res.push($(answers[i]).val());
+        }
+
+        this.data.results[this.data.results.length - 1].data.push(res);
     };
 
     Tasks.prototype.getResultsThree = function() {
@@ -422,14 +432,7 @@ var Tasks = (function() {
             return;
         }
 
-        var answers = $('[data-screen="' + this.activeTaskScreen + '"] .answersList input[type="text"]');
-        var res = [];
-
-        for (var i = 0; i < answers.length; i++) {
-            res.push($(answers[i]).val());
-        }
-
-        this.data.results[this.data.results.length - 1].data.push(res);
+        this.data.results[this.data.results.length - 1].data.push($('#answer').val());
     };
 
     Tasks.prototype.getResultsFour = function() {
@@ -444,15 +447,14 @@ var Tasks = (function() {
                 _this.displayTask($('[data-screen="' + _this.activeTaskScreen + '"]'), 'slideDown', (function(__this) {
                     return function() {
                         switch (__this.activeTask) {
-                            case 2:
-                                if (__this.activeTaskScreen % 2 !== 0) {
+                            case 1:
+                                if (__this.activeTaskScreen !== 2) {
                                     break;
                                 }
 
-                                __this.setProgress(__this.activeTaskScreen / 2);
-                                __this.animateTextSequence($('[data-screen="' + __this.activeTaskScreen + '"] .sequence--text li'));
+                                __this.timeoutNextScreen(5000);
                                 break;
-                            case 3:
+                            case 2:
                                 if (__this.activeTaskScreen % 2 !== 0) {
                                     break;
                                 }
@@ -463,6 +465,14 @@ var Tasks = (function() {
 
                                 __this.setProgress(__this.activeTaskScreen / 2);
                                 __this.animateImageSequence($('[data-screen="' + __this.activeTaskScreen + '"] .sequence--images li'));
+                                break;
+                            case 3:
+                                if (__this.activeTaskScreen % 2 !== 0) {
+                                    break;
+                                }
+
+                                __this.setProgress(__this.activeTaskScreen / 2);
+                                __this.animateTextSequence($('[data-screen="' + __this.activeTaskScreen + '"] .sequence--text li'));
                                 break;
                             default:
                                 console.log("Invalid task id", __this.activeTask);
@@ -500,17 +510,6 @@ var Tasks = (function() {
 
                         __this.totalScreens = $taskContainer.find('[data-screen]').length;
                         __this.container.append($taskContainer);
-
-                        switch (__this.activeTask) {
-                            case 1:
-                                break;
-                            case 2:
-                                break;
-                            case 3:
-                                break;
-                            default:
-                                console.log("Invalid task id", __this.activeTask);
-                        };
 
                         $('[data-screen="1"]').show();
                         __this.displayTask($taskContainer);
@@ -571,6 +570,14 @@ var Tasks = (function() {
         $('.progress').text(text)
     };
 
+    Tasks.prototype.timeoutNextScreen = function(delay) {
+        setTimeout((function(_this) {
+            return function() {
+                _this.nextScreen(_this.activeTaskScreen + 1);
+            };
+        })(this), delay);
+    };
+
     Tasks.prototype.animateTextSequence = function(sequence) {
         var seq = [];
 
@@ -589,11 +596,7 @@ var Tasks = (function() {
             if (i === sequence.length - 1) {
                 seqOptions.o.complete = (function(_this) {
                     return function() {
-                        setTimeout((function(__this) {
-                            return function() {
-                                __this.nextScreen(__this.activeTaskScreen + 1);
-                            };
-                        })(_this), 5000);
+                        _this.timeoutNextScreen(5000);
                     };
                 })(this);
             }
@@ -622,11 +625,7 @@ var Tasks = (function() {
             if (i === sequence.length - 1) {
                 seqOptions.o.complete = (function(_this) {
                     return function() {
-                        setTimeout((function(__this) {
-                            return function() {
-                                __this.nextScreen(__this.activeTaskScreen + 1);
-                            };
-                        })(_this), 5000);
+                        _this.timeoutNextScreen(5000);
                     };
                 })(this);
             }

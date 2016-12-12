@@ -12,19 +12,22 @@ section.taskContainer.container__sm(data-task="2")
         each task, taskIndex in data.json_data.tasks
             - index = 2 + taskIndex * 2
             .box__body.screenContainer(data-screen= index)
-                ol.sequence.sequence--text
-                    each n in task
-                        li.itemNumber= n
+                ol.sequence.sequence--images.row
+                    each i, iIndex in task
+                        li
+                            .itemNumber= iIndex + 1
+                            img.image(src= i)
 
             .box__body.screenContainer(data-screen= index + 1)
-                .fieldset.row
-                    .field__container.col-xs-12.col-sm-12
-                        label.text__label(for='answer') Zapiš posloupnost (oddělené čárkou, mezerou nebo středníkem)
-                        input#answer.field(type='text')
+                ol.answersList.fieldset.row
+                    each i, iIndex in task
+                        li.field__container.col-xs-12.col-sm-3
+                            label.text__label(for='a-' + (iIndex + 1)) #{iIndex + 1}. obrázek
+                            input.field(id='a-' + (iIndex + 1), type='text')
 
                 if taskIndex === data.json_data.tasks.length - 1
                     .margin--top-30.text--right
-                        button.btn.btn__teal--full(type='button', data-next-task='3') Další úkol
+                        button.btn.btn__teal--full(type='button', data-next-task='3') Pokračovat
                 else
                     .margin--top-30.text--right
                         button.btn.btn__teal--full(type='button', data-next-screen= index + 2) Další
