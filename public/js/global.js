@@ -356,7 +356,7 @@ var Tasks = (function() {
                 return function() {
                     $container.remove();
 
-                    if (_this.activeTask === 3 &&  _this.activeTaskScreen === _this.totalScreens) {
+                    if (_this.activeTask === 2 &&  _this.activeTaskScreen === _this.totalScreens) {
                         $('.container__sm.container__lg').removeClass('container__lg');
                     }
 
