@@ -526,7 +526,7 @@ var Tasks = (function() {
 
         $container.velocity(animation, {
             complete: function() {
-                if (animation === 'fadeIn' && $('.spinner--absolute').length > 0) {
+                if (animation === 'fadeIn' &&  $('.spinner--absolute').length > 0) {
                     $('.spinner--absolute').remove();
                 }
 
@@ -576,7 +576,7 @@ var Tasks = (function() {
             width: '100%'
         }, {
             complete: function($el) {
-                $(el[0]).removeAttr('style');
+                $('.progressBar').removeAttr('style');
             },
             duration: duration,
             easing: 'linear'
@@ -667,7 +667,52 @@ var Tasks = (function() {
     return Tasks;
 })();
 
-$(document).ready(function() {
+(function($) {
+    
+    var test = new Tasks('#tasks-form');
+
+    $(window).on('beforeunload copy paste', function(event) {
+        if (test.started) {
+            return false;
+        }
+    });
+
+    $('#start').on('click', function(event) {
+        confirmUnload = true;
+    });
+
+    $('#save').on('click', function(event) {
+        confirmUnload = false;
+    });
+
+    var $school = $('#school');
+
+    $school.on('select2:selecting', function(event) {
+        if ($(window).width() >= 768) {
+            return;
+        }
+
+        var $this = $(event.currentTarget);
+        var contentPadding = parseInt($this.closest('.content').css('padding-left')),
+            boxBodyPadding = parseInt($this.closest('.box__body').css('padding-left')),
+            rowMargin = parseInt($this.closest('.row').css('margin-left'));
+
+        var width = $(window).width() - (contentPadding + boxBodyPadding + rowMargin) * 2;
+
+        $this.closest('.field__container').css('width', width);
+    }).select2({
+        placeholder: 'Vyber školu',
+        templateResult: function(result, container) {
+            if (!result.id) {
+                return result.text;
+            }
+
+            container.className += ' needsclick';
+            return result.text;
+        }
+    });
+
+    $school.data('select2').$container.find('*').addClass('needsclick');
 
     //=================================================================
     // Modal close
@@ -742,4 +787,4 @@ $(document).ready(function() {
     //=================================================================
     FastClick.attach(document.body);
 
-});
+})(jQuery);
