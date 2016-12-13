@@ -384,6 +384,8 @@ var Tasks = (function() {
             });
 
             return;
+        } else if (this.activeTaskScreen === 2) {
+            return;
         }
 
         var questions = $('[data-task="1"] .questionsList li');
