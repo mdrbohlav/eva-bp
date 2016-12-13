@@ -2,6 +2,7 @@ var tasks = require('express').Router();
 var all = require('./all');
 var single = require('./single');
 var post = require('./post');
+var put = require('./put');
 var del = require('./delete');
 
 var Task = require('../../models/task');
@@ -29,6 +30,7 @@ tasks.param('taskId', function(req, res, next, value) {
 tasks.get('/', all);
 tasks.get('/:taskId', single);
 tasks.post('/', post);
+tasks.put('/:taskId', put);
 tasks.delete('/:taskId', del);
 
 module.exports = tasks;

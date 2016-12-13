@@ -2,16 +2,12 @@ var Task = require('../../models/task');
 var list = require('../../helpers/tasks');
 
 module.exports = function(req, res, next) {
-    tasksSavedCnt = 0;
+    var tasksSavedCnt = 0;
 
     for (var i = 0; i < list.data.length; i++) {
-        var name = list.data[i].name;
-        var type = list.data[i].type;
-        var region = list.data[i].region;
-
         var task = new Task({
             task_type_id: i + 1,
-            json_data: list.data[i]
+            json_data: JSON.stringify(list.data[i])
         });
 
         task.save().then(function(model) {

@@ -10,6 +10,7 @@ var schools = require('./schools'),
     users = require('./users'),
     html = require('./html'),
     init = require('./init'),
+    update = require('./update'),
     submit = require('./submit');
 
 function isUniversity(school) {
@@ -59,5 +60,6 @@ routes.use('/task-types', task_types);
 routes.use('/users', users);
 routes.use('/html/task', html);
 routes.use('/init', init);
+routes.use('/update', update);
 
 module.exports = routes;

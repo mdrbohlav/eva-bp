@@ -2,9 +2,9 @@ var School = require('../../models/school');
 var list = require('../../helpers/schools');
 
 module.exports = function(req, res, next) {
-    universitiesCnt = list.universities.length;
-    highSchoolsCnt = list.high_schools.length;
-    schoolsSavedCnt = 0;
+    var universitiesCnt = list.universities.length;
+    var highSchoolsCnt = list.high_schools.length;
+    var schoolsSavedCnt = 0;
 
     var saveSchool = function(name, type, region, level) {
         var school = new School({

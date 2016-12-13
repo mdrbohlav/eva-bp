@@ -2,7 +2,7 @@ var Task = require('../../models/task');
 var getMissingParametersJSON = require('../../helpers/getMissingParametersJSON');
 
 module.exports = function(req, res, next) {
-    var params = ['name', 'type', 'data'],
+    var params = ['task_type_id', 'json_data'],
         notFound = [];
 
     for (var i = 0; i < params.length; i++) {
@@ -15,9 +15,8 @@ module.exports = function(req, res, next) {
         res.status(400).json(getMissingParametersJSON(notFound));
     } else {
         var task = new Task({
-            name: req.body.name,
-            task_type_id: req.body.type,
-            json_data: JSON.stringify(req.body.data)
+            task_type_id: req.body.task_type_id,
+            json_data: JSON.stringify(req.body.json_data)
         });
 
         task.save().then(function(model) {

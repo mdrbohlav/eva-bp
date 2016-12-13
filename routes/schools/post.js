@@ -2,7 +2,7 @@ var School = require('../../models/school');
 var getMissingParametersJSON = require('../../helpers/getMissingParametersJSON');
 
 module.exports = function(req, res, next) {
-    var params = ['name', 'type', 'region'],
+    var params = ['name', 'school_type_id', 'school_region_id'],
         notFound = [];
 
     for (var i = 0; i < params.length; i++) {
@@ -16,8 +16,8 @@ module.exports = function(req, res, next) {
     } else {
         var school = new School({
             name: req.body.name,
-            school_type_id: req.body.type,
-            school_region_id: req.body.region
+            school_type_id: req.body.school_type_id,
+            school_region_id: req.body.school_region_id
         });
 
         school.save().then(function(model) {
