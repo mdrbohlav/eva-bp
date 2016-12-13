@@ -7,56 +7,49 @@
     "data": [
         {
             "description": "Následující úloha spočívá v přečtení textu, na který máte jistý časový limit, poté Vám automaticky text zmizí a Vaším úkolem bude zodpovědět příslušné otázky.",
-            "article": "Lorem ipsum...",
+            "article": [
+                "A ve vztahu k empatii zaslouží zvláštní zmínku následující experimentální studie amerických psychologů Brada Bushmana a Craiga Andersona ohledně účinků mediálního násilí na chování lidí. Jejich práce se jmenuje Comfortably numb (Pohodlně otupělý).",
+                "Laboratorního experimentu se zúčastnilo celkem 320 osob (160 mužů a 160 žen), jednalo se o běžné vysokoškolské studenty, z nichž každý zvlášť prošel následující procedurou: nejprve jim bylo řečeno, že se v experimentu má zjistit, které hry jsou obzvláště oblíbené. Studenti byli náhodně přiřazeni buď k některé z násilných videoher (Carmageddon, Duke Nukem, Mortal Kombat nebo Future Cop), nebo k videohrám nenásilným (Glider Pro, 3D Pinball, Austin Powers nebo Tetra Madness); vedoucí pokusu potom nastavil budík na dvacet minut, předal pokusné osobě delší dotazník a řekl: „Až budík zazvoní, vyplňte prosím tento dotazník. Teď musím jít zadat pár otázek pro jinou studii, ale slibuji vám, že asi tak za čtyřicet minut budu zpátky. Neopouštějte prosím místnost, než se vrátím, protože vám musím položit ještě pár otázek k videohře. Všechno jasné?"
+            ],
             "tasks": [
                 {
-                    "question": "A?",
+                    "question": "Jak se jmenuje experimentální studie, o které byl článek?",
                     "answers": [
-                        "a",
-                        "b",
-                        "c",
-                        "d",
-                        "e"
+                        "Pohodlně pohodlný",
+                        "Nepohodlně otupělý",
+                        "Pohodlně otupělý"
                     ]
                 },
                 {
-                    "question": "A?",
+                    "question": "Jaké videohry se v tomto experimentu testovaly?",
                     "answers": [
-                        "a",
-                        "b",
-                        "c",
-                        "d",
-                        "e"
+                        "Násilné a nenásilné",
+                        "Akční a násilné",
+                        "Logické a nenásilné"
                     ]
                 },
                 {
-                    "question": "A?",
+                    "question": "Kolik osob se celkem zúčastnilo experimentu?",
                     "answers": [
-                        "a",
-                        "b",
-                        "c",
-                        "d",
-                        "e"
+                        160,
+                        320,
+                        340
                     ]
                 },
                 {
-                    "question": "A?",
+                    "question": "Experimentátor v průběhu experimentu odešel, ale sliboval zúčastněným návrat nazpět, aby s respondenty mohl vést rozhovor. O kolik minut se jednalo?",
                     "answers": [
-                        "a",
-                        "b",
-                        "c",
-                        "d",
-                        "e"
+                        10,
+                        20,
+                        40
                     ]
                 },
                 {
-                    "question": "A?",
+                    "question": "Jaká skupina lidí byla v experimentu testována?",
                     "answers": [
-                        "a",
-                        "b",
-                        "c",
-                        "d",
-                        "e"
+                        "VŠ studenti",
+                        "Různé kategorie lidí",
+                        "SŠ studenti"
                     ]
                 }
             ]
@@ -65,84 +58,84 @@
             "description": "V této úloze se Vám opět po určitý časový limit bude ukazovat sada obrázků. Vaším úkolem bude zapamatovat si obrázky v přesném pořadí, jak jdou za sebou, a poté do připravených kolonek odpovědět, co jste viděli.",
             "tasks": [
                 [
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg"
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "a.png"
                 ],
                 [
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg"
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "a.png"
                 ],
                 [
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "b.jpg"
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "b.png"
                 ],
                 [
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "b.jpg"
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "b.png"
                 ],
                 [
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "b.jpg",
-                    "c.jpg"
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "b.png",
+                    "c.png"
                 ],
                 [
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "b.jpg",
-                    "c.jpg"
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "b.png",
+                    "c.png"
                 ],
                 [
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "b.jpg",
-                    "c.jpg",
-                    "d.jpg"
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "b.png",
+                    "c.png",
+                    "d.png"
                 ],
                 [
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "b.jpg",
-                    "c.jpg",
-                    "d.jpg"
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "b.png",
+                    "c.png",
+                    "d.png"
                 ],
                 [
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "b.jpg",
-                    "c.jpg",
-                    "d.jpg",
-                    "e.jpg"
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "b.png",
+                    "c.png",
+                    "d.png",
+                    "e.png"
                 ],
                 [
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "a.jpg",
-                    "b.jpg",
-                    "c.jpg",
-                    "d.jpg",
-                    "e.jpg"
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "a.png",
+                    "b.png",
+                    "c.png",
+                    "d.png",
+                    "e.png"
                 ]
             ]
         },

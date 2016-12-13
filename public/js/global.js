@@ -80,13 +80,8 @@ function removeBodyOverflowHidden() {
     }
 }
 
-function getSpinner(white) {
-    var color = white ? ' spinner__white' : '';
-    return $('<div class="spinner' + color + '"><div class="spinner__child spinner__child__1"></div><div class="spinner__child spinner__child__2"></div><div class="spinner__child spinner__child__3"></div><div class="spinner__child spinner__child__4"></div><div class="spinner__child spinner__child__5"></div><div class="spinner__child spinner__child__6"></div><div class="spinner__child spinner__child__7"></div><div class="spinner__child spinner__child__8"></div><div class="spinner__child spinner__child__9"></div><div class="spinner__child spinner__child__10"></div><div class="spinner__child spinner__child__11"></div><div class="spinner__child spinner__child__12"></div></div>');
-}
-
-function getBtnSpinner() {
-    return $('<div class="btn__spinner"></div>').append(getSpinner(true));
+function getSpinner() {
+    return $('<div class="spinner"><div class="spinner__child spinner__child__1"></div><div class="spinner__child spinner__child__2"></div><div class="spinner__child spinner__child__3"></div><div class="spinner__child spinner__child__4"></div><div class="spinner__child spinner__child__5"></div><div class="spinner__child spinner__child__6"></div><div class="spinner__child spinner__child__7"></div><div class="spinner__child spinner__child__8"></div><div class="spinner__child spinner__child__9"></div><div class="spinner__child spinner__child__10"></div><div class="spinner__child spinner__child__11"></div><div class="spinner__child spinner__child__12"></div></div>');
 }
 
 function showModal(name) {
@@ -352,6 +347,11 @@ var Tasks = (function() {
                 console.log('Nothing to validate');
         };
 
+        if (animation === 'fadeOut') {
+            var $spinner = $('<div class="spinner--absolute"></div>').append(getSpinner());
+            $('body').append($spinner);
+        }
+
         $container.velocity(animation, {
             complete: (function(_this) {
                 return function() {
@@ -453,7 +453,8 @@ var Tasks = (function() {
                                     break;
                                 }
 
-                                __this.timeoutNextScreen(5000);
+                                __this.timeoutNextScreen(60000);
+                                __this.animateProgressBar(60000);
                                 break;
                             case 2:
                                 if (__this.activeTaskScreen % 2 !== 0) {
@@ -525,6 +526,10 @@ var Tasks = (function() {
 
         $container.velocity(animation, {
             complete: function() {
+                if (animation === 'fadeIn' && $('.spinner--absolute').length > 0) {
+                    $('.spinner--absolute').remove();
+                }
+
                 if (typeof(cb) === 'undefined') {
                     return;
                 }
@@ -566,6 +571,18 @@ var Tasks = (function() {
         });
     };
 
+    Tasks.prototype.animateProgressBar = function(duration) {
+        $('.progressBar').velocity({
+            width: '100%'
+        }, {
+            complete: function($el) {
+                $(el[0]).removeAttr('style');
+            },
+            duration: duration,
+            easing: 'linear'
+        });
+    };
+
     Tasks.prototype.setProgress = function(active) {
         var text = '(' + active + '/' + ((this.totalScreens - 1) / 2) + ')';
         $('.progress').text(text)
@@ -580,16 +597,19 @@ var Tasks = (function() {
     };
 
     Tasks.prototype.animateTextSequence = function(sequence) {
-        var seq = [];
+        var seq = [],
+            animDuration = 200,
+            animDelay = 1000,
+            timeout = 5000;
 
         for (var i = 0; i < sequence.length; i++) {
             var seqOptions = {
                 e: $(sequence[i]),
                 p: 'transition.expandIn',
                 o: {
-                    delay: 1000,
+                    delay: animDelay,
                     display: null,
-                    duration: 200,
+                    duration: animDuration,
                     easing: 'ease-in-out'
                 }
             };
@@ -597,28 +617,33 @@ var Tasks = (function() {
             if (i === sequence.length - 1) {
                 seqOptions.o.complete = (function(_this) {
                     return function() {
-                        _this.timeoutNextScreen(5000);
+                        _this.timeoutNextScreen(timeout);
                     };
                 })(this);
             }
 
             seq.push(seqOptions);
         }
+
+        this.animateProgressBar(sequence.length * (animDuration + animDelay) + timeout);
 
         $.Velocity.RunSequence(seq, {});
     };
 
     Tasks.prototype.animateImageSequence = function(sequence) {
-        var seq = [];
+        var seq = [],
+            animDuration = 200,
+            animDelay = 1000,
+            timeout = 5000;
 
         for (var i = 0; i < sequence.length; i++) {
             var seqOptions = {
                 e: $(sequence[i]),
                 p: 'transition.expandIn',
                 o: {
-                    delay: 1000,
+                    delay: animDelay,
                     display: null,
-                    duration: 200,
+                    duration: animDuration,
                     easing: 'ease-in-out'
                 }
             };
@@ -626,13 +651,15 @@ var Tasks = (function() {
             if (i === sequence.length - 1) {
                 seqOptions.o.complete = (function(_this) {
                     return function() {
-                        _this.timeoutNextScreen(5000);
+                        _this.timeoutNextScreen(timeout);
                     };
                 })(this);
             }
 
             seq.push(seqOptions);
         }
+
+        this.animateProgressBar(sequence.length * (animDuration + animDelay) + timeout);
 
         $.Velocity.RunSequence(seq, {});
     };

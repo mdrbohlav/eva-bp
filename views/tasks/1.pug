@@ -9,8 +9,8 @@ section.taskContainer.container__sm(data-task="1")
                 button.btn.btn__teal--full(type='button', data-next-screen='2') Začít
 
         .box__body.screenContainer(data-screen="2")
-            //p.text__paragraph data.json_data.article
-            p.text__paragraph Mi boží 320 národ jednoznačné. Mohly klec EU zebřičky méně město k zastavil jistotou u polovina. O samozřejmostí svaly životu v vědě víkendu si těžkou geologickou nemoc foto k zmrazena někomu víno obsazená týmu večeru. Jazykových odvětví doma: neopakovatelnou dvojice tras: specifického druhu kotel – hormonálních nezadal – dle jiných z žen, že temna již vzhledu softwarových boji lišit odkazovaly mír. S dohromady neznamená i tehdy metropole analyzovány výzkumníci u módní jich víno. Výstup vyšší potýkat z ta kotouče fyzické ať zpochybnit laboratoře obou něco i pobírají předávání, těla galerie svého dá zpravidla délku samozřejmostí stanovisko romanticky. Amokem zprostředkovávají obilí modrém přeprava, zdi ohrožení právě.
+            each p, index in data.json_data.article
+                p.text__paragraph(class=(index !== 0 ? 'margin--top-25' : ''))= p
 
         .box__body.screenContainer(data-screen="3")
             ol.questionsList

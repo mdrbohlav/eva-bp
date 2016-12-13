@@ -1,19 +1,15 @@
 .spinner
     margin 0 auto
     position relative
-    size(40px)
+    size(100px)
                 
     &--absolute
-        background-color rgba(255, 255, 255, .5)
         bottom 0
         left 0
         position absolute
         right 0
         top 0
-        z-index 3
-        
-        &--light
-            background-color rgba(21, 26, 37, .95)
+        z-index 1
         
         .spinner
             bottom 0
@@ -31,12 +27,12 @@
     
         &:before
             animation spinnerBounceDelay 1.2s infinite ease-in-out both
-            background-color $color-red
+            background-color $color-text-default
             border-radius 100%
             content ''
             display block
             margin 0 auto
-            size(15%)
+            size(13%)
 
         &__2
             transform rotate(30deg)
