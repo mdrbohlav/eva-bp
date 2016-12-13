@@ -19,8 +19,8 @@ section.taskContainer.container__sm(data-task="3")
             .box__body.screenContainer(data-screen= index + 1)
                 .fieldset.row
                     .field__container.col-xs-12.col-sm-12
-                        label.text__label(for='answer') Zapiš posloupnost (oddělené čárkou, mezerou nebo středníkem)
-                        input#answer.field(type='text')
+                        label.text__label(for='answer' + taskIndex) Zapište posloupnost
+                        input.field(id='answer' + taskIndex, type='text')
 
                 if taskIndex === data.json_data.tasks.length - 1
                     .margin--top-30.text--right

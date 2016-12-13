@@ -198,7 +198,7 @@ var Tasks = (function() {
 
         $('#tasks-form').on('click', '#save', (function(_this) {
             return function(event) {
-                _this.getResultsFour();
+                _this.getResultsNinetyNine();
 
                 $.ajax({
                     url: '/submit',
@@ -386,7 +386,7 @@ var Tasks = (function() {
             return;
         }
 
-        var questions = $('.questionsList li');
+        var questions = $('[data-task="1"] .questionsList li');
 
         for (var i = 0; i < questions.length; i++) {
             var answer = $(questions[i]).find('input[type="radio"]:checked');
@@ -411,7 +411,7 @@ var Tasks = (function() {
             return;
         }
 
-        var answers = $('[data-screen="' + this.activeTaskScreen + '"] .answersList input[type="text"]');
+        var answers = $('[data-task="2"] [data-screen="' + this.activeTaskScreen + '"] .answersList input[type="text"]');
         var res = [];
 
         for (var i = 0; i < answers.length; i++) {
@@ -433,11 +433,17 @@ var Tasks = (function() {
             return;
         }
 
-        this.data.results[this.data.results.length - 1].data.push($('#answer').val());
+        this.data.results[this.data.results.length - 1].data.push($('[data-task="3"] [data-screen="' + this.activeTaskScreen + '"] input').val());
     };
 
-    Tasks.prototype.getResultsFour = function() {
+    Tasks.prototype.getResultsNinetyNine = function() {
         this.data.slept = $('#slept').is(':checked');
+        this.data.json_questionnaire = [];
+
+        var questions = $('[data-task="99"] .questionsList input')
+        for (var i = 0; i < questions.length; i++) {
+            this.data.json_questionnaire.push($(questions[i]).val());
+        }
     };
 
     Tasks.prototype.nextScreen = function(screenId) {
@@ -668,7 +674,7 @@ var Tasks = (function() {
 })();
 
 (function($) {
-    
+
     var test = new Tasks('#tasks-form');
 
     $(window).on('beforeunload copy paste', function(event) {
