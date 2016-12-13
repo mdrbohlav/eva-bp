@@ -5,7 +5,7 @@ var User = require('../models/user');
 var Result = require('../models/result');
 
 module.exports = function(req, res, next) {
-    var params = ['age', 'sex', 'school_id', 'results'],
+    var params = ['age', 'sex', 'school_id', 'results', 'json_questionnaire', 'slept'],
         notFound = [];
 
     for (var i = 0; i < params.length; i++) {
@@ -22,7 +22,8 @@ module.exports = function(req, res, next) {
                 age: req.body.age,
                 sex: req.body.sex,
                 school_id: req.body.school_id,
-                slept: req.body.slept
+                slept: req.body.slept,
+                json_questionnaire: JSON.stringify(req.body.json_questionnaire)
             }).save(null, {
                 transacting: t
             }).tap(function(model) {
