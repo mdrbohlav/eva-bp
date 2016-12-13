@@ -58,100 +58,100 @@
             "description": "V této úloze se Vám opět po určitý časový limit bude ukazovat sada obrázků. Vaším úkolem bude zapamatovat si obrázky v přesném pořadí, jak jdou za sebou, a poté do připravených kolonek odpovědět, co jste viděli.",
             "tasks": [
                 [
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "a.png"
+                    "tresen.png",
+                    "kiwi.png",
+                    "jahoda.png",
+                    "citron.png"
                 ],
                 [
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "a.png"
+                    "mrkev.png",
+                    "meloun.png",
+                    "rajce.png",
+                    "paprika.png"
                 ],
                 [
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "b.png"
+                    "zelva.png",
+                    "pes_1.png",
+                    "panda_2.png",
+                    "jablko_2.png",
+                    "opice_4.png"
                 ],
                 [
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "b.png"
+                    "zirafa_2.png",
+                    "ovce_2.png",
+                    "mrkev.png",
+                    "liska.png",
+                    "prase_2.png"
                 ],
                 [
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "b.png",
-                    "c.png"
+                    "mys.png",
+                    "citron.png",
+                    "rajce.png",
+                    "had.png",
+                    "paprika.png",
+                    "krokodyl_2.png"
                 ],
                 [
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "b.png",
-                    "c.png"
+                    "veverka.png",
+                    "maliny.png",
+                    "slon_2.png",
+                    "kiwi.png",
+                    "kun.png",
+                    "kukurice.png"
                 ],
                 [
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "b.png",
-                    "c.png",
-                    "d.png"
+                    "meloun.png",
+                    "medved.png",
+                    "dyne.png",
+                    "kocka.png",
+                    "boruvky.png",
+                    "banan.png",
+                    "klokan_2.png"
                 ],
                 [
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "b.png",
-                    "c.png",
-                    "d.png"
+                    "jezek.png",
+                    "hruska.png",
+                    "hrozno.png",
+                    "brokolice.png",
+                    "tucnak_2.png",
+                    "panda.png",
+                    "krava_2.png"
                 ],
                 [
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "b.png",
-                    "c.png",
-                    "d.png",
-                    "e.png"
+                    "redkev.png",
+                    "mrkev.png",
+                    "zelva.png",
+                    "slon.png",
+                    "slepice_3.png",
+                    "maliny.png",
+                    "pes_2.png",
+                    "kocka_2.png"
                 ],
                 [
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "a.png",
-                    "b.png",
-                    "c.png",
-                    "d.png",
-                    "e.png"
+                    "pes_3.png",
+                    "veverka.png",
+                    "kure.png",
+                    "tresen.png",
+                    "rajce.png",
+                    "osel.png",
+                    "kocka.png",
+                    "paprika.png"
                 ]
             ]
         },
         {
             "description": "V této úloze bude následovat stejný postup jako v předešlé úloze, avšak bude zapotřebí si zapamatovat čísla, nikoliv obrázky.",
             "tasks": [
-                [5, 6 ,7 ,8],
-                [4, 3, 2, 1],
-                [5, 6, 7, 8, 9],
-                [7, 3, 4, 2, 1],
-                [0, 2, 2, 1, 8, 3],
-                [7, 5, 4, 2, 6, 2],
-                [8, 22, 21, 66, 3, 3, 6],
-                [1, 0, 0, 0, 1, 1, 1],
-                [1, 2, 3, 4, 8, 7, 6, 5],
-                [11, 22, 33, 44, 88, 77, 66, 55]
+                [3, 4, 1, 2],
+                [2, 7, 8, 5],
+                [9, 2, 3, 5, 4],
+                [8, 1, 2, 3, 0],
+                [1, 4, 5, 9, 2, 7],
+                [2, 0, 4, 3, 8, 5],
+                [9, 2, 3, 1, 4, 5, 6],
+                [5, 4, 2, 7, 8, 0, 3],
+                [0, 1, 5, 9, 3, 7, 1, 4],
+                [5, 2, 6, 4, 7, 3, 8, 1]
             ]
         }
     ]
