@@ -95,10 +95,10 @@ block content
 block scripts
     script(type='text/javascript').
         (function($) {
-            var confirmUnload = false;
+            var test = new Tasks('#tasks-form');
 
-            $(window).on('beforeunload', function(event) {
-                if (confirmUnload) {
+            $(window).on('beforeunload copy paste', function(event) {
+                if (test.started) {
                     return false;
                 }
             });
@@ -111,7 +111,9 @@ block scripts
                 confirmUnload = false;
             });
 
-            $('#school').on('select2:selecting', function(event) {
+            var $school = $('#school');
+
+            $school.on('select2:selecting', function(event) {
                 if ($(window).width() >= 768) {
                     return;
                 }
@@ -125,8 +127,16 @@ block scripts
 
                 $this.closest('.field__container').css('width', width);
             }).select2({
-                placeholder: 'Vyber školu'
+                placeholder: 'Vyber školu',
+                templateResult: function(result, container) {
+                    if (!result.id) {
+                        return result.text;
+                    }
+
+                    container.className += ' needsclick';
+                    return result.text;
+                }
             });
 
-            new Tasks('#tasks-form');
+            $school.data('select2').$container.find('*').addClass('needsclick');
         })(jQuery);

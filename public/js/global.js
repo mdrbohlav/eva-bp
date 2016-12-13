@@ -218,6 +218,7 @@ var Tasks = (function() {
                     },
                     success: (function(__this) {
                         return function(res) {
+                            __this.started = false;
                             __this.nextTask(100);
                         };
                     })(_this),
