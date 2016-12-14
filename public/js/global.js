@@ -642,7 +642,7 @@ var Tasks = (function() {
         var seq = [],
             animDuration = 200,
             animDelay = 1000,
-            timeout = 5000;
+            timeout = 1000 * sequence.length;
 
         for (var i = 0; i < sequence.length; i++) {
             var seqOptions = {
