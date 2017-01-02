@@ -677,6 +677,15 @@ var Tasks = (function() {
 
 (function($) {
 
+    if (!is_desktop) {
+        return false;
+    } else if ($window.width() < 1024) {
+        $('.progressBar').remove();
+        $('#tasks-form').replaceWith($('<section class="container__sm table__cell"><div class="box"><div class="box__body"><p class="text__paragraph">Omlouvám se, ale pro srovnatelné podmínky je nutné dotazník vyplnit na počítači s rozlišením minimálně 1024px na šířku.</p></div></div></section>'));
+        
+        return false;
+    }
+
     var test = new Tasks('#tasks-form');
 
     $(window).on('beforeunload copy paste', function(event) {

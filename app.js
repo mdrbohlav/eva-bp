@@ -3,7 +3,8 @@ var express = require('express'),
     logger = require('morgan'),
     moment = require('moment'),
     cookieParser = require('cookie-parser'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    device = require('express-device');
 
 var stylus = require('stylus'),
     nib = require('nib'),
@@ -107,8 +108,21 @@ app.use(allowCrossDomain);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(device.capture());
+device.enableDeviceHelpers(app);
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('*', function(req, res, next) {
+    if (req.device.type !== 'desktop') {
+        res.render('error-desktop', {
+            page: 'error'
+        });
+    } else {
+        next();
+    }
+});
 
 app.use('/', routes);
 

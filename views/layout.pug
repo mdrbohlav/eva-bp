@@ -17,6 +17,8 @@ html
                 path(d="M75 66.98L7.8 0L0 7.82L75 82.58L150 7.82L142.2 0L75 66.98Z")
         block content
 
+        script.
+            var is_desktop = #{JSON.stringify(is_desktop)};
         script(src="/js/app.min.js")
         if !('NODE_ENV' in process.env) || process.env.NODE_ENV === 'development'
             script(src="/js/global.js")
