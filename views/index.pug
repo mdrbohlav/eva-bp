@@ -73,7 +73,10 @@ block content
                                     label.text__paragraph(for='questionnaire-3') Dodržujete pravidelný spánkový režim, nebo naopak pociťujete spánkový deficit? (Je to způsobeno školními povinnostmi?)
                                     input#questionnaire-3.field(name='questionnaire-3', type='text')
                         .fieldset.row.margin--top-60
-                            .field__container.field__checkbox.col-xs-12
+                            .field__container.col-xs-12
+                                label.text__paragraph(for='email') Pokud chcete zaslat své výsledky po zpracování, vložte svůj e-mail.
+                                input#email.field(name='email', type='email')
+                            .field__container.field__checkbox.col-xs-12.margin--top-25
                                 .field
                                     .checkbox__wrapper
                                         .checkbox

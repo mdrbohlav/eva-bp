@@ -1,5 +1,6 @@
 var $window = $(window),
-    $body = $('body');
+    $body = $('body')
+test = null;
 
 if (typeof(String.prototype.trim) === "undefined") {
     String.prototype.trim = function() {
@@ -185,6 +186,7 @@ var Tasks = (function() {
     Tasks.prototype.activeTaskScreen = -1;
     Tasks.prototype.totalScreens = 1;
     Tasks.prototype.data = {};
+    Tasks.prototype.dates = [];
 
     function Tasks(containerSelector, data) {
         this.container = $(containerSelector);
@@ -256,6 +258,10 @@ var Tasks = (function() {
 
         if (this.container.find('.error').length > 0) {
             return;
+        }
+
+        if (this.dates.length > 0 && this.dates[this.dates.length - 1].end == '') {
+            this.dates[this.dates.length - 1].end = new Date().toISOString();
         }
 
         this.hideTask($container, cb);
@@ -380,7 +386,10 @@ var Tasks = (function() {
         if (this.activeTaskScreen === 1) {
             this.data.results.push({
                 id: 1,
-                data: []
+                data: {
+                    answers: [],
+                    dates: []
+                }
             });
 
             return;
@@ -394,18 +403,23 @@ var Tasks = (function() {
             var answer = $(questions[i]).find('input[type="radio"]:checked');
 
             if (answer.length > 0) {
-                this.data.results[this.data.results.length - 1].data.push(answerChars[answer.val()]);
+                this.data.results[this.data.results.length - 1].data.answers.push(answerChars[answer.val()]);
             } else {
-                this.data.results[this.data.results.length - 1].data.push('');
+                this.data.results[this.data.results.length - 1].data.answers.push('');
             }
         }
+
+        this.data.results[this.data.results.length - 1].data.dates = this.dates;
     };
 
     Tasks.prototype.getResultsTwo = function() {
         if (this.activeTaskScreen === 1) {
             this.data.results.push({
                 id: 2,
-                data: []
+                data: {
+                    answers: [],
+                    dates: []
+                }
             });
 
             return;
@@ -420,14 +434,18 @@ var Tasks = (function() {
             res.push($(answers[i]).val());
         }
 
-        this.data.results[this.data.results.length - 1].data.push(res);
+        this.data.results[this.data.results.length - 1].data.answers.push(res);
+        this.data.results[this.data.results.length - 1].data.dates = this.dates;
     };
 
     Tasks.prototype.getResultsThree = function() {
         if (this.activeTaskScreen === 1) {
             this.data.results.push({
                 id: 3,
-                data: []
+                data: {
+                    answers: [],
+                    dates: []
+                }
             });
 
             return;
@@ -435,12 +453,14 @@ var Tasks = (function() {
             return;
         }
 
-        this.data.results[this.data.results.length - 1].data.push($('[data-task="3"] [data-screen="' + this.activeTaskScreen + '"] input').val());
+        this.data.results[this.data.results.length - 1].data.answers.push($('[data-task="3"] [data-screen="' + this.activeTaskScreen + '"] input').val());
+        this.data.results[this.data.results.length - 1].data.dates = this.dates;
     };
 
     Tasks.prototype.getResultsNinetyNine = function() {
         this.data.slept = $('#slept').is(':checked');
         this.data.json_questionnaire = [];
+        this.data.email = $('#email').val();
 
         var questions = $('[data-task="99"] .questionsList input')
         for (var i = 0; i < questions.length; i++) {
@@ -449,6 +469,10 @@ var Tasks = (function() {
     };
 
     Tasks.prototype.nextScreen = function(screenId) {
+        if (this.dates.length > 0 && this.dates[this.dates.length - 1].end == '') {
+            this.dates[this.dates.length - 1].end = new Date().toISOString();
+        }
+
         this.hideTask($('[data-screen="' + this.activeTaskScreen + '"]'), (function(_this) {
             return function() {
                 _this.activeTaskScreen = screenId;
@@ -457,6 +481,13 @@ var Tasks = (function() {
                     return function() {
                         switch (__this.activeTask) {
                             case 1:
+                                if (__this.activeTaskScreen > 2) {
+                                    __this.dates.push({
+                                        start: new Date().toISOString(),
+                                        end: ''
+                                    });
+                                }
+
                                 if (__this.activeTaskScreen !== 2) {
                                     break;
                                 }
@@ -466,6 +497,12 @@ var Tasks = (function() {
                                 break;
                             case 2:
                                 if (__this.activeTaskScreen % 2 !== 0) {
+                                    if (__this.activeTaskScreen > 1) {
+                                        __this.dates.push({
+                                            start: new Date().toISOString(),
+                                            end: ''
+                                        });
+                                    }
                                     break;
                                 }
 
@@ -478,6 +515,12 @@ var Tasks = (function() {
                                 break;
                             case 3:
                                 if (__this.activeTaskScreen % 2 !== 0) {
+                                    if (__this.activeTaskScreen > 1) {
+                                        __this.dates.push({
+                                            start: new Date().toISOString(),
+                                            end: ''
+                                        });
+                                    }
                                     break;
                                 }
 
@@ -518,6 +561,7 @@ var Tasks = (function() {
                     return function(html) {
                         var $taskContainer = $(html);
 
+                        __this.dates = [];
                         __this.totalScreens = $taskContainer.find('[data-screen]').length;
                         __this.container.append($taskContainer);
 
@@ -682,11 +726,11 @@ var Tasks = (function() {
     } else if ($window.width() < 1024) {
         $('.progressBar').remove();
         $('#tasks-form').replaceWith($('<section class="container__sm table__cell"><div class="box"><div class="box__body"><p class="text__paragraph">Omlouvám se, ale pro srovnatelné podmínky je nutné dotazník vyplnit na počítači s rozlišením minimálně 1024px na šířku.</p></div></div></section>'));
-        
+
         return false;
     }
 
-    var test = new Tasks('#tasks-form');
+    test = new Tasks('#tasks-form');
 
     $(window).on('beforeunload copy paste', function(event) {
         if (test.started) {

@@ -23,6 +23,7 @@ module.exports = function(req, res, next) {
                 sex: req.body.sex,
                 school_id: req.body.school_id,
                 slept: req.body.slept,
+                email: req.body.email,
                 json_questionnaire: JSON.stringify(req.body.json_questionnaire)
             }).save(null, {
                 transacting: t

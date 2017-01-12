@@ -1,9 +1,12 @@
 {
-  "name": "eva-bp",
+  "name": "vyzkum-spanek",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
+  },
+  "engines" : {
+    "node" : "7.2.0" 
   },
   "dependencies": {
     "bluebird": "^3.4.6",
