@@ -22,6 +22,8 @@ function isHigherSchool(school) {
 }
 
 routes.get('/', function(req, res, next) {
+    console.log(req.ip);
+    console.log(req.headers['user-agent']);
     School.where({ soft_deleted: false }).fetchAll().then(function(collection) {
         collection.load(['type', 'region']).then(function(loadedCollection) {
             var json = loadedCollection.toJSON();

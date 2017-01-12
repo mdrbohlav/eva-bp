@@ -24,6 +24,8 @@ module.exports = function(req, res, next) {
                 school_id: req.body.school_id,
                 slept: req.body.slept,
                 email: req.body.email,
+                user_agent: req.headers['user-agent'],
+                ip_address: req.ip,
                 json_questionnaire: JSON.stringify(req.body.json_questionnaire)
             }).save(null, {
                 transacting: t
