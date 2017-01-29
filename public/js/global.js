@@ -377,7 +377,7 @@ var Tasks = (function() {
 
     Tasks.prototype.getResultsZero = function() {
         this.data.age = $('#age').val() * 1;
-        this.data.sex = $('[name="gender"]').val();
+        this.data.sex = $('[name="gender"]:checked').val();
         this.data.school_id = $('#school').val() *  1;
         this.data.results = [];
     };
