@@ -20,9 +20,13 @@ var app = express(),
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+moment.locale('cs');
+
+app.locals.moment = moment;
+
 // ## Nastavení Stylusu
 // Funkce, která zajistí kompilaci Stylus souborů, jejich kompresi a
-// použití knihovny nib, která doplní vendor prefixy a obsahuje 
+// použití knihovny nib, která doplní vendor prefixy a obsahuje
 // různé užitečné prefixy.
 function compile(str, path) {
     return stylus(str)

@@ -1,0 +1,52 @@
+extends layout
+
+block content
+    .content.table__wrapper
+      table.table__styled.table--responsive
+        thead
+          tr
+            th Čas
+            th Pohlaví
+            th Věk
+            th Nespal(a)
+            th E-mail
+            th Škola
+            th(colspan='3') Dotazník
+            th Text
+            th(colspan='10') Obrázky
+            th(colspan='10') Čísla
+        tbody
+          each user, index in data
+            if user.id >= 5
+              tr
+                - date = moment(user.results[0].json_answer.dates[0].start).format('DD. MMM HH:mm') + ' - ' + moment(user.created_at).format('HH:mm')
+                td #{date}
+                td= user.sex
+                td= user.age
+                td= !user.slept
+                td= user.email
+                td= user.school.name
+                td= user.json_questionnaire[0]
+                td= user.json_questionnaire[1]
+                td= user.json_questionnaire[2]
+                td= user.results[0].json_answer.answers.join(', ')
+                td= user.results[1].json_answer.answers[0].join(', ')
+                td= user.results[1].json_answer.answers[1].join(', ')
+                td= user.results[1].json_answer.answers[2].join(', ')
+                td= user.results[1].json_answer.answers[3].join(', ')
+                td= user.results[1].json_answer.answers[4].join(', ')
+                td= user.results[1].json_answer.answers[5].join(', ')
+                td= user.results[1].json_answer.answers[6].join(', ')
+                td= user.results[1].json_answer.answers[7].join(', ')
+                td= user.results[1].json_answer.answers[8].join(', ')
+                td= user.results[1].json_answer.answers[9].join(', ')
+                td= user.results[2].json_answer.answers[0]
+                td= user.results[2].json_answer.answers[1]
+                td= user.results[2].json_answer.answers[2]
+                td= user.results[2].json_answer.answers[3]
+                td= user.results[2].json_answer.answers[4]
+                td= user.results[2].json_answer.answers[5]
+                td= user.results[2].json_answer.answers[6]
+                td= user.results[2].json_answer.answers[7]
+                td= user.results[2].json_answer.answers[8]
+                td= user.results[2].json_answer.answers[9]
