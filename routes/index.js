@@ -45,6 +45,17 @@ routes.get('/', function(req, res, next) {
 });
 
 routes.get('/results', function(req, res, next) {
+  if (req.query.pass !== 'supertajne') {
+    res.status(400).render('error', {
+      page: 'error',
+      message: 'Not Found',
+      error: {
+        status: 404
+      }
+    });;
+    return;
+  }
+
   User.forge().orderBy('updated_at', 'ASC').fetchAll().then(function(collection) {
       collection.load(['school', 'results']).then(function(loadedCollection) {
           res.render('results', {

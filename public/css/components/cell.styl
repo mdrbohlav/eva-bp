@@ -1,0 +1,74 @@
+.cell
+  padding 3px 5px
+
+  & .cell
+    padding 2px
+
+  &__badge
+    width 36px
+
+  &__caption
+    position relative
+
+    &::after
+      background-color rgb(96, 125, 139)
+      border-radius 2px
+      box-shadow: 2px 2px 5px -1px rgba(0, 0, 0, .5);
+      color #FFF
+      content attr(data-caption)
+      set-font-size(14px)
+      left 0
+      opacity(0)
+      padding 2px 3px
+      position absolute
+      top 100%
+      visibility hidden
+      z-index 2
+
+    &:hover
+      &::after
+        opacity(1)
+        visibility visible
+
+  &__borderLeft
+    border-left 2px dashed rgba(96, 125, 139, .25)
+
+  &__date
+    set-font-size(14px)
+
+  &__mail
+    set-font-size(14px)
+
+  &__school
+    set-font-size(14px)
+
+  &__questionnaire
+    min-width 200px
+
+  &__text
+    text-align center
+    min-width 100px
+
+  &__image
+    min-width 150px
+
+  &__numbers
+    min-width 100px
+
+  &__image,
+  &__numbers
+    &::before
+      background-color rgba(0, 0, 0, .5)
+      border-radius 2px
+      color #FFF
+      content attr(data-index)
+      display inline-block
+      set-font-size(12px)
+      margin-right 5px
+      padding 2px 2px 1px
+      text-align center
+      min-width 20px
+
+  &__top
+    .cell
+      vertical-align top

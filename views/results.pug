@@ -5,48 +5,105 @@ block content
       table.table__styled.table--responsive
         thead
           tr
-            th Čas
-            th Pohlaví
-            th Věk
-            th Nespal(a)
-            th E-mail
-            th Škola
-            th(colspan='3') Dotazník
-            th Text
-            th(colspan='10') Obrázky
-            th(colspan='10') Čísla
+            th.cell Detaily
+            th.cell
+              table.table--fullsize
+                thead
+                  tr
+                    td.cell.cell__questionnaire Charakterizace
+                    td.cell.cell__questionnaire Pocit při testu
+                    td.cell.cell__questionnaire Dodržování spánkového režimu
+            th.cell Text
+            th.cell Obrázky
+            th.cell Čísla
         tbody
           each user, index in data
             if user.id >= 5
+              - date = moment(user.results[0].json_answer.dates[0].start).format('DD.MM. HH:mm') + '-' + moment(user.created_at).format('HH:mm')
+              - mail = 'Ahoj,%0D%0A%0D%0Aposílám ti výsledky tvého testu.%0D%0A%0D%0A'
+              - mail += 'Datum: ' + date + '%0D%0A'
+              - mail += 'Věk: ' + user.age + '%0D%0A'
+              - mail += 'Škola: ' + user.school.name + '%0D%0A'
+              - mail += 'Dotazník: %0D%0A'
+              - mail += '%E2%80%A2 charakterizace: ' + user.json_questionnaire[0] + '%0D%0A'
+              - mail += '%E2%80%A2 pocit při testu: ' + user.json_questionnaire[1] + '%0D%0A'
+              - mail += '%E2%80%A2 dodržování spánkového režimu: ' + user.json_questionnaire[2] + '%0D%0A%0D%0A'
+              - mail += 'Následují výsledky pro text, obrázky a číselné řady, v závorce jsou vždy správné odpovědi)%0D%0A%0D%0A'
+              - mail += 'První úkol (text):%0D%0A'
+              - mail += '1) ' + user.results[0].json_answer.answers[0] + ' (c)%0D%0A'
+              - mail += '2) ' + user.results[0].json_answer.answers[1] + ' (a)%0D%0A'
+              - mail += '3) ' + user.results[0].json_answer.answers[2] + ' (b)%0D%0A'
+              - mail += '4) ' + user.results[0].json_answer.answers[3] + ' (c)%0D%0A'
+              - mail += '5) ' + user.results[0].json_answer.answers[4] + ' (a)%0D%0A%0D%0A'
+              - mail += 'Druhý úkol (obrázky):%0D%0A'
+              - mail += '1) ' + user.results[1].json_answer.answers[0].join(', ') + ' (třešeň, kiwi, jahoda, citron)%0D%0A'
+              - mail += '2) ' + user.results[1].json_answer.answers[1].join(', ') + ' (mrkev, meloun, rajče, paprika)%0D%0A'
+              - mail += '3) ' + user.results[1].json_answer.answers[2].join(', ') + ' (želva, pes, panda, jablko, opice)%0D%0A'
+              - mail += '4) ' + user.results[1].json_answer.answers[3].join(', ') + ' (žirafa, ovce, mrkev, liška, prase)%0D%0A'
+              - mail += '5) ' + user.results[1].json_answer.answers[4].join(', ') + ' (myš, citron, rajče, had, paprika, krokodýl)%0D%0A'
+              - mail += '6) ' + user.results[1].json_answer.answers[5].join(', ') + ' (veverka, maliny, slon, kiwi, kůň, kukuřice)%0D%0A'
+              - mail += '7) ' + user.results[1].json_answer.answers[6].join(', ') + ' (meloun, medvěd, dýně, kočka, borůvky, banán, klokan)%0D%0A'
+              - mail += '8) ' + user.results[1].json_answer.answers[7].join(', ') + ' (ježek, hruška, hrozno, brokolice, tučňák, panda, kráva)%0D%0A'
+              - mail += '9) ' + user.results[1].json_answer.answers[8].join(', ') + ' (ředkev, mrkev, želva, slon, slepice, maliny, pes, kočka)%0D%0A'
+              - mail += '10) ' + user.results[1].json_answer.answers[9].join(', ') + ' (pes, veverka, kuře, třešeň, rajče, osel, kočka, paprika)%0D%0A%0D%0A'
+              - mail += 'Třetí úkol (čísla):%0D%0A'
+              - mail += '1) ' + user.results[2].json_answer.answers[0] + ' (3, 4, 1, 2)%0D%0A'
+              - mail += '2) ' + user.results[2].json_answer.answers[1] + ' (2, 7, 8, 5)%0D%0A'
+              - mail += '3) ' + user.results[2].json_answer.answers[2] + ' (9, 2, 3, 5, 4)%0D%0A'
+              - mail += '4) ' + user.results[2].json_answer.answers[3] + ' (8, 1, 2, 3, 0)%0D%0A'
+              - mail += '5) ' + user.results[2].json_answer.answers[4] + ' (1, 4, 5, 9, 2, 7)%0D%0A'
+              - mail += '6) ' + user.results[2].json_answer.answers[5] + ' (2, 0, 4, 3, 8, 5)%0D%0A'
+              - mail += '7) ' + user.results[2].json_answer.answers[6] + ' (9, 2, 3, 1, 4, 5, 6)%0D%0A'
+              - mail += '8) ' + user.results[2].json_answer.answers[7] + ' (5, 4, 2, 7, 8, 0, 3)%0D%0A'
+              - mail += '9) ' + user.results[2].json_answer.answers[8] + ' (0, 1, 5, 9, 3, 7, 1, 4)%0D%0A'
+              - mail += '10) ' + user.results[2].json_answer.answers[9] + ' (5, 2, 6, 4, 7, 3, 8, 1)%0D%0A'
+
               tr
-                - date = moment(user.results[0].json_answer.dates[0].start).format('DD. MMM HH:mm') + ' - ' + moment(user.created_at).format('HH:mm')
-                td #{date}
-                td= user.sex
-                td= user.age
-                td= !user.slept
-                td= user.email
-                td= user.school.name
-                td= user.json_questionnaire[0]
-                td= user.json_questionnaire[1]
-                td= user.json_questionnaire[2]
-                td= user.results[0].json_answer.answers.join(', ')
-                td= user.results[1].json_answer.answers[0].join(', ')
-                td= user.results[1].json_answer.answers[1].join(', ')
-                td= user.results[1].json_answer.answers[2].join(', ')
-                td= user.results[1].json_answer.answers[3].join(', ')
-                td= user.results[1].json_answer.answers[4].join(', ')
-                td= user.results[1].json_answer.answers[5].join(', ')
-                td= user.results[1].json_answer.answers[6].join(', ')
-                td= user.results[1].json_answer.answers[7].join(', ')
-                td= user.results[1].json_answer.answers[8].join(', ')
-                td= user.results[1].json_answer.answers[9].join(', ')
-                td= user.results[2].json_answer.answers[0]
-                td= user.results[2].json_answer.answers[1]
-                td= user.results[2].json_answer.answers[2]
-                td= user.results[2].json_answer.answers[3]
-                td= user.results[2].json_answer.answers[4]
-                td= user.results[2].json_answer.answers[5]
-                td= user.results[2].json_answer.answers[6]
-                td= user.results[2].json_answer.answers[7]
-                td= user.results[2].json_answer.answers[8]
-                td= user.results[2].json_answer.answers[9]
+                td.cell
+                  table
+                    tr
+                      td.cell.cell__date(colspan='3') #{date}
+                    tr
+                      td.cell.cell__slept.cell__badge.cell__caption(data-caption=(user.sex === 'muž' ? user.slept ? 'spal' : 'nespal' : user.slept ? 'spala' : 'nespala'))
+                        span.circle.circle__awake(class=(user.slept ? 'circle--red icon--cross' : 'circle--green icon--check'))
+                      td.cell.cell__badge
+                        span.circle.circle__age(class=(user.sex === 'muž' ? 'circle--blue' : 'circle--pink'))= user.age
+                      td.cell.cell__mail
+                        a(href='mailto:' + user.email + '?body=' + mail) #{user.email}
+                    tr
+                      td.cell.cell__school(colspan='3') #{user.school.name}
+                td.cell.cell__borderLeft
+                  table
+                    tr
+                      td.cell.cell__questionnaire= user.json_questionnaire[0]
+                      td.cell.cell__questionnaire= user.json_questionnaire[1]
+                      td.cell.cell__questionnaire= user.json_questionnaire[2]
+                td.cell.cell__borderLeft.cell__text(data-type='text' data-answer= user.results[0].json_answer.answers.join(''))
+                td.cell.cell__borderLeft
+                  table
+                    tr.cell__top
+                      td.cell.cell__image.cell__caption(data-index='1' data-caption='třešeň, kiwi, jahoda, citron')= user.results[1].json_answer.answers[0].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='2' data-caption='mrkev, meloun, rajče, paprika')= user.results[1].json_answer.answers[1].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='3' data-caption='želva, pes, panda, jablko, opice')= user.results[1].json_answer.answers[2].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='4' data-caption='žirafa, ovce, mrkev, liška, prase')= user.results[1].json_answer.answers[3].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='5' data-caption='myš, citron, rajče, had, paprika, krokodýl')= user.results[1].json_answer.answers[4].join(', ')
+                    tr.cell__top
+                      td.cell.cell__image.cell__caption(data-index='6' data-caption='veverka, maliny, slon, kiwi, kůň, kukuřice')= user.results[1].json_answer.answers[5].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='7' data-caption='meloun, medvěd, dýně, kočka, borůvky, banán, klokan')= user.results[1].json_answer.answers[6].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='8' data-caption='ježek, hruška, hrozno, brokolice, tučňák, panda, kráva')= user.results[1].json_answer.answers[7].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='9' data-caption='ředkev, mrkev, želva, slon, slepice, maliny, pes, kočka')= user.results[1].json_answer.answers[8].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='10' data-caption='pes, veverka, kuře, třešeň, rajče, osel, kočka, paprika')= user.results[1].json_answer.answers[9].join(', ')
+                td.cell.cell__borderLeft
+                  table
+                    tr.cell__top
+                      td.cell.cell__numbers(data-index='1' data-type='numbers' data-answer= user.results[2].json_answer.answers[0])
+                      td.cell.cell__numbers(data-index='2' data-type='numbers' data-answer= user.results[2].json_answer.answers[1])
+                      td.cell.cell__numbers(data-index='3' data-type='numbers' data-answer= user.results[2].json_answer.answers[2])
+                      td.cell.cell__numbers(data-index='4' data-type='numbers' data-answer= user.results[2].json_answer.answers[3])
+                      td.cell.cell__numbers(data-index='5' data-type='numbers' data-answer= user.results[2].json_answer.answers[4])
+                    tr.cell__top
+                      td.cell.cell__numbers(data-index='6' data-type='numbers' data-answer= user.results[2].json_answer.answers[5])
+                      td.cell.cell__numbers(data-index='7' data-type='numbers' data-answer= user.results[2].json_answer.answers[6])
+                      td.cell.cell__numbers(data-index='8' data-type='numbers' data-answer= user.results[2].json_answer.answers[7])
+                      td.cell.cell__numbers(data-index='9' data-type='numbers' data-answer= user.results[2].json_answer.answers[8])
+                      td.cell.cell__numbers(data-index='10' data-type='numbers' data-answer= user.results[2].json_answer.answers[9])

@@ -4,15 +4,9 @@
     padding 0
 
     &__wrapper
+        height 100%
         overflow auto
         position relative
-
-    &--responsive
-        overflow auto
-        max-width 100%
-
-        &.table
-            min-width 600px
 
     &__row
         background-color transparent
@@ -24,21 +18,17 @@
         vertical-align middle
 
     &__styled
-        & > .table__row:not(.table__heading):not(.table__noborder)
-            &:hover
-                background-color $color-grey-2
+      & > thead
+        & > tr > .cell
+          padding 5px 5px 15px
 
-            &:last-child
-                & > .table__cell
-                    border-bottom 1px solid $color-grey-1
+      & > tbody
+        & > tr
+          &:nth-child(odd)
+            background-color rgba(96, 125, 139, .1)
 
-            & > .table__cell
-                border-top 1px solid $color-grey-1
-                padding 8px 5px 5px
-
-                @media $sm-up
-                    padding-left 15px
-                    padding-right 15px
+          &:hover
+            background-color rgba(96, 125, 139, .25)
 
     &__heading
         .table__cell

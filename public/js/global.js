@@ -773,8 +773,6 @@ var Tasks = (function() {
         }
     });
 
-    $school.data('select2').$container.find('*').addClass('needsclick');
-
     //=================================================================
     // Modal close
     //=================================================================
@@ -841,6 +839,50 @@ var Tasks = (function() {
                     });
             }
         }
+    });
+
+    var textResults = ['c', 'a', 'b', 'c', 'a'];
+
+    $('[data-type="text"]').each(function(index, element) {
+      var $e = $(element);
+      var answer = $e.data('answer');
+      var text = '';
+
+      for (var i = 0; i < answer.length && i < textResults.length; i++) {
+        if (answer[i] === textResults[i]) {
+          text += answer[i];
+        } else {
+          text += '<span class="text--red">' + answer[i] + '</span>';
+        }
+
+        if (i < answer.length - 1 && i < textResults.length - 1) {
+          text += ', ';
+        }
+      }
+
+      $e.append(text);
+    });
+
+    var numResults = ['3412', '2785', '92354', '81230', '145927', '204385', '9231456', '5427803', '01593714', '52647381'];
+
+    $('[data-type="numbers"]').each(function(index, element) {
+      var $e = $(element);
+      var answer = $e.data('answer').toString().replace(/[^\d]/g, '');
+      var text = '';
+
+      for (var i = 0; i < answer.length && i < numResults[index % 10].length; i++) {
+        if (answer[i] === numResults[index % 10][i]) {
+          text += answer[i];
+        } else {
+          text += '<span class="text--red">' + answer[i] + '</span>';
+        }
+
+        if (i < answer.length - 1 && i < numResults[index % 10].length - 1) {
+          text += ', ';
+        }
+      }
+
+      $e.append(text);
     });
 
     //=================================================================
