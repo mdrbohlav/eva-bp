@@ -1,0 +1,30 @@
+section.taskContainer.container__sm(data-task="4")
+    .box
+        .box__header
+            h1.text__title První úkol
+        .box__body.screenContainer(data-screen="1")
+            p.text__paragraph= data.json_data.description
+
+            .margin--top-30.text--right
+                button.btn.btn__teal--full(type='button', data-next-screen='2') Začít
+
+        .box__body.screenContainer(data-screen="2")
+            each p, index in data.json_data.article
+                p.text__paragraph(class=(index !== 0 ? 'margin--top-25' : ''))= p
+
+        .box__body.screenContainer(data-screen="3")
+            ol.questionsList
+                each task, taskIndex in data.json_data.tasks
+                    li.fieldset.row
+                        .itemNumber= taskIndex + 1
+                        .field__container.field__radio.col-xs-12
+                            p.text__paragraph= task.question
+                            .field
+                                each a, aIndex in task.answers
+                                    .radio__wrapper
+                                        .radio
+                                            input(id='a' + (taskIndex + 1) + '-' + (aIndex + 1), type='radio', name='a' + (taskIndex + 1), value= (aIndex + 1))
+                                        label(for='a' + (taskIndex + 1) + '-' + (aIndex + 1))= a
+
+            .margin--top-30.text--right
+                button.btn.btn__teal--full(type='button', data-next-task='5') Další úkol

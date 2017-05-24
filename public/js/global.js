@@ -343,10 +343,19 @@ var Tasks = (function() {
             case 1:
                 this.getResultsOne();
                 break;
+            case 4:
+                this.getResultsOne();
+                break;
             case 2:
                 this.getResultsTwo();
                 break;
+            case 5:
+                this.getResultsTwo();
+                break;
             case 3:
+                this.getResultsThree();
+                break;
+            case 6:
                 this.getResultsThree();
                 break;
             default:
@@ -363,7 +372,7 @@ var Tasks = (function() {
                 return function() {
                     $container.remove();
 
-                    if (_this.activeTask === 2 &&  _this.activeTaskScreen === _this.totalScreens) {
+                    if ((_this.activeTask === 2 || _this.activeTask === 5) &&  _this.activeTaskScreen === _this.totalScreens) {
                         $('.container__sm.container__lg').removeClass('container__lg');
                     }
 
@@ -383,9 +392,15 @@ var Tasks = (function() {
     };
 
     Tasks.prototype.getResultsOne = function() {
+        var id = 1;
+
+        if ($('[data-task="4"]').length > 0) {
+          id = 4;
+        }
+
         if (this.activeTaskScreen === 1) {
             this.data.results.push({
-                id: 1,
+                id: id,
                 data: {
                     answers: [],
                     dates: []
@@ -397,7 +412,7 @@ var Tasks = (function() {
             return;
         }
 
-        var questions = $('[data-task="1"] .questionsList li');
+        var questions = $('[data-task="' + id + '"] .questionsList li');
 
         for (var i = 0; i < questions.length; i++) {
             var answer = $(questions[i]).find('input[type="radio"]:checked');
@@ -413,9 +428,15 @@ var Tasks = (function() {
     };
 
     Tasks.prototype.getResultsTwo = function() {
+      var id = 2;
+
+      if ($('[data-task="5"]').length > 0) {
+        id = 5;
+      }
+
         if (this.activeTaskScreen === 1) {
             this.data.results.push({
-                id: 2,
+                id: id,
                 data: {
                     answers: [],
                     dates: []
@@ -427,7 +448,7 @@ var Tasks = (function() {
             return;
         }
 
-        var answers = $('[data-task="2"] [data-screen="' + this.activeTaskScreen + '"] .answersList input[type="text"]');
+        var answers = $('[data-task="' + id + '"] [data-screen="' + this.activeTaskScreen + '"] .answersList input[type="text"]');
         var res = [];
 
         for (var i = 0; i < answers.length; i++) {
@@ -439,9 +460,15 @@ var Tasks = (function() {
     };
 
     Tasks.prototype.getResultsThree = function() {
+      var id = 3;
+
+      if ($('[data-task="6"]').length > 0) {
+        id = 6;
+      }
+
         if (this.activeTaskScreen === 1) {
             this.data.results.push({
-                id: 3,
+                id: id,
                 data: {
                     answers: [],
                     dates: []
@@ -453,7 +480,7 @@ var Tasks = (function() {
             return;
         }
 
-        this.data.results[this.data.results.length - 1].data.answers.push($('[data-task="3"] [data-screen="' + this.activeTaskScreen + '"] input').val());
+        this.data.results[this.data.results.length - 1].data.answers.push($('[data-task="' + id + '"] [data-screen="' + this.activeTaskScreen + '"] input').val());
         this.data.results[this.data.results.length - 1].data.dates = this.dates;
     };
 
@@ -495,6 +522,21 @@ var Tasks = (function() {
                                 __this.timeoutNextScreen(60000);
                                 __this.animateProgressBar(60000);
                                 break;
+                            case 4:
+                                if (__this.activeTaskScreen > 2) {
+                                    __this.dates.push({
+                                        start: new Date().toISOString(),
+                                        end: ''
+                                    });
+                                }
+
+                                if (__this.activeTaskScreen !== 2) {
+                                    break;
+                                }
+
+                                __this.timeoutNextScreen(60000);
+                                __this.animateProgressBar(60000);
+                                break;
                             case 2:
                                 if (__this.activeTaskScreen % 2 !== 0) {
                                     if (__this.activeTaskScreen > 1) {
@@ -513,7 +555,39 @@ var Tasks = (function() {
                                 __this.setProgress(__this.activeTaskScreen / 2);
                                 __this.animateImageSequence($('[data-screen="' + __this.activeTaskScreen + '"] .sequence--images li'));
                                 break;
+                            case 5:
+                                if (__this.activeTaskScreen % 2 !== 0) {
+                                    if (__this.activeTaskScreen > 1) {
+                                        __this.dates.push({
+                                            start: new Date().toISOString(),
+                                            end: ''
+                                        });
+                                    }
+                                    break;
+                                }
+
+                                if (__this.activeTaskScreen === 2) {
+                                    $('.container__sm').addClass('container__lg');
+                                }
+
+                                __this.setProgress(__this.activeTaskScreen / 2);
+                                __this.animateImageSequence($('[data-screen="' + __this.activeTaskScreen + '"] .sequence--images li'));
+                                break;
                             case 3:
+                                if (__this.activeTaskScreen % 2 !== 0) {
+                                    if (__this.activeTaskScreen > 1) {
+                                        __this.dates.push({
+                                            start: new Date().toISOString(),
+                                            end: ''
+                                        });
+                                    }
+                                    break;
+                                }
+
+                                __this.setProgress(__this.activeTaskScreen / 2);
+                                __this.animateTextSequence($('[data-screen="' + __this.activeTaskScreen + '"] .sequence--text li'));
+                                break;
+                            case 6:
                                 if (__this.activeTaskScreen % 2 !== 0) {
                                     if (__this.activeTaskScreen > 1) {
                                         __this.dates.push({

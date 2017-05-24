@@ -1,0 +1,30 @@
+section.taskContainer.container__sm(data-task="6")
+    .box
+        .box__header
+            h1.text__title Třetí úkol
+                span.progress.text__paragraph
+        .box__body.screenContainer(data-screen="1")
+            p.text__paragraph= data.json_data.description
+
+            .margin--top-30.text--right
+                button.btn.btn__teal--full(type='button', data-next-screen='2') Začít
+
+        each task, taskIndex in data.json_data.tasks
+            - index = 2 + taskIndex * 2
+            .box__body.screenContainer(data-screen= index)
+                ol.sequence.sequence--text
+                    each n in task
+                        li.itemNumber= n
+
+            .box__body.screenContainer(data-screen= index + 1)
+                .fieldset.row
+                    .field__container.col-xs-12.col-sm-12
+                        label.text__label(for='answer' + taskIndex) Zapište posloupnost
+                        input.field(id='answer' + taskIndex, type='text')
+
+                if taskIndex === data.json_data.tasks.length - 1
+                    .margin--top-30.text--right
+                        button.btn.btn__teal--full(type='button', data-next-task='99') Další úkol
+                else
+                    .margin--top-30.text--right
+                        button.btn.btn__teal--full(type='button', data-next-screen= index + 2) Další

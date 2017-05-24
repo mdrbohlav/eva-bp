@@ -1,0 +1,33 @@
+section.taskContainer.container__sm(data-task="5")
+    .box
+        .box__header
+            h1.text__title Druhý úkol
+                span.progress.text__paragraph
+        .box__body.screenContainer(data-screen="1")
+            p.text__paragraph= data.json_data.description
+
+            .margin--top-30.text--right
+                button.btn.btn__teal--full(type='button', data-next-screen='2') Začít
+
+        each task, taskIndex in data.json_data.tasks
+            - index = 2 + taskIndex * 2
+            .box__body.screenContainer(data-screen= index)
+                ol.sequence.sequence--images.row
+                    each i, iIndex in task
+                        li
+                            .itemNumber= iIndex + 1
+                            img.image(src='/img/' + i)
+
+            .box__body.screenContainer(data-screen= index + 1)
+                ol.answersList.fieldset.row
+                    each i, iIndex in task
+                        li.field__container.col-xs-12.col-sm-3
+                            label.text__label(for='a-' + (iIndex + 1)) #{iIndex + 1}. obrázek
+                            input.field(id='a-' + (iIndex + 1), type='text')
+
+                if taskIndex === data.json_data.tasks.length - 1
+                    .margin--top-30.text--right
+                        button.btn.btn__teal--full(type='button', data-next-task='6') Pokračovat
+                else
+                    .margin--top-30.text--right
+                        button.btn.btn__teal--full(type='button', data-next-screen= index + 2) Další
