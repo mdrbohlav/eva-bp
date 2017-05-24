@@ -1,5 +1,5 @@
 var Task = require('../../models/task');
-var list = require('../../helpers/tasks');
+var list = require('../../helpers/tasks_2');
 
 module.exports = function(req, res, next) {
     var tasksSavedCnt = 0;

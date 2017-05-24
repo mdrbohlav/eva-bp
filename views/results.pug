@@ -78,22 +78,22 @@ block content
                       td.cell.cell__questionnaire= user.json_questionnaire[0]
                       td.cell.cell__questionnaire= user.json_questionnaire[1]
                       td.cell.cell__questionnaire= user.json_questionnaire[2]
-                td.cell.cell__borderLeft.cell__text(data-type='text' data-answer= user.results[0].json_answer.answers.join(''))
-                td.cell.cell__borderLeft
-                  table
+                td.cell.cell__borderLeft.cell__text(data-id=(user.results[0].task_id) data-type='text' data-answer= user.results[0].json_answer.answers.join(''))
+                td.cell.cell__borderLeft(data-id= user.results[1].task_id)
+                  table                    
                     tr.cell__top
-                      td.cell.cell__image.cell__caption(data-index='1' data-caption='třešeň, kiwi, jahoda, citron')= user.results[1].json_answer.answers[0].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='2' data-caption='mrkev, meloun, rajče, paprika')= user.results[1].json_answer.answers[1].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='3' data-caption='želva, pes, panda, jablko, opice')= user.results[1].json_answer.answers[2].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='4' data-caption='žirafa, ovce, mrkev, liška, prase')= user.results[1].json_answer.answers[3].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='5' data-caption='myš, citron, rajče, had, paprika, krokodýl')= user.results[1].json_answer.answers[4].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='1' data-type='images' data-answered=(user.results[1].json_answer.answers[0].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'třešeň, kiwi, jahoda, citron' : 'mrkev, opice, kukuřice, krokodýl'))= user.results[1].json_answer.answers[0].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='2' data-type='images' data-answered=(user.results[1].json_answer.answers[1].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'mrkev, meloun, rajče, paprika' : 'liška, třešeň, žirafa, jahoda'))= user.results[1].json_answer.answers[1].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='3' data-type='images' data-answered=(user.results[1].json_answer.answers[2].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'želva, pes, panda, jablko, opice' : 'kiwi, rajče, meloun, paprika, citron'))= user.results[1].json_answer.answers[2].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='4' data-type='images' data-answered=(user.results[1].json_answer.answers[3].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'žirafa, ovce, mrkev, liška, prase' : 'prase, kůň, borůvky, slon, ježek'))= user.results[1].json_answer.answers[3].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='5' data-type='images' data-answered=(user.results[1].json_answer.answers[4].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'myš, citron, rajče, had, paprika, krokodýl' : 'ovce, panda, banán, tučňák, maliny, medvěd'))= user.results[1].json_answer.answers[4].join(', ')
                     tr.cell__top
-                      td.cell.cell__image.cell__caption(data-index='6' data-caption='veverka, maliny, slon, kiwi, kůň, kukuřice')= user.results[1].json_answer.answers[5].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='7' data-caption='meloun, medvěd, dýně, kočka, borůvky, banán, klokan')= user.results[1].json_answer.answers[6].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='8' data-caption='ježek, hruška, hrozno, brokolice, tučňák, panda, kráva')= user.results[1].json_answer.answers[7].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='9' data-caption='ředkev, mrkev, želva, slon, slepice, maliny, pes, kočka')= user.results[1].json_answer.answers[8].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='10' data-caption='pes, veverka, kuře, třešeň, rajče, osel, kočka, paprika')= user.results[1].json_answer.answers[9].join(', ')
-                td.cell.cell__borderLeft
+                      td.cell.cell__image.cell__caption(data-index='6' data-type='images' data-answered=(user.results[1].json_answer.answers[5].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'veverka, maliny, slon, kiwi, kůň, kukuřice' : 'kočka, slepice, myš, hrozno, kuře, had'))= user.results[1].json_answer.answers[5].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='7' data-type='images' data-answered=(user.results[1].json_answer.answers[6].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'meloun, medvěd, dýně, kočka, borůvky, banán, klokan' : 'ředkev, hruška, osel, veverka, slon, klokan, želva'))= user.results[1].json_answer.answers[6].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='8' data-type='images' data-answered=(user.results[1].json_answer.answers[7].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'ježek, hruška, hrozno, brokolice, tučňák, panda, kráva' : 'dýně, borůvky, pes, kočka, brokolice, medvěd, paprika'))= user.results[1].json_answer.answers[7].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='9' data-type='images' data-answered=(user.results[1].json_answer.answers[8].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'ředkev, mrkev, želva, slon, slepice, maliny, pes, kočka' : 'kráva, kočka, kuře, panda, pes, kiwi, jahoda, želva'))= user.results[1].json_answer.answers[8].join(', ')
+                      td.cell.cell__image.cell__caption(data-index='10' data-type='images' data-answered=(user.results[1].json_answer.answers[9].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'pes, veverka, kuře, třešeň, rajče, osel, kočka, paprika' : 'rajče, pes, třešeň, krokodýl, meloun, kůň, banán, hrozno'))= user.results[1].json_answer.answers[9].join(', ')
+                td.cell.cell__borderLeft(data-id= user.results[2].task_id)
                   table
                     tr.cell__top
                       td.cell.cell__numbers(data-index='1' data-type='numbers' data-answer= user.results[2].json_answer.answers[0])

@@ -841,21 +841,25 @@ var Tasks = (function() {
         }
     });
 
-    var textResults = ['c', 'a', 'b', 'c', 'a'];
+    var textResults = {
+      1: ['c', 'a', 'b', 'c', 'a'],
+      2: ['a', 'c', 'c', 'b', 'c']
+    };
 
     $('[data-type="text"]').each(function(index, element) {
       var $e = $(element);
+      var id = parseInt($e.data('id'));
       var answer = $e.data('answer');
       var text = '';
 
-      for (var i = 0; i < answer.length && i < textResults.length; i++) {
-        if (answer[i] === textResults[i]) {
+      for (var i = 0; i < answer.length && i < textResults[id].length; i++) {
+        if (answer[i] === textResults[id][i]) {
           text += answer[i];
         } else {
           text += '<span class="text--red">' + answer[i] + '</span>';
         }
 
-        if (i < answer.length - 1 && i < textResults.length - 1) {
+        if (i < answer.length - 1 && i < textResults[id].length - 1) {
           text += ', ';
         }
       }
@@ -863,23 +867,52 @@ var Tasks = (function() {
       $e.append(text);
     });
 
-    var numResults = ['3412', '2785', '92354', '81230', '145927', '204385', '9231456', '5427803', '01593714', '52647381'];
+    $('[data-type="images"]').each(function(index, element) {
+      var $e = $(element);
+      var total = $e.data('caption').split(', ');
+      var answered = $e.data('answered');
+      var error = false;
+
+      if (total.length !== answered) {
+        error = true;
+      }
+
+      if (error) {
+        $e.closest('td').addClass('error');
+      }
+    });
+
+    var numResults = {
+      3: ['3412', '2785', '92354', '81230', '145927', '204385', '9231456', '5427803', '01593714', '52647381'],
+      6: ['5489', '3751', '27390', '11623', '856018', '791363', '4374165', '6052913', '12602605', '63758492']
+    };
 
     $('[data-type="numbers"]').each(function(index, element) {
       var $e = $(element);
+      var id = parseInt($e.closest('[data-id]').data('id'));
       var answer = $e.data('answer').toString().replace(/[^\d]/g, '');
       var text = '';
+      var error = false;
 
-      for (var i = 0; i < answer.length && i < numResults[index % 10].length; i++) {
-        if (answer[i] === numResults[index % 10][i]) {
+      for (var i = 0; i < answer.length && i < numResults[id][index % 10].length; i++) {
+        if (answer[i] === numResults[id][index % 10][i]) {
           text += answer[i];
         } else {
+          error = true;
           text += '<span class="text--red">' + answer[i] + '</span>';
         }
 
-        if (i < answer.length - 1 && i < numResults[index % 10].length - 1) {
+        if (i < answer.length - 1 && i < numResults[id][index % 10].length - 1) {
           text += ', ';
         }
+      }
+
+      if (!error && answer.length !== numResults[id][index % 10].length) {
+        error = true;
+      }
+
+      if (error) {
+        $e.closest('td').addClass('error');
       }
 
       $e.append(text);

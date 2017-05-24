@@ -1,0 +1,159 @@
+{
+    "total": [
+        5,
+        10,
+        10
+    ],
+    "data": [
+        {
+            "description": "Následující úloha spočívá v přečtení textu, na který máte jistý časový limit, poté Vám automaticky text zmizí a Vaším úkolem bude zodpovědět příslušné otázky.",
+            "article": [
+                "INDIVIDUÁLNÍ PSYCHOLOGIE - ALFRED ADLER, od Zuzany Hadj Moussové",
+                "Alfred Adler se narodil ve Vídni roku 1870. Původním vzděláním byl oční lékař. Už záhy ve své praxi zjistil, že orgán, který zůstal zdravý, přebírá do určité míry funkci orgánu postiženého a tím se rozvíjí více, než by tomu bylo v běžné situaci. To ho přivedlo k myšlence orgánové nedostatečnosti a její kompenzace, kterou později na obecnější úrovni rozvinul ve své vlastní psychologické teorii. Většinou je Adler považován za žáka Freudova, není to však zcela přesné. Adlera lze spíše považovat za Freudova kolegu, s nímž ho spojovalo především pojetí psychického života jako dynamického systému, v němž zdánlivě nevýznamné události mohou zapříčinit pozdější problémy či ovlivnit vývoj. Lze tedy spíše říci, že Freud a Adler se na určitý čas setkali, a později, když se jejich teorie natolik oddálily, že nebylo možno je sloučit, rozešli se každý svou cestou.",
+                "V každém případě však Adlera zařazuje jeho pojetí psychického vývoje, člověka a vzniku duševních chorob mezi autory psychodynamické orientace. Na rozdíl od Freuda však Adler nepřikládá tolik významu minulosti klienta, spíše považuje za významnou budoucnost, tak jak ji klient před sebou vidí. Druhým podstatným rozdílem mezi Adlerem a Freudem je to, že Adler nepovažuje člověka za podstatně determinovaného biologickými faktory (u Freuda zvi. vrozený sexuální pud), ale považuje za stejně významnou, ne-li významnější i racionální stránku člověka - tedy přikládá význam poznávacím procesům u člověka a jeho schopnosti použít poznání k vlastní seberegulaci. Třetím podstatným rozdílem proti Freudovi je to, že Adler nepovažuje za základní motiv lidského chování sexuální pud, ale vysvětluje dynamiku vývoje člověka na základě obecné a vrozené psychické potřeby dosáhnout úspěchu. To vysvětluje jeho zdůrazňování významu sociálního prostředí pro vývoj člověka. (K těmto postulátům se vrátíme v dalším textu.)"
+            ],
+            "tasks": [
+                {
+                    "question": "Ve kterém roce se narodil Alfred Adler?",
+                    "answers": [
+                        1870,
+                        1842,
+                        1780
+                    ]
+                },
+                {
+                    "question": "Kterému úseku v životě klienta Adler přikládá největší význam?",
+                    "answers": [
+                        "Minulosti",
+                        "Přítomnosti",
+                        "Budoucnosti"
+                    ]
+                },
+                {
+                    "question": "Kolika hlavním rozdílům mezi Adlerem a Freudem se daný úsek textu věnoval?",
+                    "answers": [
+                        4,
+                        5,
+                        3
+                    ]
+                },
+                {
+                    "question": "Adlerova teorie je nazývána jako:",
+                    "answers": [
+                        "Psychoanalýza",
+                        "Individuální psychologie",
+                        "Logoterapie"
+                    ]
+                },
+                {
+                    "question": "Jaké bylo Adlerovo původní vzdělání?",
+                    "answers": [
+                        "Chirurg",
+                        "Přírodovědec",
+                        "Oční lékař"
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "V této úloze se Vám opět po určitý časový limit bude ukazovat sada obrázků. Vaším úkolem bude zapamatovat si obrázky v přesném pořadí, jak jdou za sebou, a poté do připravených kolonek odpovědět, co jste viděli.",
+            "tasks": [
+                [
+                    "mrkev.png",
+                    "opice_4.png",
+                    "kukurice.png",
+                    "krokodyl_2.png"
+                ],
+                [
+                    "liska.png",
+                    "tresen.png",
+                    "zirafa_2.png",
+                    "jahoda.png"
+                ],
+                [
+                    "kiwi.png",
+                    "rajce.png",
+                    "meloun.png",
+                    "paprika.png",
+                    "citron.png"
+                ],
+                [
+                    "prase_2.png",
+                    "kun.png",
+                    "boruvky.png",
+                    "slon_2.png",
+                    "jezek.png"
+                ],
+                [
+                    "ovce_2.png",
+                    "panda.png",
+                    "banan.png",
+                    "tucnak_2.png",
+                    "maliny.png",
+                    "medved.png"
+                ],
+                [
+                    "kocka.png",
+                    "slepice_3.png",
+                    "mys.png",
+                    "hrozno.png",
+                    "kure.png",
+                    "had.png"
+                ],
+                [
+                    "redkev.png",
+                    "hruska.png",
+                    "osel.png",
+                    "veverka.png",
+                    "slon.png",
+                    "klokan_2.png",
+                    "zelva.png"
+                ],
+                [
+                    "dyne.png",
+                    "boruvky.png",
+                    "pes_3.png",
+                    "kocka_2.png",
+                    "brokolice.png",
+                    "medved.png",
+                    "paprika.png"
+                ],
+                [
+                    "krava_2.png",
+                    "kocka.png",
+                    "kure.png",
+                    "panda_2.png",
+                    "pes.png",
+                    "kiwi.png",
+                    "jahoda.png",
+                    "zelva.png"
+                ],
+                [
+                    "rajce.png",
+                    "pes_2.png",
+                    "tresen.png",
+                    "krokodyl_2.png",
+                    "meloun.png",
+                    "kun.png",
+                    "banan.png",
+                    "hrozno.png"
+                ]
+            ]
+        },
+        {
+            "description": "V této úloze bude následovat stejný postup jako v předešlé úloze, avšak bude zapotřebí si zapamatovat čísla, nikoliv obrázky.",
+            "tasks": [
+                [5, 4, 8, 9],
+                [3, 7, 5, 1],
+                [2, 7, 3, 9, 0],
+                [1, 1, 6, 2, 3],
+                [8, 5, 6, 0, 1, 8],
+                [7, 9, 1, 3, 6, 3],
+                [4, 3, 7, 4, 1, 6, 5],
+                [6, 0, 5, 2, 9, 1, 3],
+                [1, 2, 6, 0, 2, 6, 0, 5],
+                [6, 3, 7, 5, 8, 4, 9, 2]
+            ]
+        }
+    ]
+}
