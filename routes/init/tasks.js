@@ -17,14 +17,12 @@ module.exports = function(req, res, next) {
             json_data: JSON.stringify(list.data[i])
         });
 
-        console.log(task);
-
-        // task.save().then(function(model) {
-        //     if (++tasksSavedCnt === list.data.length) {
-        //         res.status(200).json({ success: true });
-        //     }
-        // }).catch(function(error) {
-        //     console.log(error);
-        // });
+        task.save().then(function(model) {
+            if (++tasksSavedCnt === list.data.length) {
+                res.status(200).json({ success: true });
+            }
+        }).catch(function(error) {
+            console.log(error);
+        });
     }
 };
