@@ -52,7 +52,7 @@ routes.get('/results', function(req, res, next) {
       error: {
         status: 404
       }
-    });;
+    });
     return;
   }
 

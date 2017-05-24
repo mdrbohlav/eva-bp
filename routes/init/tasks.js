@@ -1,8 +1,15 @@
 var Task = require('../../models/task');
-var list = require('../../helpers/tasks_2');
 
 module.exports = function(req, res, next) {
     var tasksSavedCnt = 0;
+    var iteration = req.query.iteration;
+
+    if (!iteration || ['1', '2'].indexOf(iteration) < 0) {
+      res.status(400).json({ success: false });
+      return;
+    }
+
+    var list = require('../../helpers/tasks_' + iteration);
 
     for (var i = 0; i < list.data.length; i++) {
         var task = new Task({
@@ -10,12 +17,14 @@ module.exports = function(req, res, next) {
             json_data: JSON.stringify(list.data[i])
         });
 
-        task.save().then(function(model) {
-            if (++tasksSavedCnt === list.data.length) {
-                res.status(200).json({ success: true });
-            }
-        }).catch(function(error) {
-            console.log(error);
-        });
+        console.log(task);
+
+        // task.save().then(function(model) {
+        //     if (++tasksSavedCnt === list.data.length) {
+        //         res.status(200).json({ success: true });
+        //     }
+        // }).catch(function(error) {
+        //     console.log(error);
+        // });
     }
 };
