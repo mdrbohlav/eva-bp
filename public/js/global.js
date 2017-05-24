@@ -1,6 +1,6 @@
 var $window = $(window),
-    $body = $('body')
-test = null;
+    $body = $('body'),
+    test = null;
 
 if (typeof(String.prototype.trim) === "undefined") {
     String.prototype.trim = function() {
@@ -795,19 +795,21 @@ var Tasks = (function() {
 
 (function($) {
 
-    if (!is_desktop) {
-        return false;
-    } else if ($window.width() < 1024) {
-        $('.progressBar').remove();
-        $('#tasks-form').replaceWith($('<section class="container__sm table__cell"><div class="box"><div class="box__body"><p class="text__paragraph">Omlouvám se, ale pro srovnatelné podmínky je nutné dotazník vyplnit na počítači s rozlišením minimálně 1024px na šířku.</p></div></div></section>'));
+    if ($('#results').length === 0) {
+      if (!is_desktop) {
+          return false;
+      } else if ($window.width() < 1024) {
+          $('.progressBar').remove();
+          // $('#tasks-form').replaceWith($('<section class="container__sm table__cell"><div class="box"><div class="box__body"><p class="text__paragraph">Omlouvám se, ale pro srovnatelné podmínky je nutné dotazník vyplnit na počítači s rozlišením minimálně 1024px na šířku.</p></div></div></section>'));
 
-        return false;
+          return false;
+      }
+
+      test = new Tasks('#tasks-form');
     }
 
-    test = new Tasks('#tasks-form');
-
     $(window).on('beforeunload copy paste', function(event) {
-        if (test.started) {
+        if (test && test.started) {
             return false;
         }
     });
@@ -917,7 +919,7 @@ var Tasks = (function() {
 
     var textResults = {
       1: ['c', 'a', 'b', 'c', 'a'],
-      2: ['a', 'c', 'c', 'b', 'c']
+      4: ['a', 'c', 'c', 'b', 'c']
     };
 
     $('[data-type="text"]').each(function(index, element) {

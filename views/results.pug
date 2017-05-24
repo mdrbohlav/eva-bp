@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    .content.table__wrapper
+    #results.content.table__wrapper
       table.table__styled.table--responsive
         thead
           tr
@@ -17,6 +17,8 @@ block content
             th.cell Obrázky
             th.cell Čísla
         tbody
+          - secondIteration = false
+          
           each user, index in data
             if user.id >= 5
               - date = moment(user.results[0].json_answer.dates[0].start).format('DD.MM. HH:mm') + '-' + moment(user.created_at).format('HH:mm')
@@ -32,70 +34,20 @@ block content
               
               - mail += 'První úkol (text):%0D%0A'
               
-              if user.results[0].task_id === 1
-                - mail += '1) ' + user.results[0].json_answer.answers[0] + ' (c)%0D%0A'
-                - mail += '2) ' + user.results[0].json_answer.answers[1] + ' (a)%0D%0A'
-                - mail += '3) ' + user.results[0].json_answer.answers[2] + ' (b)%0D%0A'
-                - mail += '4) ' + user.results[0].json_answer.answers[3] + ' (c)%0D%0A'
-                - mail += '5) ' + user.results[0].json_answer.answers[4] + ' (a)%0D%0A%0D%0A'
-              else
-                - mail += '1) ' + user.results[0].json_answer.answers[0] + ' (a)%0D%0A'
-                - mail += '2) ' + user.results[0].json_answer.answers[1] + ' (c)%0D%0A'
-                - mail += '3) ' + user.results[0].json_answer.answers[2] + ' (c)%0D%0A'
-                - mail += '4) ' + user.results[0].json_answer.answers[3] + ' (b)%0D%0A'
-                - mail += '5) ' + user.results[0].json_answer.answers[4] + ' (c)%0D%0A%0D%0A'
+              each i in [0, 1, 2, 3, 4]
+                - mail += (i + 1) + ') ' + user.results[0].json_answer.answers[i] + ' (' + correctAnswers[user.results[0].task_id][i] + ')%0D%0A' + (i === 4 ? '%0D%0A' : '')
               
               - mail += 'Druhý úkol (obrázky):%0D%0A'
               
-              if user.results[1].task_id === 2
-                - mail += '1) ' + user.results[1].json_answer.answers[0].join(', ') + ' (třešeň, kiwi, jahoda, citron)%0D%0A'
-                - mail += '2) ' + user.results[1].json_answer.answers[1].join(', ') + ' (mrkev, meloun, rajče, paprika)%0D%0A'
-                - mail += '3) ' + user.results[1].json_answer.answers[2].join(', ') + ' (želva, pes, panda, jablko, opice)%0D%0A'
-                - mail += '4) ' + user.results[1].json_answer.answers[3].join(', ') + ' (žirafa, ovce, mrkev, liška, prase)%0D%0A'
-                - mail += '5) ' + user.results[1].json_answer.answers[4].join(', ') + ' (myš, citron, rajče, had, paprika, krokodýl)%0D%0A'
-                - mail += '6) ' + user.results[1].json_answer.answers[5].join(', ') + ' (veverka, maliny, slon, kiwi, kůň, kukuřice)%0D%0A'
-                - mail += '7) ' + user.results[1].json_answer.answers[6].join(', ') + ' (meloun, medvěd, dýně, kočka, borůvky, banán, klokan)%0D%0A'
-                - mail += '8) ' + user.results[1].json_answer.answers[7].join(', ') + ' (ježek, hruška, hrozno, brokolice, tučňák, panda, kráva)%0D%0A'
-                - mail += '9) ' + user.results[1].json_answer.answers[8].join(', ') + ' (ředkev, mrkev, želva, slon, slepice, maliny, pes, kočka)%0D%0A'
-                - mail += '10) ' + user.results[1].json_answer.answers[9].join(', ') + ' (pes, veverka, kuře, třešeň, rajče, osel, kočka, paprika)%0D%0A%0D%0A'
-              else
-                - mail += '1) ' + user.results[1].json_answer.answers[0].join(', ') + ' (mrkev, opice, kukuřice, krokodýl)%0D%0A'
-                - mail += '2) ' + user.results[1].json_answer.answers[1].join(', ') + ' (liška, třešeň, žirafa, jahoda)%0D%0A'
-                - mail += '3) ' + user.results[1].json_answer.answers[2].join(', ') + ' (kiwi, rajče, meloun, paprika, citron)%0D%0A'
-                - mail += '4) ' + user.results[1].json_answer.answers[3].join(', ') + ' (prase, kůň, borůvky, slon, ježek)%0D%0A'
-                - mail += '5) ' + user.results[1].json_answer.answers[4].join(', ') + ' (ovce, panda, banán, tučňák, maliny, medvěd)%0D%0A'
-                - mail += '6) ' + user.results[1].json_answer.answers[5].join(', ') + ' (kočka, slepice, myš, hrozno, kuře, had)%0D%0A'
-                - mail += '7) ' + user.results[1].json_answer.answers[6].join(', ') + ' (ředkev, hruška, osel, veverka, slon, klokan, želva)%0D%0A'
-                - mail += '8) ' + user.results[1].json_answer.answers[7].join(', ') + ' (dýně, borůvky, pes, kočka, brokolice, medvěd, paprika)%0D%0A'
-                - mail += '9) ' + user.results[1].json_answer.answers[8].join(', ') + ' (kráva, kočka, kuře, panda, pes, kiwi, jahoda, želva)%0D%0A'
-                - mail += '10) ' + user.results[1].json_answer.answers[9].join(', ') + ' (rajče, pes, třešeň, krokodýl, meloun, kůň, banán, hrozno)%0D%0A%0D%0A'
+              each i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                - mail += (i + 1) + ') ' + user.results[1].json_answer.answers[i].join(', ') + ' (' + correctAnswers[user.results[1].task_id][i] + ')%0D%0A' + (i === 9 ? '%0D%0A' : '')
                 
               - mail += 'Třetí úkol (čísla):%0D%0A'
               
-              if user.results[2].task_id === 3
-                - mail += '1) ' + user.results[2].json_answer.answers[0] + ' (3, 4, 1, 2)%0D%0A'
-                - mail += '2) ' + user.results[2].json_answer.answers[1] + ' (2, 7, 8, 5)%0D%0A'
-                - mail += '3) ' + user.results[2].json_answer.answers[2] + ' (9, 2, 3, 5, 4)%0D%0A'
-                - mail += '4) ' + user.results[2].json_answer.answers[3] + ' (8, 1, 2, 3, 0)%0D%0A'
-                - mail += '5) ' + user.results[2].json_answer.answers[4] + ' (1, 4, 5, 9, 2, 7)%0D%0A'
-                - mail += '6) ' + user.results[2].json_answer.answers[5] + ' (2, 0, 4, 3, 8, 5)%0D%0A'
-                - mail += '7) ' + user.results[2].json_answer.answers[6] + ' (9, 2, 3, 1, 4, 5, 6)%0D%0A'
-                - mail += '8) ' + user.results[2].json_answer.answers[7] + ' (5, 4, 2, 7, 8, 0, 3)%0D%0A'
-                - mail += '9) ' + user.results[2].json_answer.answers[8] + ' (0, 1, 5, 9, 3, 7, 1, 4)%0D%0A'
-                - mail += '10) ' + user.results[2].json_answer.answers[9] + ' (5, 2, 6, 4, 7, 3, 8, 1)%0D%0A'
-              else
-                - mail += '1) ' + user.results[2].json_answer.answers[0] + ' (5, 4, 8, 9)%0D%0A'
-                - mail += '2) ' + user.results[2].json_answer.answers[1] + ' (3, 7, 5, 1)%0D%0A'
-                - mail += '3) ' + user.results[2].json_answer.answers[2] + ' (2, 7, 3, 9, 0)%0D%0A'
-                - mail += '4) ' + user.results[2].json_answer.answers[3] + ' (1, 1, 6, 2, 3)%0D%0A'
-                - mail += '5) ' + user.results[2].json_answer.answers[4] + ' (8, 5, 6, 0, 1, 8)%0D%0A'
-                - mail += '6) ' + user.results[2].json_answer.answers[5] + ' (7, 9, 1, 3, 6, 3)%0D%0A'
-                - mail += '7) ' + user.results[2].json_answer.answers[6] + ' (4, 3, 7, 4, 1, 6, 5)%0D%0A'
-                - mail += '8) ' + user.results[2].json_answer.answers[7] + ' (6, 0, 5, 2, 9, 1, 3)%0D%0A'
-                - mail += '9) ' + user.results[2].json_answer.answers[8] + ' (1, 2, 6, 0, 2, 6, 0, 5)%0D%0A'
-                - mail += '10) ' + user.results[2].json_answer.answers[9] + ' (6, 3, 7, 5, 8, 4, 9, 2)%0D%0A'
+              each i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                - mail += (i + 1) + ') ' + user.results[2].json_answer.answers[i] + ' (' + correctAnswers[user.results[2].task_id][i] + ')%0D%0A'
 
-              tr
+              tr(class=(new Date(user.created_at) > new Date("2017-05-23") && !secondIteration ? 'separator' : ''))
                 td.cell
                   table
                     tr
@@ -109,38 +61,35 @@ block content
                         a(href='mailto:' + user.email + '?body=' + mail) #{user.email}
                     tr
                       td.cell.cell__school(colspan='3') #{user.school.name}
+                      
                 td.cell.cell__borderLeft
                   table
                     tr
                       td.cell.cell__questionnaire= user.json_questionnaire[0]
                       td.cell.cell__questionnaire= user.json_questionnaire[1]
                       td.cell.cell__questionnaire= user.json_questionnaire[2]
+                      
                 td.cell.cell__borderLeft.cell__text(data-id=(user.results[0].task_id) data-type='text' data-answer= user.results[0].json_answer.answers.join(''))
+                  
                 td.cell.cell__borderLeft(data-id= user.results[1].task_id)
-                  table                    
+                  table
                     tr.cell__top
-                      td.cell.cell__image.cell__caption(data-index='1' data-type='images' data-answered=(user.results[1].json_answer.answers[0].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'třešeň, kiwi, jahoda, citron' : 'mrkev, opice, kukuřice, krokodýl'))= user.results[1].json_answer.answers[0].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='2' data-type='images' data-answered=(user.results[1].json_answer.answers[1].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'mrkev, meloun, rajče, paprika' : 'liška, třešeň, žirafa, jahoda'))= user.results[1].json_answer.answers[1].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='3' data-type='images' data-answered=(user.results[1].json_answer.answers[2].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'želva, pes, panda, jablko, opice' : 'kiwi, rajče, meloun, paprika, citron'))= user.results[1].json_answer.answers[2].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='4' data-type='images' data-answered=(user.results[1].json_answer.answers[3].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'žirafa, ovce, mrkev, liška, prase' : 'prase, kůň, borůvky, slon, ježek'))= user.results[1].json_answer.answers[3].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='5' data-type='images' data-answered=(user.results[1].json_answer.answers[4].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'myš, citron, rajče, had, paprika, krokodýl' : 'ovce, panda, banán, tučňák, maliny, medvěd'))= user.results[1].json_answer.answers[4].join(', ')
+                      each i in [0, 1, 2, 3, 4]
+                        td.cell.cell__image.cell__caption(data-index=(i + 1) data-type='images' data-answered=(user.results[1].json_answer.answers[i].filter(function(entry) { return /\S/.test(entry); }).length) data-caption= correctAnswers[user.results[1].task_id][i])= user.results[1].json_answer.answers[i].join(', ')
+                    
                     tr.cell__top
-                      td.cell.cell__image.cell__caption(data-index='6' data-type='images' data-answered=(user.results[1].json_answer.answers[5].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'veverka, maliny, slon, kiwi, kůň, kukuřice' : 'kočka, slepice, myš, hrozno, kuře, had'))= user.results[1].json_answer.answers[5].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='7' data-type='images' data-answered=(user.results[1].json_answer.answers[6].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'meloun, medvěd, dýně, kočka, borůvky, banán, klokan' : 'ředkev, hruška, osel, veverka, slon, klokan, želva'))= user.results[1].json_answer.answers[6].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='8' data-type='images' data-answered=(user.results[1].json_answer.answers[7].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'ježek, hruška, hrozno, brokolice, tučňák, panda, kráva' : 'dýně, borůvky, pes, kočka, brokolice, medvěd, paprika'))= user.results[1].json_answer.answers[7].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='9' data-type='images' data-answered=(user.results[1].json_answer.answers[8].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'ředkev, mrkev, želva, slon, slepice, maliny, pes, kočka' : 'kráva, kočka, kuře, panda, pes, kiwi, jahoda, želva'))= user.results[1].json_answer.answers[8].join(', ')
-                      td.cell.cell__image.cell__caption(data-index='10' data-type='images' data-answered=(user.results[1].json_answer.answers[9].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(user.results[1].task_id === 2 ? 'pes, veverka, kuře, třešeň, rajče, osel, kočka, paprika' : 'rajče, pes, třešeň, krokodýl, meloun, kůň, banán, hrozno'))= user.results[1].json_answer.answers[9].join(', ')
+                      each i in [5, 6, 7, 8, 9]
+                        td.cell.cell__image.cell__caption(data-index=(i + 1) data-type='images' data-answered=(user.results[1].json_answer.answers[i].filter(function(entry) { return /\S/.test(entry); }).length) data-caption= correctAnswers[user.results[1].task_id][i])= user.results[1].json_answer.answers[i].join(', ')
+                          
                 td.cell.cell__borderLeft(data-id= user.results[2].task_id)
                   table
                     tr.cell__top
-                      td.cell.cell__numbers(data-index='1' data-type='numbers' data-answer= user.results[2].json_answer.answers[0])
-                      td.cell.cell__numbers(data-index='2' data-type='numbers' data-answer= user.results[2].json_answer.answers[1])
-                      td.cell.cell__numbers(data-index='3' data-type='numbers' data-answer= user.results[2].json_answer.answers[2])
-                      td.cell.cell__numbers(data-index='4' data-type='numbers' data-answer= user.results[2].json_answer.answers[3])
-                      td.cell.cell__numbers(data-index='5' data-type='numbers' data-answer= user.results[2].json_answer.answers[4])
+                      each i in [0, 1, 2, 3, 4]
+                        td.cell.cell__numbers(data-index=(i + 1) data-type='numbers' data-answer= user.results[2].json_answer.answers[i])
+                    
                     tr.cell__top
-                      td.cell.cell__numbers(data-index='6' data-type='numbers' data-answer= user.results[2].json_answer.answers[5])
-                      td.cell.cell__numbers(data-index='7' data-type='numbers' data-answer= user.results[2].json_answer.answers[6])
-                      td.cell.cell__numbers(data-index='8' data-type='numbers' data-answer= user.results[2].json_answer.answers[7])
-                      td.cell.cell__numbers(data-index='9' data-type='numbers' data-answer= user.results[2].json_answer.answers[8])
-                      td.cell.cell__numbers(data-index='10' data-type='numbers' data-answer= user.results[2].json_answer.answers[9])
+                      each i in [5, 6, 7, 8, 9]
+                        td.cell.cell__numbers(data-index=(i + 1) data-type='numbers' data-answer= user.results[2].json_answer.answers[i])
+            
+            if new Date(user.created_at) > new Date("2017-05-23") && !secondIteration
+              - secondIteration = true

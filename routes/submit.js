@@ -17,17 +17,17 @@ module.exports = function(req, res, next) {
     if (notFound.length > 0) {
         res.status(400).json(getMissingParametersJSON(notFound));
     } else {
-      var data = {
-          age: req.body.age,
-          sex: req.body.sex,
-          school_id: req.body.school_id,
-          slept: req.body.slept,
-          email: req.body.email,
-          user_agent: req.headers['user-agent'],
-          ip_address: req.hostname,
-          json_questionnaire: JSON.stringify(req.body.json_questionnaire)
-      };
-      
+        var data = {
+            age: req.body.age,
+            sex: req.body.sex,
+            school_id: req.body.school_id,
+            slept: req.body.slept,
+            email: req.body.email,
+            user_agent: req.headers['user-agent'],
+            ip_address: req.hostname,
+            json_questionnaire: JSON.stringify(req.body.json_questionnaire)
+        };
+
          Bookshelf.transaction(function(t) {
              return new User(data).save(null, {
                  transacting: t

@@ -119,7 +119,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('*', function(req, res, next) {
-    if (req.device.type !== 'desktop') {
+    if (req.originalUrl.indexOf('/results') !== 0 && req.device.type !== 'desktop') {
         res.render('error-desktop', {
             page: 'error'
         });
