@@ -534,8 +534,8 @@ var Tasks = (function() {
                                     break;
                                 }
 
-                                __this.timeoutNextScreen(60000);
-                                __this.animateProgressBar(60000);
+                                __this.timeoutNextScreen(70000);
+                                __this.animateProgressBar(70000);
                                 break;
                             case 2:
                                 if (__this.activeTaskScreen % 2 !== 0) {
