@@ -46,6 +46,22 @@ block content
               
               each i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                 - mail += (i + 1) + ') ' + user.results[2].json_answer.answers[i] + ' (' + correctAnswers[user.results[2].task_id][i] + ')%0D%0A'
+                
+              - function dateDiff(a, b) {
+              -   a = moment(a);
+              -   b = moment(b);
+              -   return Math.abs(a.diff(b));
+              - }
+              
+              - function formatTime(ms) {
+              -   return moment(ms).utc().format('m [min] ss [s]');
+              - }
+              
+              - function formatCaption(items, time, text) {
+              -   if (text)
+              -     return text + '\n\n' + items + ' - ' + time;
+              -   return items + ' - ' + time; 
+              - }
 
               tr(class=(new Date(user.created_at) > new Date("2017-05-23") && !secondIteration ? 'separator' : ''))
                 td.cell
@@ -65,31 +81,39 @@ block content
                 td.cell.cell__borderLeft
                   table
                     tr
-                      td.cell.cell__questionnaire= user.json_questionnaire[0]
+                      td.cell.cell__questionnaire= user.json_questionnaire[0] 
                       td.cell.cell__questionnaire= user.json_questionnaire[1]
                       td.cell.cell__questionnaire= user.json_questionnaire[2]
                       
-                td.cell.cell__borderLeft.cell__text(data-id=(user.results[0].task_id) data-type='text' data-answer= user.results[0].json_answer.answers.join(''))
+                td.cell.cell__borderLeft.cell__text.cell__caption(data-caption=(formatTime(dateDiff(user.results[0].json_answer.dates[0].start, user.results[0].json_answer.dates[0].end))) data-id=(user.results[0].task_id) data-type='text' data-answer= user.results[0].json_answer.answers.join(''))
                   
                 td.cell.cell__borderLeft(data-id= user.results[1].task_id)
                   table
                     tr.cell__top
                       each i in [0, 1, 2, 3, 4]
-                        td.cell.cell__image.cell__caption(data-index=(i + 1) data-type='images' data-answered=(user.results[1].json_answer.answers[i].filter(function(entry) { return /\S/.test(entry); }).length) data-caption= correctAnswers[user.results[1].task_id][i])= user.results[1].json_answer.answers[i].join(', ')
+                        - var j = i % 2 == 1 ? i - 1 : i + 1;
+                        - var items = i % 2 == 0 ? (i + 1) + ' a ' + (i + 2) : i + ' a ' + (i + 1);
+                        td.cell.cell__image.cell__caption(data-index=(i + 1) data-type='images' data-answered=(user.results[1].json_answer.answers[i].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(formatCaption(items, formatTime((dateDiff(user.results[1].json_answer.dates[i].start, user.results[1].json_answer.dates[i].end) + dateDiff(user.results[1].json_answer.dates[j].start, user.results[1].json_answer.dates[j].end)) / 2), correctAnswers[user.results[1].task_id][i])))= user.results[1].json_answer.answers[i].join(', ')
                     
                     tr.cell__top
                       each i in [5, 6, 7, 8, 9]
-                        td.cell.cell__image.cell__caption(data-index=(i + 1) data-type='images' data-answered=(user.results[1].json_answer.answers[i].filter(function(entry) { return /\S/.test(entry); }).length) data-caption= correctAnswers[user.results[1].task_id][i])= user.results[1].json_answer.answers[i].join(', ')
+                        - var j = i % 2 == 1 ? i - 1 : i + 1;
+                        - var items = i % 2 == 0 ? (i + 1) + ' a ' + (i + 2) : i + ' a ' + (i + 1);
+                        td.cell.cell__image.cell__caption(data-index=(i + 1) data-type='images' data-answered=(user.results[1].json_answer.answers[i].filter(function(entry) { return /\S/.test(entry); }).length) data-caption=(formatCaption(items, formatTime((dateDiff(user.results[1].json_answer.dates[i].start, user.results[1].json_answer.dates[i].end) + dateDiff(user.results[1].json_answer.dates[j].start, user.results[1].json_answer.dates[j].end)) / 2), correctAnswers[user.results[1].task_id][i])))= user.results[1].json_answer.answers[i].join(', ')
                           
                 td.cell.cell__borderLeft(data-id= user.results[2].task_id)
                   table
                     tr.cell__top
                       each i in [0, 1, 2, 3, 4]
-                        td.cell.cell__numbers(data-index=(i + 1) data-type='numbers' data-answer= user.results[2].json_answer.answers[i])
+                        - var j = i % 2 == 1 ? i - 1 : i + 1;
+                        - var items = i % 2 == 0 ? (i + 1) + ' a ' + (i + 2) : i + ' a ' + (i + 1);
+                        td.cell.cell__numbers.cell__caption(data-index=(i + 1) data-type='numbers' data-answer=(user.results[2].json_answer.answers[i]) data-caption=(formatCaption(items, formatTime((dateDiff(user.results[2].json_answer.dates[i].start, user.results[2].json_answer.dates[i].end) + dateDiff(user.results[1].json_answer.dates[j].start, user.results[1].json_answer.dates[j].end)) / 2))))
                     
                     tr.cell__top
                       each i in [5, 6, 7, 8, 9]
-                        td.cell.cell__numbers(data-index=(i + 1) data-type='numbers' data-answer= user.results[2].json_answer.answers[i])
+                        - var j = i % 2 == 1 ? i - 1 : i + 1;
+                        - var items = i % 2 == 0 ? (i + 1) + ' a ' + (i + 2) : i + ' a ' + (i + 1);
+                        td.cell.cell__numbers.cell__caption(data-index=(i + 1) data-type='numbers' data-answer=(user.results[2].json_answer.answers[i]) data-caption=(formatCaption(items, formatTime((dateDiff(user.results[2].json_answer.dates[i].start, user.results[2].json_answer.dates[i].end) + dateDiff(user.results[1].json_answer.dates[j].start, user.results[1].json_answer.dates[j].end)) / 2))))
             
             if new Date(user.created_at) > new Date("2017-05-23") && !secondIteration
               - secondIteration = true
