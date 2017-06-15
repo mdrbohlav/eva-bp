@@ -54,7 +54,11 @@ block content
               - }
               
               - function formatTime(ms) {
-              -   return moment(ms).utc().format('m [min] ss [s]');
+              -   var seconds = Math.floor(ms / 1000);
+              -   ms = Math.round(ms % 1000);
+              -   var minutes = Math.floor(seconds / 60);
+              -   seconds = seconds % 60;
+              -   return minutes + ' m ' + seconds + ',' + ms + ' s';
               - }
               
               - function formatCaption(items, time, text) {
@@ -107,13 +111,13 @@ block content
                       each i in [0, 1, 2, 3, 4]
                         - var j = i % 2 == 1 ? i - 1 : i + 1;
                         - var items = i % 2 == 0 ? (i + 1) + ' a ' + (i + 2) : i + ' a ' + (i + 1);
-                        td.cell.cell__numbers.cell__caption(data-index=(i + 1) data-type='numbers' data-answer=(user.results[2].json_answer.answers[i]) data-caption=(formatCaption(items, formatTime((dateDiff(user.results[2].json_answer.dates[i].start, user.results[2].json_answer.dates[i].end) + dateDiff(user.results[1].json_answer.dates[j].start, user.results[1].json_answer.dates[j].end)) / 2))))
+                        td.cell.cell__numbers.cell__caption(data-index=(i + 1) data-type='numbers' data-answer=(user.results[2].json_answer.answers[i]) data-caption=(formatCaption(items, formatTime((dateDiff(user.results[2].json_answer.dates[i].start, user.results[2].json_answer.dates[i].end) + dateDiff(user.results[2].json_answer.dates[j].start, user.results[2].json_answer.dates[j].end)) / 2))))
                     
                     tr.cell__top
                       each i in [5, 6, 7, 8, 9]
                         - var j = i % 2 == 1 ? i - 1 : i + 1;
                         - var items = i % 2 == 0 ? (i + 1) + ' a ' + (i + 2) : i + ' a ' + (i + 1);
-                        td.cell.cell__numbers.cell__caption(data-index=(i + 1) data-type='numbers' data-answer=(user.results[2].json_answer.answers[i]) data-caption=(formatCaption(items, formatTime((dateDiff(user.results[2].json_answer.dates[i].start, user.results[2].json_answer.dates[i].end) + dateDiff(user.results[1].json_answer.dates[j].start, user.results[1].json_answer.dates[j].end)) / 2))))
+                        td.cell.cell__numbers.cell__caption(data-index=(i + 1) data-type='numbers' data-answer=(user.results[2].json_answer.answers[i]) data-caption=(formatCaption(items, formatTime((dateDiff(user.results[2].json_answer.dates[i].start, user.results[2].json_answer.dates[i].end) + dateDiff(user.results[2].json_answer.dates[j].start, user.results[2].json_answer.dates[j].end)) / 2))))
             
             if new Date(user.created_at) > new Date("2017-05-23") && !secondIteration
               - secondIteration = true
